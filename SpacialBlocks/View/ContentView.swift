@@ -3,7 +3,6 @@
 //
 
 import RealityKit
-import RealityKitContent
 import SwiftUI
 
 struct ContentView: View {
@@ -15,46 +14,39 @@ struct ContentView: View {
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
 
     var body: some View {
-        RealityView { content in
-            // Add the initial RealityKit content
-            if let scene = try? await Entity(named: "Scene", in: realityKitContentBundle) {
-                content.add(scene)
+        BlockSceneView(enlarge: enlarge)
+            .onChange(of: showImmersiveSpace) { _, newValue in
+                Task {
+                    await updateImmersiveSpaceShown(newValue)
+                }
             }
-        } update: { content in
-            // Update the RealityKit content when SwiftUI state changes
-            if let scene = content.entities.first {
-                let uniformScale: Float = enlarge ? 1.4 : 1.0
-                scene.transform.scale = [uniformScale, uniformScale, uniformScale]
-            }
-        }
-        .onChange(of: showImmersiveSpace) { _, newValue in
-            Task {
-                if newValue {
-                    switch await openImmersiveSpace(id: "ImmersiveSpace") {
-                    case .opened:
-                        immersiveSpaceIsShown = true
-                    case .error, .userCancelled:
-                        fallthrough
-                    @unknown default:
-                        immersiveSpaceIsShown = false
-                        showImmersiveSpace = false
+            .gesture(TapGesture().targetedToAnyEntity().onEnded { _ in
+                enlarge.toggle()
+            })
+            .toolbar {
+                ToolbarItemGroup(placement: .bottomOrnament) {
+                    VStack(spacing: 12) {
+                        Toggle("Enlarge RealityView Content", isOn: $enlarge)
+                        Toggle("Show ImmersiveSpace", isOn: $showImmersiveSpace)
                     }
-                } else if immersiveSpaceIsShown {
-                    await dismissImmersiveSpace()
-                    immersiveSpaceIsShown = false
                 }
             }
-        }
-        .gesture(TapGesture().targetedToAnyEntity().onEnded { _ in
-            enlarge.toggle()
-        })
-        .toolbar {
-            ToolbarItemGroup(placement: .bottomOrnament) {
-                VStack(spacing: 12) {
-                    Toggle("Enlarge RealityView Content", isOn: $enlarge)
-                    Toggle("Show ImmersiveSpace", isOn: $showImmersiveSpace)
-                }
+    }
+
+    private func updateImmersiveSpaceShown(_ show: Bool) async {
+        if show {
+            switch await openImmersiveSpace(id: "ImmersiveSpace") {
+            case .opened:
+                immersiveSpaceIsShown = true
+            case .error, .userCancelled:
+                fallthrough
+            @unknown default:
+                immersiveSpaceIsShown = false
+                showImmersiveSpace = false
             }
+        } else if immersiveSpaceIsShown {
+            await dismissImmersiveSpace()
+            immersiveSpaceIsShown = false
         }
     }
 }

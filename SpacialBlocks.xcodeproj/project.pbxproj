@@ -15,6 +15,7 @@
 		D6D3B4D92BB5E3B800B24CE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6D3B4D82BB5E3B800B24CE8 /* Assets.xcassets */; };
 		D6D3B4DC2BB5E3B800B24CE8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6D3B4DB2BB5E3B800B24CE8 /* Preview Assets.xcassets */; };
 		D6D3B4E72BB5E3B800B24CE8 /* SpacialBlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D3B4E62BB5E3B800B24CE8 /* SpacialBlocksTests.swift */; };
+		D6D3B4F62BB5E60000B24CE8 /* BlockSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D3B4F52BB5E60000B24CE8 /* BlockSceneView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		D6D3B4DD2BB5E3B800B24CE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6D3B4E22BB5E3B800B24CE8 /* SpacialBlocksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpacialBlocksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D3B4E62BB5E3B800B24CE8 /* SpacialBlocksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacialBlocksTests.swift; sourceTree = "<group>"; };
+		D6D3B4F52BB5E60000B24CE8 /* BlockSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockSceneView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 		D6D3B4F22BB5E43000B24CE8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D6D3B4F52BB5E60000B24CE8 /* BlockSceneView.swift */,
 				D6D3B4D22BB5E3B700B24CE8 /* ContentView.swift */,
 				D6D3B4D42BB5E3B700B24CE8 /* ImmersiveView.swift */,
 			);
@@ -248,6 +251,7 @@
 				D6D3B4D32BB5E3B700B24CE8 /* ContentView.swift in Sources */,
 				D6D3B4D12BB5E3B700B24CE8 /* SpacialBlocksApp.swift in Sources */,
 				D6D3B4D52BB5E3B700B24CE8 /* ImmersiveView.swift in Sources */,
+				D6D3B4F62BB5E60000B24CE8 /* BlockSceneView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
