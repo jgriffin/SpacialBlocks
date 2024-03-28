@@ -1,10 +1,10 @@
-// 
+//
 // Created by John Griffin on 3/28/24
 //
 
-import SwiftUI
 import RealityKit
 import RealityKitContent
+import SwiftUI
 
 struct ImmersiveView: View {
     var body: some View {

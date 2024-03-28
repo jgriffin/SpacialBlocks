@@ -1,13 +1,12 @@
-// 
+//
 // Created by John Griffin on 3/28/24
 //
 
-import SwiftUI
 import RealityKit
 import RealityKitContent
+import SwiftUI
 
 struct ContentView: View {
-
     @State private var enlarge = false
     @State private var showImmersiveSpace = false
     @State private var immersiveSpaceIsShown = false
@@ -51,7 +50,7 @@ struct ContentView: View {
         })
         .toolbar {
             ToolbarItemGroup(placement: .bottomOrnament) {
-                VStack (spacing: 12) {
+                VStack(spacing: 12) {
                     Toggle("Enlarge RealityView Content", isOn: $enlarge)
                     Toggle("Show ImmersiveSpace", isOn: $showImmersiveSpace)
                 }
