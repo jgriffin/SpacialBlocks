@@ -14,7 +14,7 @@ struct ContentView: View {
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
 
     var body: some View {
-        BlockSceneView(enlarge: enlarge)
+        BlockSceneView()
             .onChange(of: showImmersiveSpace) { _, newValue in
                 Task {
                     await updateImmersiveSpaceShown(newValue)

@@ -15,8 +15,8 @@
     "objectMetadataList" : [
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
-        "_GridMaterial",
+        "GridMaterialScene",
+        "Material",
         "GridMaterial"
       ],
       {
@@ -35,8 +35,18 @@
       },
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "GridMaterialScene",
-        "Material"
+        "Root",
+        "CubeGrid",
+        "MeterGridPlane"
+      ],
+      {
+        "isExpanded" : false,
+        "isLocked" : true
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "GridCube"
       ],
       {
         "isExpanded" : true,
@@ -44,7 +54,6 @@
       },
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
         "GridMaterialScene",
         "Material"
       ],
@@ -65,35 +74,8 @@
       },
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "GridLines3"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "GridMaterialScene",
-        "Material",
-        "GridMaterial"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
-        "GridMaterialScene"
+        "LightGridMaterial"
       ],
       {
         "isExpanded" : true,
@@ -112,17 +94,25 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "CubeGrid",
-        "MeterGridPlane"
+        "GridLines3"
       ],
       {
-        "isExpanded" : false,
-        "isLocked" : true
+        "isExpanded" : true,
+        "isLocked" : false
       },
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "LightGridMaterial"
+        "_GridMaterial",
+        "GridMaterial"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -142,15 +132,6 @@
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
         "Sphere_Left"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
-        "GridCube"
       ],
       {
         "isExpanded" : true,
@@ -217,6 +198,15 @@
       [
         "384AADEA-C627-4D5C-A002-C25401B99A22",
         "Root",
+        "GridMaterial"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "384AADEA-C627-4D5C-A002-C25401B99A22",
+        "Root",
         "GridMaterial",
         "Material"
       ],
@@ -231,10 +221,42 @@
       {
         "isExpanded" : true,
         "isLocked" : false
+      }
+    ]
+  },
+  "713D4846-4943-4D30-B97D-6EA790A9972A" : {
+    "objectMetadataList" : [
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "GridMaterials"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
       },
       [
-        "384AADEA-C627-4D5C-A002-C25401B99A22",
-        "Root",
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "GridMaterials",
+        "Materials"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "GridMaterials",
+        "Materials",
+        "GridMaterial"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "GridMaterials",
+        "Material",
         "GridMaterial"
       ],
       {
@@ -245,6 +267,24 @@
   },
   "883D7564-6F68-4163-B7A8-32847E43A4F3" : {
     "objectMetadataList" : [
+      [
+        "883D7564-6F68-4163-B7A8-32847E43A4F3",
+        "Root",
+        "WoodBlock"
+      ],
+      {
+        "isExpanded" : false,
+        "isLocked" : true
+      },
+      [
+        "883D7564-6F68-4163-B7A8-32847E43A4F3",
+        "Root",
+        "GridMaterial_1"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
       [
         "883D7564-6F68-4163-B7A8-32847E43A4F3",
         "Root",
@@ -266,8 +306,25 @@
       },
       [
         "883D7564-6F68-4163-B7A8-32847E43A4F3",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "883D7564-6F68-4163-B7A8-32847E43A4F3",
         "Root",
-        "GridMaterial_1"
+        "MyGridMaterial"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "883D7564-6F68-4163-B7A8-32847E43A4F3",
+        "Root",
+        "GridMaterial"
       ],
       {
         "isExpanded" : true,
@@ -287,41 +344,6 @@
         "883D7564-6F68-4163-B7A8-32847E43A4F3",
         "Root",
         "GridMaterial",
-        "GridMaterial"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "883D7564-6F68-4163-B7A8-32847E43A4F3",
-        "Root",
-        "WoodBlock"
-      ],
-      {
-        "isExpanded" : false,
-        "isLocked" : true
-      },
-      [
-        "883D7564-6F68-4163-B7A8-32847E43A4F3",
-        "Root",
-        "MyGridMaterial"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "883D7564-6F68-4163-B7A8-32847E43A4F3",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "883D7564-6F68-4163-B7A8-32847E43A4F3",
-        "Root",
         "GridMaterial"
       ],
       {
@@ -379,8 +401,44 @@
     "objectMetadataList" : [
       [
         "CED1B227-898B-4D2D-9D02-3AC91A75D4C5",
+        "GridMaterials",
+        "Material"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "CED1B227-898B-4D2D-9D02-3AC91A75D4C5",
         "GridMaterialScene",
-        "GridMaterial",
+        "Material"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "CED1B227-898B-4D2D-9D02-3AC91A75D4C5",
+        "GridMaterials",
+        "Material",
+        "GridMaterial"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "CED1B227-898B-4D2D-9D02-3AC91A75D4C5",
+        "GridMaterials"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "CED1B227-898B-4D2D-9D02-3AC91A75D4C5",
+        "GridMaterialScene",
+        "Material",
         "GridMaterial"
       ],
       {
@@ -396,6 +454,16 @@
       {
         "isExpanded" : true,
         "isLocked" : false
+      },
+      [
+        "CED1B227-898B-4D2D-9D02-3AC91A75D4C5",
+        "GridMaterialScene",
+        "GridMaterial",
+        "GridMaterial"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
       }
     ]
   },
@@ -403,7 +471,8 @@
     "objectMetadataList" : [
       [
         "D66134B1-3681-4A8E-AFE5-29F257229F3B",
-        "Root"
+        "Root",
+        "GridMaterial"
       ],
       {
         "isExpanded" : true,
@@ -430,8 +499,7 @@
       },
       [
         "D66134B1-3681-4A8E-AFE5-29F257229F3B",
-        "Root",
-        "GridMaterial"
+        "Root"
       ],
       {
         "isExpanded" : true,
@@ -444,6 +512,127 @@
       [
         "E4F717A7-DC89-4D13-8699-C12C4FC27AA7",
         "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      }
+    ]
+  },
+  "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407" : {
+    "objectMetadataList" : [
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "root",
+        "gridRoot",
+        "origin",
+        "Block"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "Root",
+        "gridRoot",
+        "origin"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "Root",
+        "gridRoot"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "root",
+        "gridRoot"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "Root",
+        "gridRoot",
+        "Ground",
+        "Material"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "root",
+        "Materials"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "root",
+        "gridRoot",
+        "origin"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "Root",
+        "gridRoot",
+        "GroundGrid"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "root",
+        "gridRoot",
+        "GroundGrid"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "Root",
+        "gridRoot",
+        "origin",
+        "Block"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "Root",
+        "Materials"
       ],
       {
         "isExpanded" : true,
