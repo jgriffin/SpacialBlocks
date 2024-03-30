@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D6014DB32BB6726800E4B18C /* SIMD++.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6014DB22BB6726800E4B18C /* SIMD++.swift */; };
+		D6014DB62BB69B6200E4B18C /* Grid3DMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6014DB52BB69B6200E4B18C /* Grid3DMath.swift */; };
 		D6D3B4CF2BB5E3B700B24CE8 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = D6D3B4CE2BB5E3B700B24CE8 /* RealityKitContent */; };
 		D6D3B4D12BB5E3B700B24CE8 /* SpacialBlocksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D3B4D02BB5E3B700B24CE8 /* SpacialBlocksApp.swift */; };
 		D6D3B4D32BB5E3B700B24CE8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D3B4D22BB5E3B700B24CE8 /* ContentView.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		D6014DB22BB6726800E4B18C /* SIMD++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SIMD++.swift"; sourceTree = "<group>"; };
+		D6014DB52BB69B6200E4B18C /* Grid3DMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid3DMath.swift; sourceTree = "<group>"; };
 		D6D3B4C92BB5E3B700B24CE8 /* SpacialBlocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpacialBlocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D3B4CD2BB5E3B700B24CE8 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		D6D3B4D02BB5E3B700B24CE8 /* SpacialBlocksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacialBlocksApp.swift; sourceTree = "<group>"; };
@@ -72,6 +74,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		D6014DB42BB69B3E00E4B18C /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				D6014DB52BB69B6200E4B18C /* Grid3DMath.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
 		D6D3B4C02BB5E3B700B24CE8 = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				D6D3B4F32BB5E44600B24CE8 /* App */,
+				D6014DB42BB69B3E00E4B18C /* Logic */,
 				D6D3B4F42BB5E45300B24CE8 /* Resources */,
 				D6014DB12BB6725100E4B18C /* Utils */,
 				D6D3B4F22BB5E43000B24CE8 /* View */,
@@ -259,6 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6014DB62BB69B6200E4B18C /* Grid3DMath.swift in Sources */,
 				D6D3B4D32BB5E3B700B24CE8 /* ContentView.swift in Sources */,
 				D6014DB32BB6726800E4B18C /* SIMD++.swift in Sources */,
 				D6D3B4D12BB5E3B700B24CE8 /* SpacialBlocksApp.swift in Sources */,

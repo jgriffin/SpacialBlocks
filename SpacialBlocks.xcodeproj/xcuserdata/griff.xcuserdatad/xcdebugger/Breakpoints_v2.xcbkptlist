@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "B40F6CB1-6016-4248-B7D2-93365FF00B20"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9EACB025-EEAE-41E7-8585-0C682C0808F7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SpacialBlocks/View/BlockSceneView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9F2D4D8A-CBF8-4F97-B7CA-92E1AF304BC7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SpacialBlocks/View/BlockSceneView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "loadResources()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9F2D4D8A-CBF8-4F97-B7CA-92E1AF304BC7 - a7d816f7ac12ac05"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for SpacialBlocks.UnitGrid3DView.loadResources() async -&gt; Swift.Optional&lt;SpacialBlocks.UnitGrid3DView.Resources&gt;"
+                  moduleName = "SpacialBlocks"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/griff/dev/AR/SpacialBlocks/SpacialBlocks/View/BlockSceneView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108">
+               </Location>
+               <Location
+                  uuid = "9F2D4D8A-CBF8-4F97-B7CA-92E1AF304BC7 - 9298a7b0217e0e02"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for SpacialBlocks.UnitGrid3DView.loadResources() async -&gt; Swift.Optional&lt;SpacialBlocks.UnitGrid3DView.Resources&gt;"
+                  moduleName = "SpacialBlocks"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/griff/dev/AR/SpacialBlocks/SpacialBlocks/View/BlockSceneView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

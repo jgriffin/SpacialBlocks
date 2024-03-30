@@ -14,9 +14,9 @@ struct ContentView: View {
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
 
     var body: some View {
-        BlockSceneView()
+        UnitGrid3DView()
             .onChange(of: showImmersiveSpace) { _, newValue in
-                Task {
+                Task { @MainActor in
                     await updateImmersiveSpaceShown(newValue)
                 }
             }
@@ -26,7 +26,7 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .bottomOrnament) {
                     VStack(spacing: 12) {
-                        Toggle("Enlarge RealityView Content", isOn: $enlarge)
+//                        Toggle("Enlarge RealityView Content", isOn: $enlarge)
                         Toggle("Show ImmersiveSpace", isOn: $showImmersiveSpace)
                     }
                 }

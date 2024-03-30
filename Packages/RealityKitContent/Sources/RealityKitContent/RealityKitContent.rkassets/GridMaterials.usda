@@ -10,7 +10,7 @@
 
 def Xform "GridMaterials"
 {
-    reorder nameChildren = ["Materials", "GraphNodes", "LightGridMaterial", "GlobeMaterial"]
+    reorder nameChildren = ["Materials", "Palette", "Sphere"]
     quatf xformOp:orient = (1, 0, 0, 0)
     float3 xformOp:scale = (1, 1, 1)
     float3 xformOp:translate = (0, 0, 0)
@@ -458,6 +458,57 @@ def Xform "GridMaterials"
                     int ui:nodegraph:node:stackingOrder = 1423
                 }
             }
+        }
+    }
+
+    def Xform "Palette" (
+        active = true
+    )
+    {
+        reorder nameChildren = ["globeMaterialHolder", "gridMaterialHolder", "lightGridMaterialHolder"]
+        def Sphere "globeMaterialHolder" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </GridMaterials/Materials/GlobeMaterial> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double radius = 0.1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Sphere "gridMaterialHolder" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </GridMaterials/Materials/GridMaterial> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double radius = 0.1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0.4, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+        }
+
+        def Sphere "lightGridMaterialHolder" (
+            active = true
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </GridMaterials/Materials/LightGridMaterial> (
+                bindMaterialAs = "weakerThanDescendants"
+            )
+            double radius = 0.1
+            quatf xformOp:orient = (1, 0, 0, 0)
+            float3 xformOp:scale = (1, 1, 1)
+            float3 xformOp:translate = (0.8, 0, 0)
+            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
         }
     }
 }
