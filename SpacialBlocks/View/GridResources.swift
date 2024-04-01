@@ -6,29 +6,19 @@ import RealityKit
 import RealityKitContent
 
 struct GridResources {
-    let cubeGrid: Entity
-    let gridRoot: Entity
-    let lightGridMaterial: ShaderGraphMaterial
-    let gridMaterial: ShaderGraphMaterial
+    let unitsGridMaterial: ShaderGraphMaterial
     let plasticMaterial: RealityKit.Material
 
     @MainActor
     static func loadResources() async -> GridResources? {
-        guard let scene = try? await Entity(named: "CubeGrid", in: realityKitContentBundle),
-              let gridRoot = scene.findEntity(named: "gridRoot"),
-              let gridMaterial = try? await gridMaterialShader(),
-              let lightGridMaterial = try? await lightGridMaterialShader(),
-              let plasticMaterial = try? await plasticMaterialShader()
-                //loadMaterial(holderName: "plasticMaterialHolder", in: scene)
+        guard let gridMaterial = try? await unitsGridShaderMaterial(),
+              let plasticMaterial = try? await absPlasticMaterial(baseColorTint: .green)
         else {
             return nil
         }
 
         return GridResources(
-            cubeGrid: scene,
-            gridRoot: gridRoot,
-            lightGridMaterial: lightGridMaterial,
-            gridMaterial: gridMaterial,
+            unitsGridMaterial: gridMaterial,
             plasticMaterial: plasticMaterial
         )
     }

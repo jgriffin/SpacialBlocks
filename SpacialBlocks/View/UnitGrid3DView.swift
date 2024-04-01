@@ -47,9 +47,6 @@ struct UnitGrid3DView: View {
                     bias: gridConstraints.unitBias
                 )
 
-                // let centerConeMesh = MeshResource.generateCone(height: 0.5, radius: 0.25)
-                // scaledAndZFlippedRoot.addChild(ModelEntity(mesh: centerConeMesh))
-
                 for cubePosition in cubePositions {
                     let cubeMesh = MeshResource.generateBox(size: 1)
                     let cube = ModelEntity(
@@ -90,8 +87,6 @@ extension UnitGrid3DView {
         let right = ModelEntity()
     }
 
-    
-
     enum EntityError: Error {
         case failedToFindEntity(String?)
     }
@@ -101,7 +96,7 @@ extension UnitGrid3DView {
         scaledRoot.scale = fit.scale
 
         if let r {
-            ensureGridPlanes(fit, gridMaterial: r.lightGridMaterial)
+            ensureGridPlanes(fit, gridMaterial: r.unitsGridMaterial)
         } else {
             assertionFailure("applyGridFit called without materials")
         }
@@ -117,21 +112,10 @@ extension UnitGrid3DView {
         let groundMesh = MeshResource.generateBox(width: unitsExtents.x, height: 0.01, depth: unitsExtents.z)
         let backMesh = MeshResource.generateBox(width: unitsExtents.x, height: unitsExtents.y, depth: 0.01)
         let rightMesh = MeshResource.generateBox(width: 0.01, height: unitsExtents.y, depth: unitsExtents.z)
-        var groundMaterial = gridMaterial
-        debugPrint(groundMaterial.parameterNames)
 
-        e.ground.model = ModelComponent(
-            mesh: groundMesh,
-            materials: .init(repeating: gridMaterial, count: groundMesh.expectedMaterialCount)
-        )
-        e.back.model = ModelComponent(
-            mesh: backMesh,
-            materials: .init(repeating: gridMaterial, count: groundMesh.expectedMaterialCount)
-        )
-        e.right.model = ModelComponent(
-            mesh: rightMesh,
-            materials: .init(repeating: gridMaterial, count: groundMesh.expectedMaterialCount)
-        )
+        e.ground.model = ModelComponent(mesh: groundMesh, material: gridMaterial)
+        e.back.model = ModelComponent(mesh: backMesh, material: gridMaterial)
+        e.right.model = ModelComponent(mesh: rightMesh, material: gridMaterial)
 
         scaledRoot.addChild(e.ground)
         scaledRoot.addChild(e.back)

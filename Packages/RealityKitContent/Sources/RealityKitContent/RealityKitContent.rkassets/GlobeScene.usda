@@ -17,10 +17,11 @@ def Xform "Root"
     def Sphere "Sphere" (
         active = true
         prepend apiSchemas = ["MaterialBindingAPI"]
+        references = @GridMaterials.usda@
     )
     {
         reorder nameChildren = ["Collider", "InputTarget", "GridMaterial"]
-        rel material:binding = </Root/GridMaterial/Materials/GlobeMaterial> (
+        rel material:binding = </Root/Sphere/Materials/GlobeMaterial> (
             bindMaterialAs = "weakerThanDescendants"
         )
         double radius = 0.1
@@ -47,146 +48,6 @@ def Xform "Root"
         def RealityKitComponent "InputTarget"
         {
             uniform token info:id = "RealityKit.InputTarget"
-        }
-    }
-
-    def "GridMaterial" (
-        active = true
-        references = @GridMaterials.usda@
-    )
-    {
-        quatf xformOp:orient = (1, 0, 0, 0)
-        float3 xformOp:scale = (1, 1, 1)
-        float3 xformOp:translate = (0, 0, 0)
-        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-        over "Material"
-        {
-            over "GridMaterial"
-            {
-                color4f inputs:BaseColor (
-                    customData = {
-                        dictionary realitykit = {
-                            float2 positionInSubgraph = (67.29334, 432.31796)
-                            float2 sizeInSubgraph = (133, 53)
-                            int stackingOrderInSubgraph = 1487
-                        }
-                    }
-                )
-                color4f inputs:LineColor (
-                    customData = {
-                        dictionary realitykit = {
-                            float2 positionInSubgraph = (66.555145, 327.8113)
-                            float2 sizeInSubgraph = (133, 53)
-                            int stackingOrderInSubgraph = 1486
-                        }
-                    }
-                )
-                float2 inputs:LineCounts (
-                    customData = {
-                        dictionary realitykit = {
-                            float2 positionInSubgraph = (77.921715, 140.37903)
-                            float2 sizeInSubgraph = (138.5, 53)
-                            int stackingOrderInSubgraph = 1416
-                        }
-                    }
-                )
-                float2 inputs:LineWidths (
-                    customData = {
-                        dictionary realitykit = {
-                            float2 positionInSubgraph = (72.04498, 230.3688)
-                            float2 sizeInSubgraph = (138.5, 53)
-                            int stackingOrderInSubgraph = 1415
-                        }
-                    }
-                )
-                float2 ui:nodegraph:realitykit:subgraphOutputs:size = (181.5, 99)
-
-                over "Combine3"
-                {
-                    float2 ui:nodegraph:node:size = (145, 54)
-                }
-
-                over "Texcoord"
-                {
-                    float2 ui:nodegraph:node:size = (180.5, 53)
-                }
-
-                over "Min"
-                {
-                    float2 ui:nodegraph:node:size = (113, 40)
-                }
-
-                over "Remap"
-                {
-                    float2 ui:nodegraph:node:size = (94, 181)
-                }
-
-                over "Alpha"
-                {
-                    float2 ui:nodegraph:node:size = (94, 181)
-                }
-
-                over "Separate2"
-                {
-                    float2 ui:nodegraph:node:size = (115, 127)
-                }
-
-                over "LineColor3"
-                {
-                    float2 ui:nodegraph:node:size = (118, 127)
-                }
-
-                over "BaseColor3"
-                {
-                    float2 ui:nodegraph:node:size = (122, 127)
-                }
-
-                over "Multiply"
-                {
-                    float2 ui:nodegraph:node:size = (60, 36)
-                }
-
-                over "Add"
-                {
-                    float2 ui:nodegraph:node:size = (61.5, 36.5)
-                }
-
-                over "Fractional"
-                {
-                    float2 ui:nodegraph:node:size = (154.5, 109)
-                }
-
-                over "Multiply_1"
-                {
-                    float2 ui:nodegraph:node:size = (60, 36)
-                }
-
-                over "Absval"
-                {
-                    float2 ui:nodegraph:node:size = (121.5, 53)
-                }
-
-                over "Range"
-                {
-                    float2 ui:nodegraph:node:size = (98, 217)
-                }
-
-                over "Subtract_1"
-                {
-                    float2 ui:nodegraph:node:size = (61.5, 36)
-                }
-
-                over "Multiply_2"
-                {
-                    float2 ui:nodegraph:node:size = (60, 36)
-                }
-
-                over "MaterialXPreviewSurface"
-                {
-                    float2 ui:nodegraph:node:size = (207.5, 199)
-                }
-            }
         }
     }
 }

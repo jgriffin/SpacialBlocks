@@ -56,10 +56,9 @@ extension Grid3D {
         /// Take a position in grid units and returns a proper Translation position relative to the center
         /// after adjusting for the bounds origin, z flipping, and bias to end up centered on or between grid units/
         func positionForUnits(_ unitsPosition: Units, bias: UnitBias? = nil) -> SIMD3<Float> {
-            let ratios = (unitsPosition - unitsBounds.min) / unitsBounds.extents
-            let centerOffsetRatios = ratios - .half
             let biasOffset = (bias ?? self.bias).offset
-            return (centerOffsetRatios * unitsBounds.extents + biasOffset) * .zFlip
+            let centerRelative = (unitsPosition + biasOffset) - unitsBounds.center
+            return centerRelative * .zFlip
         }
         
         // MARK: - fitFrom
@@ -68,19 +67,19 @@ extension Grid3D {
             from c: Grid3D.UnitsConstraints,
             sceneBounds: BoundingBox
         ) throws {
-            guard !c.unitsMinBounds.isEmpty else { throw FitError.invalidConstrants("unitsMinBounds") }
             guard !sceneBounds.isEmpty else { throw FitError.invalidSceneBounds }
-
             let sceneExtents = sceneBounds.extents
-            let unitsBounds = BoundingBox(
+
+            guard !c.unitsMinBounds.isEmpty else { throw FitError.invalidConstrants("unitsMinBounds") }
+            let paddedBounds = BoundingBox(
                 min: c.unitsMinBounds.min - c.paddingUnits,
                 max: c.unitsMinBounds.max + c.paddingUnits
             )
-            let fitScales = sceneExtents / unitsBounds.extents
+            let fitScales = sceneExtents / paddedBounds.extents
             let scale = fitScales.min()
             
             self = UnitsFit(
-                unitsBounds: unitsBounds,
+                unitsBounds: paddedBounds,
                 scale: .one * scale,
                 bias: c.unitBias
             )

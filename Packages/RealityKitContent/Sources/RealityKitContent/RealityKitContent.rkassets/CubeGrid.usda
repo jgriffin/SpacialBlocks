@@ -16,6 +16,9 @@ def Xform "root"
     )
     {
         reorder nameChildren = ["GroundGrid", "BackGrid", "RightGrid", "origin"]
+        float3 xformOp:scale = (1, 1, 1)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+
         def Cube "GroundGrid" (
             active = true
             prepend apiSchemas = ["MaterialBindingAPI"]
@@ -69,38 +72,13 @@ def Xform "root"
             float3 xformOp:translate = (0.5, 0, 0)
             uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
         }
-
-        def Xform "origin" (
-            active = true
-        )
-        {
-            quatf xformOp:orient = (1, 0, 0, 0)
-            float3 xformOp:scale = (1, 1, 1)
-            float3 xformOp:translate = (-0.25, -0.45, 0.15)
-            uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-
-            def Cube "Block" (
-                active = false
-                prepend apiSchemas = ["MaterialBindingAPI"]
-            )
-            {
-                rel material:binding = </root/Materials/BlackABSPlastic> (
-                    bindMaterialAs = "weakerThanDescendants"
-                )
-                double size = 0.1
-                quatf xformOp:orient = (1, 0, 0, 0)
-                float3 xformOp:scale = (1, 1, 1)
-                float3 xformOp:translate = (0, 0, 0)
-                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
-            }
-        }
     }
 
     def Xform "Materials" (
         active = true
     )
     {
-        reorder nameChildren = ["MaterialsPalette", "GridMaterials", "BlackABSPlastic"]
+        reorder nameChildren = ["MaterialsPalette", "GridMaterials", "ABSPlasticMaterial"]
         def "GridMaterials" (
             active = true
             references = @GridMaterials.usda@
@@ -278,6 +256,171 @@ def Xform "root"
                     )
                     float2 ui:nodegraph:realitykit:subgraphOutputs:size = (181.5, 99)
                 }
+
+                over "GraphNodes"
+                {
+                    over "shoudlDrawGridLine"
+                    {
+                        float3 inputs:isOnGridUnit (
+                            customData = {
+                                dictionary realitykit = {
+                                    float2 positionInSubgraph = (-461.29688, -203.3086)
+                                    float2 sizeInSubgraph = (148, 53)
+                                    int stackingOrderInSubgraph = 3456
+                                }
+                            }
+                        )
+                        float3 inputs:objectNormal (
+                            customData = {
+                                dictionary realitykit = {
+                                    float2 positionInSubgraph = (-668.4414, -53.09375)
+                                    float2 sizeInSubgraph = (152, 53)
+                                    int stackingOrderInSubgraph = 3448
+                                }
+                            }
+                        )
+                        float2 ui:nodegraph:realitykit:subgraphOutputs:size = (167.00003, 81)
+
+                        over "absNormal"
+                        {
+                            float2 ui:nodegraph:node:size = (147.5, 53)
+                        }
+
+                        over "Oneminus_3"
+                        {
+                            float2 ui:nodegraph:node:size = (158, 109)
+                        }
+
+                        over "Step_4"
+                        {
+                            float2 ui:nodegraph:node:size = (129, 127)
+                        }
+
+                        over "Multiply"
+                        {
+                            float2 ui:nodegraph:node:size = (60, 36)
+                        }
+
+                        over "DotProduct_3"
+                        {
+                            float2 ui:nodegraph:node:size = (169, 53)
+                        }
+
+                        over "Step_6"
+                        {
+                            float2 ui:nodegraph:node:size = (129, 127)
+                        }
+                    }
+                }
+
+                over "UnitGridLinesMaterial"
+                {
+                    color4f inputs:baseColor (
+                        customData = {
+                            dictionary realitykit = {
+                                float2 positionInSubgraph = (-503.90234, 219.8711)
+                                float2 sizeInSubgraph = (133, 53)
+                                int stackingOrderInSubgraph = 3155
+                            }
+                        }
+                    )
+                    color4f inputs:gridLineColor (
+                        customData = {
+                            dictionary realitykit = {
+                                float2 positionInSubgraph = (-496.92188, 154.3086)
+                                float2 sizeInSubgraph = (152, 53)
+                                int stackingOrderInSubgraph = 3152
+                            }
+                        }
+                    )
+                    float inputs:GridLineWidth (
+                        customData = {
+                            dictionary realitykit = {
+                                float2 positionInSubgraph = (-505.5625, -127.08594)
+                                float2 sizeInSubgraph = (156.5, 53)
+                            }
+                        }
+                    )
+                    float3 inputs:GridUnits (
+                        customData = {
+                            dictionary realitykit = {
+                                float2 positionInSubgraph = (-500.51172, -203.46484)
+                                float2 sizeInSubgraph = (139, 53)
+                            }
+                        }
+                    )
+                    float2 ui:nodegraph:realitykit:subgraphOutputs:size = (181.5, 99)
+
+                    over "Normal"
+                    {
+                        float2 ui:nodegraph:node:size = (128.5, 40)
+                    }
+
+                    over "Position"
+                    {
+                        float2 ui:nodegraph:node:size = (133.5, 40)
+                    }
+
+                    over "Convert"
+                    {
+                        float2 ui:nodegraph:node:size = (135.5, 40)
+                    }
+
+                    over "isOnGridUnit"
+                    {
+                        float3 inputs:gridUnits (
+                            customData = {
+                                dictionary realitykit = {
+                                    float2 positionInSubgraph = (21.1875, -126.078125)
+                                    float2 sizeInSubgraph = (139, 53)
+                                    int stackingOrderInSubgraph = 3143
+                                }
+                            }
+                        )
+                        float inputs:lineWidth (
+                            customData = {
+                                dictionary realitykit = {
+                                    float2 positionInSubgraph = (18.117188, 36.359375)
+                                    float2 sizeInSubgraph = (126.5, 53)
+                                    int stackingOrderInSubgraph = 3013
+                                }
+                            }
+                        )
+                        float3 inputs:position (
+                            customData = {
+                                dictionary realitykit = {
+                                    float2 positionInSubgraph = (20.367188, -246.52344)
+                                    float2 sizeInSubgraph = (139, 53)
+                                    int stackingOrderInSubgraph = 2593
+                                }
+                            }
+                        )
+                        float2 ui:nodegraph:node:size = (130, 217)
+                        float2 ui:nodegraph:realitykit:subgraphOutputs:size = (221.5, 153)
+                    }
+
+                    over "drawGridLine"
+                    {
+                        float2 ui:nodegraph:node:size = (133, 127)
+                    }
+
+                    over "Mix_1"
+                    {
+                        float2 ui:nodegraph:node:pos = (113.115326, 169.35252)
+                        float2 ui:nodegraph:node:size = (109, 145)
+                        int ui:nodegraph:node:stackingOrder = 3174
+                    }
+
+                    over "PreviewSurface"
+                    {
+                        float2 ui:nodegraph:node:size = (159.5, 307)
+                    }
+
+                    over "SeparateColor3Alpha"
+                    {
+                        float2 ui:nodegraph:node:size = (183, 127)
+                    }
+                }
             }
 
             over "Palette"
@@ -301,7 +444,7 @@ def Xform "root"
             }
         }
 
-        def "BlackABSPlastic" (
+        def "ABSPlasticMaterial" (
             active = true
             references = @BlackABSPlastic.usdz@
         )
@@ -393,7 +536,7 @@ def Xform "root"
         prepend apiSchemas = ["MaterialBindingAPI"]
     )
     {
-        rel material:binding = </root/Materials/BlackABSPlastic> (
+        rel material:binding = </root/Materials/ABSPlasticMaterial> (
             bindMaterialAs = "weakerThanDescendants"
         )
         double size = 0.1
