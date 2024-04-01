@@ -18,6 +18,7 @@
 		D6D3B4DC2BB5E3B800B24CE8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6D3B4DB2BB5E3B800B24CE8 /* Preview Assets.xcassets */; };
 		D6D3B4E72BB5E3B800B24CE8 /* SpacialBlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D3B4E62BB5E3B800B24CE8 /* SpacialBlocksTests.swift */; };
 		D6D3B4F62BB5E60000B24CE8 /* BlockSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D3B4F52BB5E60000B24CE8 /* BlockSceneView.swift */; };
+		D6EA641C2BB80041007AFBE1 /* GridResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA641B2BB80041007AFBE1 /* GridResources.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		D6D3B4E22BB5E3B800B24CE8 /* SpacialBlocksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpacialBlocksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D3B4E62BB5E3B800B24CE8 /* SpacialBlocksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacialBlocksTests.swift; sourceTree = "<group>"; };
 		D6D3B4F52BB5E60000B24CE8 /* BlockSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockSceneView.swift; sourceTree = "<group>"; };
+		D6EA641B2BB80041007AFBE1 /* GridResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridResources.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				D6D3B4F52BB5E60000B24CE8 /* BlockSceneView.swift */,
 				D6D3B4D22BB5E3B700B24CE8 /* ContentView.swift */,
 				D6D3B4D42BB5E3B700B24CE8 /* ImmersiveView.swift */,
+				D6EA641B2BB80041007AFBE1 /* GridResources.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 			files = (
 				D6014DB62BB69B6200E4B18C /* Grid3DMath.swift in Sources */,
 				D6D3B4D32BB5E3B700B24CE8 /* ContentView.swift in Sources */,
+				D6EA641C2BB80041007AFBE1 /* GridResources.swift in Sources */,
 				D6014DB32BB6726800E4B18C /* SIMD++.swift in Sources */,
 				D6D3B4D12BB5E3B700B24CE8 /* SpacialBlocksApp.swift in Sources */,
 				D6D3B4D52BB5E3B700B24CE8 /* ImmersiveView.swift in Sources */,

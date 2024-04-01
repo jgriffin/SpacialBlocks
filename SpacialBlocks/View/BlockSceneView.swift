@@ -22,7 +22,7 @@ struct UnitGrid3DView: View {
     ]
 
     @State private var e = GridEntities()
-    @State private var r: Resources?
+    @State private var r: GridResources?
 
     @State private var scaledRoot = Entity()
     @State private var unitsCenter = Entity()
@@ -31,7 +31,7 @@ struct UnitGrid3DView: View {
     var body: some View {
         GeometryReader3D { proxy in
             RealityView { content in
-                guard let r = await loadResources() else {
+                guard let r = await GridResources.loadResources() else {
                     debugPrint("resource loading failed")
                     return
                 }
@@ -90,43 +90,10 @@ extension UnitGrid3DView {
         let right = ModelEntity()
     }
 
-    struct Resources {
-        let cubeGrid: Entity
-        let gridRoot: Entity
-        let lightGridMaterial: RealityKit.Material
-        let gridMaterial: RealityKit.Material
-        let plasticMaterial: RealityKit.Material
-    }
+    
 
     enum EntityError: Error {
         case failedToFindEntity(String?)
-    }
-
-    @MainActor
-    private func loadResources() async -> Resources? {
-        guard let scene = try? await Entity(named: "CubeGrid", in: realityKitContentBundle),
-              let gridRoot = scene.findEntity(named: "gridRoot"),
-              let lightGridMaterial = loadMaterial(holderName: "lightGridMaterialHolder", in: scene),
-              let gridMaterial = loadMaterial(holderName: "gridMaterialHolder", in: scene),
-              let plasticMaterial = loadMaterial(holderName: "plasticMaterialHolder", in: scene)
-        else {
-            return nil
-        }
-
-        return Resources(
-            cubeGrid: scene,
-            gridRoot: gridRoot,
-            lightGridMaterial: lightGridMaterial,
-            gridMaterial: gridMaterial,
-            plasticMaterial: plasticMaterial
-        )
-    }
-
-    func loadMaterial(holderName: String, in parent: Entity) -> RealityKit.Material? {
-        parent.findEntity(named: holderName)?
-            .components[ModelComponent.self]?
-            .materials
-            .first
     }
 
     func applyUnitsFit(_ fit: Grid3D.UnitsFit) {
@@ -142,7 +109,7 @@ extension UnitGrid3DView {
 
     private func ensureGridPlanes(
         _ fit: Grid3D.UnitsFit,
-        gridMaterial: RealityKit.Material
+        gridMaterial: ShaderGraphMaterial
     ) {
         let unitsBounds = fit.unitsBounds
         let unitsExtents = unitsBounds.extents
@@ -150,6 +117,8 @@ extension UnitGrid3DView {
         let groundMesh = MeshResource.generateBox(width: unitsExtents.x, height: 0.01, depth: unitsExtents.z)
         let backMesh = MeshResource.generateBox(width: unitsExtents.x, height: unitsExtents.y, depth: 0.01)
         let rightMesh = MeshResource.generateBox(width: 0.01, height: unitsExtents.y, depth: unitsExtents.z)
+        var groundMaterial = gridMaterial
+        debugPrint(groundMaterial.parameterNames)
 
         e.ground.model = ModelComponent(
             mesh: groundMesh,

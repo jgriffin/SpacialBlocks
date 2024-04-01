@@ -16,45 +16,6 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "GridMaterialScene",
-        "Material",
-        "GridMaterial"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
-        "GridMaterialScene",
-        "GridMaterialRoot"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
-        "CubeGrid",
-        "MeterGridPlane"
-      ],
-      {
-        "isExpanded" : false,
-        "isLocked" : true
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
-        "GridCube"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "GridMaterialScene",
         "Material"
       ],
       {
@@ -66,6 +27,16 @@
         "Root",
         "GridMaterialScene",
         "GridMaterialRoot",
+        "GridMaterial"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "GridMaterialScene",
+        "Material",
         "GridMaterial"
       ],
       {
@@ -94,17 +65,8 @@
       [
         "1D572CEB-057A-41C3-B575-04C37501A3C0",
         "Root",
-        "GridLines3"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "1D572CEB-057A-41C3-B575-04C37501A3C0",
-        "Root",
-        "_GridMaterial",
-        "GridMaterial"
+        "GridMaterialScene",
+        "GridMaterialRoot"
       ],
       {
         "isExpanded" : true,
@@ -123,6 +85,44 @@
         "Root",
         "Sphere_Left",
         "Material"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "CubeGrid",
+        "MeterGridPlane"
+      ],
+      {
+        "isExpanded" : false,
+        "isLocked" : true
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "GridCube"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "GridLines3"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "1D572CEB-057A-41C3-B575-04C37501A3C0",
+        "Root",
+        "_GridMaterial",
+        "GridMaterial"
       ],
       {
         "isExpanded" : true,
@@ -198,15 +198,6 @@
       [
         "384AADEA-C627-4D5C-A002-C25401B99A22",
         "Root",
-        "GridMaterial"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "384AADEA-C627-4D5C-A002-C25401B99A22",
-        "Root",
         "GridMaterial",
         "Material"
       ],
@@ -221,6 +212,15 @@
       {
         "isExpanded" : true,
         "isLocked" : false
+      },
+      [
+        "384AADEA-C627-4D5C-A002-C25401B99A22",
+        "Root",
+        "GridMaterial"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
       }
     ]
   },
@@ -228,47 +228,9 @@
     "objectMetadataList" : [
       [
         "713D4846-4943-4D30-B97D-6EA790A9972A",
-        "GridMaterials",
-        "Palette",
-        "globeMaterialHolder"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "713D4846-4943-4D30-B97D-6EA790A9972A",
-        "GridMaterials",
-        "Materials"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "713D4846-4943-4D30-B97D-6EA790A9972A",
-        "GridMaterials",
-        "Palette"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "713D4846-4943-4D30-B97D-6EA790A9972A",
-        "GridMaterials",
-        "Palette",
-        "gridMaterialHolder"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "713D4846-4943-4D30-B97D-6EA790A9972A",
-        "GridMaterials",
-        "Material",
-        "GridMaterial"
+        "Root",
+        "UnitGridLineMaterial",
+        "drawGridLine"
       ],
       {
         "isExpanded" : true,
@@ -286,7 +248,173 @@
       },
       [
         "713D4846-4943-4D30-B97D-6EA790A9972A",
-        "GridMaterials"
+        "Root",
+        "UnitGridLine",
+        "isOnGridUnit"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "Root",
+        "Materials",
+        "UnitGridLinesMaterial"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "GridMaterials",
+        "Materials"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "GridMaterials",
+        "Material",
+        "GridMaterial"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "Root",
+        "Material",
+        "isOnGridUnit"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "Root",
+        "UnitGridLine"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "GridMaterials",
+        "Palette",
+        "gridMaterialHolder"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "Root",
+        "Palette",
+        "gridMaterialHolder"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "Root",
+        "Palette",
+        "globeMaterialHolder"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "Root",
+        "Materials"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "GridMaterials",
+        "Palette"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "Root",
+        "Material",
+        "drawGridLine"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "Root",
+        "Materials",
+        "GridMaterial"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "Root",
+        "Palette",
+        "lightGridMaterialHolder"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "GridMaterials",
+        "Palette",
+        "globeMaterialHolder"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "Root",
+        "UnitGridLineMaterial",
+        "isOnGridUnit"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "Root",
+        "Materials",
+        "GraphNodes"
       ],
       {
         "isExpanded" : true,
@@ -299,15 +427,6 @@
       [
         "883D7564-6F68-4163-B7A8-32847E43A4F3",
         "Root",
-        "WoodBlock"
-      ],
-      {
-        "isExpanded" : false,
-        "isLocked" : true
-      },
-      [
-        "883D7564-6F68-4163-B7A8-32847E43A4F3",
-        "Root",
         "GridMaterial_1"
       ],
       {
@@ -317,43 +436,7 @@
       [
         "883D7564-6F68-4163-B7A8-32847E43A4F3",
         "Root",
-        "GridLines3"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "883D7564-6F68-4163-B7A8-32847E43A4F3",
-        "Root",
-        "GridMaterial_1",
-        "GridMaterial"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "883D7564-6F68-4163-B7A8-32847E43A4F3",
-        "Root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "883D7564-6F68-4163-B7A8-32847E43A4F3",
-        "Root",
         "MyGridMaterial"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "883D7564-6F68-4163-B7A8-32847E43A4F3",
-        "Root",
-        "GridMaterial"
       ],
       {
         "isExpanded" : true,
@@ -372,12 +455,57 @@
       [
         "883D7564-6F68-4163-B7A8-32847E43A4F3",
         "Root",
+        "GridLines3"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "883D7564-6F68-4163-B7A8-32847E43A4F3",
+        "Root",
+        "GridMaterial"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "883D7564-6F68-4163-B7A8-32847E43A4F3",
+        "Root"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "883D7564-6F68-4163-B7A8-32847E43A4F3",
+        "Root",
         "GridMaterial",
         "GridMaterial"
       ],
       {
         "isExpanded" : true,
         "isLocked" : false
+      },
+      [
+        "883D7564-6F68-4163-B7A8-32847E43A4F3",
+        "Root",
+        "GridMaterial_1",
+        "GridMaterial"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "883D7564-6F68-4163-B7A8-32847E43A4F3",
+        "Root",
+        "WoodBlock"
+      ],
+      {
+        "isExpanded" : false,
+        "isLocked" : true
       }
     ]
   },
@@ -409,6 +537,7 @@
     "objectMetadataList" : [
       [
         "A21C1E11-ABB0-4972-8159-55AD3A9AA5B3",
+        "GridMaterial",
         "GridMaterial"
       ],
       {
@@ -417,7 +546,6 @@
       },
       [
         "A21C1E11-ABB0-4972-8159-55AD3A9AA5B3",
-        "GridMaterial",
         "GridMaterial"
       ],
       {
@@ -430,8 +558,9 @@
     "objectMetadataList" : [
       [
         "CED1B227-898B-4D2D-9D02-3AC91A75D4C5",
-        "GridMaterials",
-        "Material"
+        "GridMaterialScene",
+        "GridMaterialRoot",
+        "GridMaterial"
       ],
       {
         "isExpanded" : true,
@@ -441,16 +570,6 @@
         "CED1B227-898B-4D2D-9D02-3AC91A75D4C5",
         "GridMaterialScene",
         "Material"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "CED1B227-898B-4D2D-9D02-3AC91A75D4C5",
-        "GridMaterials",
-        "Material",
-        "GridMaterial"
       ],
       {
         "isExpanded" : true,
@@ -467,6 +586,16 @@
       [
         "CED1B227-898B-4D2D-9D02-3AC91A75D4C5",
         "GridMaterialScene",
+        "GridMaterial",
+        "GridMaterial"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "CED1B227-898B-4D2D-9D02-3AC91A75D4C5",
+        "GridMaterials",
         "Material",
         "GridMaterial"
       ],
@@ -477,7 +606,7 @@
       [
         "CED1B227-898B-4D2D-9D02-3AC91A75D4C5",
         "GridMaterialScene",
-        "GridMaterialRoot",
+        "Material",
         "GridMaterial"
       ],
       {
@@ -486,9 +615,8 @@
       },
       [
         "CED1B227-898B-4D2D-9D02-3AC91A75D4C5",
-        "GridMaterialScene",
-        "GridMaterial",
-        "GridMaterial"
+        "GridMaterials",
+        "Material"
       ],
       {
         "isExpanded" : true,
@@ -553,9 +681,18 @@
       [
         "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
         "root",
-        "gridRoot",
-        "origin",
-        "Block"
+        "Materials",
+        "GridMaterials",
+        "Materials",
+        "GraphNodes"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "root"
       ],
       {
         "isExpanded" : true,
@@ -574,26 +711,6 @@
       [
         "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
         "Root",
-        "gridRoot"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
-        "root",
-        "Materials",
-        "GridMaterials",
-        "Palette"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
-        "root",
         "gridRoot"
       ],
       {
@@ -613,64 +730,6 @@
       },
       [
         "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
-        "root",
-        "Materials",
-        "GridMaterials",
-        "Materials"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
-        "root",
-        "Materials"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
-        "root"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
-        "root",
-        "gridRoot",
-        "origin"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
-        "Root",
-        "gridRoot",
-        "GroundGrid"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
-        "root",
-        "gridRoot",
-        "GroundGrid"
-      ],
-      {
-        "isExpanded" : true,
-        "isLocked" : false
-      },
-      [
-        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
         "Root",
         "gridRoot",
         "origin",
@@ -685,8 +744,17 @@
         "root",
         "Materials",
         "GridMaterials",
-        "Materials",
-        "GraphNodes"
+        "Palette"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "Root",
+        "gridRoot",
+        "GroundGrid"
       ],
       {
         "isExpanded" : true,
@@ -704,7 +772,67 @@
       },
       [
         "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "root",
+        "gridRoot",
+        "GroundGrid"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "root",
+        "Materials"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "root",
+        "gridRoot"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "root",
+        "gridRoot",
+        "origin",
+        "Block"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
         "Root",
+        "Materials"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "root",
+        "gridRoot",
+        "origin"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "E287FC9B-F8C8-4B96-98D1-F7FE5FD7F407",
+        "root",
+        "Materials",
+        "GridMaterials",
         "Materials"
       ],
       {

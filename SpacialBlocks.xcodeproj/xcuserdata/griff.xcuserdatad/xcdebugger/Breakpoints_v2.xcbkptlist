@@ -23,45 +23,87 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9F2D4D8A-CBF8-4F97-B7CA-92E1AF304BC7"
+            uuid = "FEA40294-E1CA-4030-9117-CDA0F98D94AC"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SpacialBlocks/View/BlockSceneView.swift"
+            filePath = "SpacialBlocks/View/GridResources.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
             landmarkName = "loadResources()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "9F2D4D8A-CBF8-4F97-B7CA-92E1AF304BC7 - a7d816f7ac12ac05"
+                  uuid = "FEA40294-E1CA-4030-9117-CDA0F98D94AC - 8bb4e164efc2414f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for SpacialBlocks.UnitGrid3DView.loadResources() async -&gt; Swift.Optional&lt;SpacialBlocks.UnitGrid3DView.Resources&gt;"
+                  symbolName = "(5) suspend resume partial function for static SpacialBlocks.GridResources.loadResources() async -&gt; Swift.Optional&lt;SpacialBlocks.GridResources&gt;"
                   moduleName = "SpacialBlocks"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/griff/dev/AR/SpacialBlocks/SpacialBlocks/View/BlockSceneView.swift"
+                  urlString = "file:///Users/griff/dev/AR/SpacialBlocks/SpacialBlocks/View/GridResources.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "108"
-                  endingLineNumber = "108">
+                  startingLineNumber = "20"
+                  endingLineNumber = "20">
                </Location>
                <Location
-                  uuid = "9F2D4D8A-CBF8-4F97-B7CA-92E1AF304BC7 - 9298a7b0217e0e02"
+                  uuid = "FEA40294-E1CA-4030-9117-CDA0F98D94AC - 9c48d4972c1b485d"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for SpacialBlocks.UnitGrid3DView.loadResources() async -&gt; Swift.Optional&lt;SpacialBlocks.UnitGrid3DView.Resources&gt;"
+                  symbolName = "(6) await resume partial function for static SpacialBlocks.GridResources.loadResources() async -&gt; Swift.Optional&lt;SpacialBlocks.GridResources&gt;"
                   moduleName = "SpacialBlocks"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/griff/dev/AR/SpacialBlocks/SpacialBlocks/View/BlockSceneView.swift"
+                  urlString = "file:///Users/griff/dev/AR/SpacialBlocks/SpacialBlocks/View/GridResources.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "108"
-                  endingLineNumber = "108">
+                  startingLineNumber = "20"
+                  endingLineNumber = "20">
+               </Location>
+               <Location
+                  uuid = "FEA40294-E1CA-4030-9117-CDA0F98D94AC - 2211bbad279a0d4d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for static SpacialBlocks.GridResources.loadResources() async -&gt; Swift.Optional&lt;SpacialBlocks.GridResources&gt;"
+                  moduleName = "SpacialBlocks"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/griff/dev/AR/SpacialBlocks/SpacialBlocks/View/GridResources.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20">
+               </Location>
+               <Location
+                  uuid = "FEA40294-E1CA-4030-9117-CDA0F98D94AC - 7c4a14939fb2c943"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(9) suspend resume partial function for static SpacialBlocks.GridResources.loadResources() async -&gt; Swift.Optional&lt;SpacialBlocks.GridResources&gt;"
+                  moduleName = "SpacialBlocks"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/griff/dev/AR/SpacialBlocks/SpacialBlocks/View/GridResources.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20">
+               </Location>
+               <Location
+                  uuid = "FEA40294-E1CA-4030-9117-CDA0F98D94AC - b342e8ac7c74394"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(10) suspend resume partial function for static SpacialBlocks.GridResources.loadResources() async -&gt; Swift.Optional&lt;SpacialBlocks.GridResources&gt;"
+                  moduleName = "SpacialBlocks"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/griff/dev/AR/SpacialBlocks/SpacialBlocks/View/GridResources.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20">
                </Location>
             </Locations>
          </BreakpointContent>
