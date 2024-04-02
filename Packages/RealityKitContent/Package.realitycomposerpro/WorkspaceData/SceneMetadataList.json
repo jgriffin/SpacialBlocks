@@ -240,6 +240,16 @@
         "713D4846-4943-4D30-B97D-6EA790A9972A",
         "Root",
         "Materials",
+        "UnitGridLinesMaterial"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "Root",
+        "Materials",
         "GridMaterial"
       ],
       {
@@ -368,6 +378,17 @@
         "Root",
         "Palette",
         "lightGridMaterialHolder"
+      ],
+      {
+        "isExpanded" : true,
+        "isLocked" : false
+      },
+      [
+        "713D4846-4943-4D30-B97D-6EA790A9972A",
+        "Root",
+        "Materials",
+        "GraphNodes",
+        "isOnGridUnit"
       ],
       {
         "isExpanded" : true,

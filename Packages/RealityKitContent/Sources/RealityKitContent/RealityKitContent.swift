@@ -8,6 +8,7 @@ public let realityKitContentBundle = Bundle.module
 public func unitsGridShaderMaterial(
     gridUnits: SIMD3<Float> = [1, 1, 1],
     lineWidth: Float = 0.03,
+    positionBias: SIMD3<Float>? = [0,0,0],
     gridLineColor: UIColor? = nil,
     baseColor: UIColor? = nil
 ) async throws -> ShaderGraphMaterial {
@@ -20,6 +21,9 @@ public func unitsGridShaderMaterial(
     try material.setParameter(name: "gridUnits", value: .simd3Float(gridUnits))
     try material.setParameter(name: "gridLineWidth", value: .float(lineWidth))
         
+    if let positionBias {
+        try material.setParameter(name: "positionBias", value: .simd3Float(positionBias))
+    }
     if let gridLineColor {
         try material.setParameter(name: "gridLineColor", value: .color(gridLineColor.cgColor))
     }

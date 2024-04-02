@@ -5,6 +5,7 @@
 import RealityKit
 import RealityKitContent
 import SwiftUI
+import Grid3D
 
 /// Establishes a (scaled) 3D grid inside a 3D Volume to make it easy to layout grid-based objects
 ///
@@ -16,7 +17,8 @@ import SwiftUI
 /// we can just think in terms of a natural 3D unit based coordinate system with a simple origin.
 struct UnitGrid3DView: View {
     var gridConstraints: Grid3D.UnitsConstraints = .init(
-        requiredUnits: .init(min: [0, 0, 0], max: [10, 5, 5])
+        requiredUnits: .init(min: [0, 0, 0], max: [9, 5, 6]),
+        paddingMin: [1,0,0]
     )
 
     var cubePositions: [SIMD3<Float>] = [
@@ -114,6 +116,10 @@ extension UnitGrid3DView {
         let groundMesh = MeshResource.generateBox(width: unitsExtents.x, height: 0.01, depth: unitsExtents.z)
         let backMesh = MeshResource.generateBox(width: unitsExtents.x, height: unitsExtents.y, depth: 0.01)
         let rightMesh = MeshResource.generateBox(width: 0.01, height: unitsExtents.y, depth: unitsExtents.z)
+
+        let bias = remainder(unitsExtents, [2,2,2]) / 2
+        var gridMaterial = gridMaterial
+        try? gridMaterial.setParameter(name: "positionBias", value: .simd3Float(bias))
 
         e.ground.model = ModelComponent(mesh: groundMesh, material: gridMaterial)
         e.back.model = ModelComponent(mesh: backMesh, material: gridMaterial)

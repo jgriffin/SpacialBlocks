@@ -565,7 +565,16 @@ def Xform "Root"
                     dictionary realitykit = {
                         float2 positionInSubgraph = (-500.51172, -203.46484)
                         float2 sizeInSubgraph = (139, 53)
-                        int stackingOrderInSubgraph = 3309
+                        int stackingOrderInSubgraph = 3332
+                    }
+                }
+            )
+            float3 inputs:positionBias = (0, 0, 0) (
+                customData = {
+                    dictionary realitykit = {
+                        float2 positionInSubgraph = (-498.51562, 7.5546875)
+                        float2 sizeInSubgraph = (144, 53)
+                        int stackingOrderInSubgraph = 3328
                     }
                 }
             )
@@ -626,7 +635,7 @@ def Xform "Root"
             {
                 float3 inputs:gridUnits.connect = </Root/Materials/UnitGridLinesMaterial.inputs:gridUnits>
                 float inputs:lineWidth.connect = </Root/Materials/UnitGridLinesMaterial.inputs:gridLineWidth>
-                float3 inputs:position.connect = </Root/Materials/UnitGridLinesMaterial/Position.outputs:out>
+                float3 inputs:position.connect = </Root/Materials/UnitGridLinesMaterial/Add.outputs:out>
                 float2 ui:nodegraph:node:pos = (-247.43652, -117.3548)
                 float2 ui:nodegraph:node:size = (130, 217)
                 int ui:nodegraph:node:stackingOrder = 3138
@@ -638,11 +647,11 @@ def Xform "Root"
                 references = </Root/Materials/GraphNodes/shouldDrawGridLine>
             )
             {
-                float3 inputs:isOnGridUnit.connect = </Root/Materials/UnitGridLinesMaterial/isOnGridUnit.outputs:isOnGridLine>
+                float3 inputs:isOnGridUnit.connect = </Root/Materials/UnitGridLinesMaterial/Multiply.outputs:out>
                 float3 inputs:objectNormal.connect = </Root/Materials/UnitGridLinesMaterial/Normal.outputs:out>
-                float2 ui:nodegraph:node:pos = (-65.608826, 37.056717)
+                float2 ui:nodegraph:node:pos = (15.750549, 34.63875)
                 float2 ui:nodegraph:node:size = (133, 127)
-                int ui:nodegraph:node:stackingOrder = 3162
+                int ui:nodegraph:node:stackingOrder = 3322
             }
 
             def Shader "Mix_1"
@@ -652,9 +661,9 @@ def Xform "Root"
                 color4f inputs:fg.connect = </Root/Materials/UnitGridLinesMaterial.inputs:gridLineColor>
                 prepend float inputs:mix.connect = </Root/Materials/UnitGridLinesMaterial/drawGridLine.outputs:drawGridLine>
                 color4f outputs:out
-                float2 ui:nodegraph:node:pos = (134.97598, 118.03256)
+                float2 ui:nodegraph:node:pos = (168.99161, 113.778656)
                 float2 ui:nodegraph:node:size = (109, 145)
-                int ui:nodegraph:node:stackingOrder = 3307
+                int ui:nodegraph:node:stackingOrder = 3319
             }
 
             def Shader "color3"
@@ -676,6 +685,39 @@ def Xform "Root"
                 float2 ui:nodegraph:node:pos = (364.32422, -41.339844)
                 float2 ui:nodegraph:node:size = (129.5, 40)
                 int ui:nodegraph:node:stackingOrder = 3271
+            }
+
+            def Shader "Step"
+            {
+                uniform token info:id = "ND_realitykit_step_vector3"
+                float3 inputs:edge = (0.01, 0.01, 0.01)
+                float3 inputs:in.connect = </Root/Materials/UnitGridLinesMaterial.inputs:gridUnits>
+                float3 outputs:out
+                float2 ui:nodegraph:node:pos = (-56.090637, -200.95312)
+                float2 ui:nodegraph:node:size = (129, 127)
+                int ui:nodegraph:node:stackingOrder = 3326
+            }
+
+            def Shader "Multiply"
+            {
+                uniform token info:id = "ND_multiply_vector3"
+                float3 inputs:in1.connect = </Root/Materials/UnitGridLinesMaterial/Step.outputs:out>
+                float3 inputs:in2.connect = </Root/Materials/UnitGridLinesMaterial/isOnGridUnit.outputs:isOnGridLine>
+                float3 outputs:out
+                float2 ui:nodegraph:node:pos = (-100.83984, -89.82422)
+                float2 ui:nodegraph:node:size = (60, 36)
+                int ui:nodegraph:node:stackingOrder = 3324
+            }
+
+            def Shader "Add"
+            {
+                uniform token info:id = "ND_add_vector3"
+                float3 inputs:in1.connect = </Root/Materials/UnitGridLinesMaterial/Position.outputs:out>
+                float3 inputs:in2.connect = </Root/Materials/UnitGridLinesMaterial.inputs:positionBias>
+                float3 outputs:out
+                float2 ui:nodegraph:node:pos = (-375.08984, -43.40625)
+                float2 ui:nodegraph:node:size = (61.5, 36.5)
+                int ui:nodegraph:node:stackingOrder = 3331
             }
         }
 

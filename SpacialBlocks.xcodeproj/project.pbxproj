@@ -3,14 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D6014DB32BB6726800E4B18C /* SIMD++.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6014DB22BB6726800E4B18C /* SIMD++.swift */; };
-		D6014DB62BB69B6200E4B18C /* Grid3DMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6014DB52BB69B6200E4B18C /* Grid3DMath.swift */; };
+		D63440382BBC724200411D9D /* Grid3D in Frameworks */ = {isa = PBXBuildFile; productRef = D63440372BBC724200411D9D /* Grid3D */; };
 		D6972DBD2BBB4A8500B8A4DF /* LoadResourcesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6972DBC2BBB4A8500B8A4DF /* LoadResourcesTests.swift */; };
-		D6972DBF2BBB8C9000B8A4DF /* Grid3DMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6972DBE2BBB8C9000B8A4DF /* Grid3DMathTests.swift */; };
 		D6D3B4CF2BB5E3B700B24CE8 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = D6D3B4CE2BB5E3B700B24CE8 /* RealityKitContent */; };
 		D6D3B4D12BB5E3B700B24CE8 /* SpacialBlocksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D3B4D02BB5E3B700B24CE8 /* SpacialBlocksApp.swift */; };
 		D6D3B4D32BB5E3B700B24CE8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D3B4D22BB5E3B700B24CE8 /* ContentView.swift */; };
@@ -18,7 +16,6 @@
 		D6D3B4D72BB5E3B700B24CE8 /* ImageBasedLighting.skybox in Resources */ = {isa = PBXBuildFile; fileRef = D6D3B4D62BB5E3B700B24CE8 /* ImageBasedLighting.skybox */; };
 		D6D3B4D92BB5E3B800B24CE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6D3B4D82BB5E3B800B24CE8 /* Assets.xcassets */; };
 		D6D3B4DC2BB5E3B800B24CE8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6D3B4DB2BB5E3B800B24CE8 /* Preview Assets.xcassets */; };
-		D6D3B4E72BB5E3B800B24CE8 /* SpacialBlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D3B4E62BB5E3B800B24CE8 /* SpacialBlocksTests.swift */; };
 		D6D3B4F62BB5E60000B24CE8 /* UnitGrid3DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D3B4F52BB5E60000B24CE8 /* UnitGrid3DView.swift */; };
 		D6EA641C2BB80041007AFBE1 /* GridResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA641B2BB80041007AFBE1 /* GridResources.swift */; };
 		D6EA641E2BBB08D2007AFBE1 /* RealityKit++.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA641D2BBB08D2007AFBE1 /* RealityKit++.swift */; };
@@ -35,10 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D6014DB22BB6726800E4B18C /* SIMD++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SIMD++.swift"; sourceTree = "<group>"; };
-		D6014DB52BB69B6200E4B18C /* Grid3DMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid3DMath.swift; sourceTree = "<group>"; };
+		D63440352BBC71A000411D9D /* Grid3D */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Grid3D; sourceTree = "<group>"; };
 		D6972DBC2BBB4A8500B8A4DF /* LoadResourcesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadResourcesTests.swift; sourceTree = "<group>"; };
-		D6972DBE2BBB8C9000B8A4DF /* Grid3DMathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid3DMathTests.swift; sourceTree = "<group>"; };
 		D6D3B4C92BB5E3B700B24CE8 /* SpacialBlocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpacialBlocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D3B4CD2BB5E3B700B24CE8 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		D6D3B4D02BB5E3B700B24CE8 /* SpacialBlocksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacialBlocksApp.swift; sourceTree = "<group>"; };
@@ -49,7 +44,6 @@
 		D6D3B4DB2BB5E3B800B24CE8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D6D3B4DD2BB5E3B800B24CE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6D3B4E22BB5E3B800B24CE8 /* SpacialBlocksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpacialBlocksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6D3B4E62BB5E3B800B24CE8 /* SpacialBlocksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacialBlocksTests.swift; sourceTree = "<group>"; };
 		D6D3B4F52BB5E60000B24CE8 /* UnitGrid3DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitGrid3DView.swift; sourceTree = "<group>"; };
 		D6EA641B2BB80041007AFBE1 /* GridResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridResources.swift; sourceTree = "<group>"; };
 		D6EA641D2BBB08D2007AFBE1 /* RealityKit++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RealityKit++.swift"; sourceTree = "<group>"; };
@@ -61,6 +55,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6D3B4CF2BB5E3B700B24CE8 /* RealityKitContent in Frameworks */,
+				D63440382BBC724200411D9D /* Grid3D in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,18 +72,9 @@
 		D6014DB12BB6725100E4B18C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				D6014DB22BB6726800E4B18C /* SIMD++.swift */,
 				D6EA641D2BBB08D2007AFBE1 /* RealityKit++.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		D6014DB42BB69B3E00E4B18C /* Logic */ = {
-			isa = PBXGroup;
-			children = (
-				D6014DB52BB69B6200E4B18C /* Grid3DMath.swift */,
-			);
-			path = Logic;
 			sourceTree = "<group>";
 		};
 		D6D3B4C02BB5E3B700B24CE8 = {
@@ -114,7 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				D6D3B4F32BB5E44600B24CE8 /* App */,
-				D6014DB42BB69B3E00E4B18C /* Logic */,
 				D6D3B4F42BB5E45300B24CE8 /* Resources */,
 				D6014DB12BB6725100E4B18C /* Utils */,
 				D6D3B4F22BB5E43000B24CE8 /* View */,
@@ -125,6 +110,7 @@
 		D6D3B4CC2BB5E3B700B24CE8 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				D63440352BBC71A000411D9D /* Grid3D */,
 				D6D3B4CD2BB5E3B700B24CE8 /* RealityKitContent */,
 			);
 			path = Packages;
@@ -141,9 +127,7 @@
 		D6D3B4E52BB5E3B800B24CE8 /* SpacialBlocksTests */ = {
 			isa = PBXGroup;
 			children = (
-				D6D3B4E62BB5E3B800B24CE8 /* SpacialBlocksTests.swift */,
 				D6972DBC2BBB4A8500B8A4DF /* LoadResourcesTests.swift */,
-				D6972DBE2BBB8C9000B8A4DF /* Grid3DMathTests.swift */,
 			);
 			path = SpacialBlocksTests;
 			sourceTree = "<group>";
@@ -196,6 +180,7 @@
 			name = SpacialBlocks;
 			packageProductDependencies = (
 				D6D3B4CE2BB5E3B700B24CE8 /* RealityKitContent */,
+				D63440372BBC724200411D9D /* Grid3D */,
 			);
 			productName = SpacialBlocks;
 			productReference = D6D3B4C92BB5E3B700B24CE8 /* SpacialBlocks.app */;
@@ -247,6 +232,9 @@
 				Base,
 			);
 			mainGroup = D6D3B4C02BB5E3B700B24CE8;
+			packageReferences = (
+				D63440362BBC724200411D9D /* XCLocalSwiftPackageReference "Packages/Grid3D" */,
+			);
 			productRefGroup = D6D3B4CA2BB5E3B700B24CE8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -282,10 +270,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6014DB62BB69B6200E4B18C /* Grid3DMath.swift in Sources */,
 				D6D3B4D32BB5E3B700B24CE8 /* ContentView.swift in Sources */,
 				D6EA641C2BB80041007AFBE1 /* GridResources.swift in Sources */,
-				D6014DB32BB6726800E4B18C /* SIMD++.swift in Sources */,
 				D6D3B4D12BB5E3B700B24CE8 /* SpacialBlocksApp.swift in Sources */,
 				D6EA641E2BBB08D2007AFBE1 /* RealityKit++.swift in Sources */,
 				D6D3B4D52BB5E3B700B24CE8 /* ImmersiveView.swift in Sources */,
@@ -297,8 +283,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6972DBF2BBB8C9000B8A4DF /* Grid3DMathTests.swift in Sources */,
-				D6D3B4E72BB5E3B800B24CE8 /* SpacialBlocksTests.swift in Sources */,
 				D6972DBD2BBB4A8500B8A4DF /* LoadResourcesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -559,7 +543,18 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		D63440362BBC724200411D9D /* XCLocalSwiftPackageReference "Packages/Grid3D" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/Grid3D;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		D63440372BBC724200411D9D /* Grid3D */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Grid3D;
+		};
 		D6D3B4CE2BB5E3B700B24CE8 /* RealityKitContent */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RealityKitContent;
