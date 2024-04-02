@@ -4,7 +4,6 @@ import PackageDescription
 
 let package = Package(
     name: "Grid3D",
-    platforms: [.visionOS(.v1)],
     products: [
         .library(
             name: "Grid3D",
