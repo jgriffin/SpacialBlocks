@@ -15,7 +15,9 @@ import SwiftUI
 /// UnitGrid3D aims to hide a lot of the tricky scaling/fitting/rotation/orienctation math from us and create a coordinate systems where
 /// we can just think in terms of a natural 3D unit based coordinate system with a simple origin.
 struct UnitGrid3DView: View {
-    var gridConstraints: Grid3D.UnitsConstraints = .init()
+    var gridConstraints: Grid3D.UnitsConstraints = .init(
+        requiredUnits: .init(min: [0, 0, 0], max: [10, 5, 5])
+    )
 
     var cubePositions: [SIMD3<Float>] = [
         [0, 0, 0], [2, 0, 0],
@@ -42,7 +44,7 @@ struct UnitGrid3DView: View {
                 scaledRoot.addChild(unitsCenter)
 
                 let defaultFit = Grid3D.UnitsFit(
-                    unitsBounds: gridConstraints.unitsMinBounds,
+                    unitsBounds: gridConstraints.requiredUnits,
                     scale: .one / 10,
                     bias: gridConstraints.unitBias
                 )

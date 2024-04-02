@@ -7,24 +7,32 @@ import RealityKit
 import simd
 import Spatial
 
-enum Grid3D {
+public enum Grid3D {
     /// typealias for when thinking of abstract Units
-    typealias Units = SIMD3<Float>
+    public typealias Units = SIMD3<Float>
     
-    struct UnitsConstraints: Equatable {
-        var unitsMinBounds: BoundingBox = .init(min: .zero, max: [10, 5, 5])
-        var paddingUnits: SIMD3<Float> = [1, 0, 1]
-        var unitBias: UnitBias = .centerBetween
+    public struct UnitsConstraints: Equatable {
+        public let requiredUnits: BoundingBox
+        public let paddingUnits: SIMD3<Float>
+        public let unitBias: UnitBias
+
+        public init(
+            requiredUnits: BoundingBox,
+            paddingUnits: SIMD3<Float> = [1, 0, 1],
+            unitBias: Grid3D.UnitBias = .centerBetween
+        ) {
+            self.requiredUnits = requiredUnits
+            self.paddingUnits = paddingUnits
+            self.unitBias = unitBias
+        }
         
-        var paddedBounds: BoundingBox {
-            .init(
-                min: unitsMinBounds.min - paddingUnits,
-                max: unitsMinBounds.min + paddingUnits
-            )
+        public var paddedBounds: BoundingBox {
+            .init(min: requiredUnits.min - paddingUnits,
+                  max: requiredUnits.max + paddingUnits)
         }
     }
     
-    enum UnitBias: Equatable {
+    public enum UnitBias: Equatable {
         case centerOn,
              centerBetween,
              custom(Units)
@@ -39,13 +47,13 @@ enum Grid3D {
     }
 }
 
-extension Grid3D {
+public extension Grid3D {
     struct UnitsFit: Equatable {
-        let unitsBounds: BoundingBox
-        let scale: SIMD3<Float>
-        let bias: UnitBias
+        public let unitsBounds: BoundingBox
+        public let scale: SIMD3<Float>
+        public let bias: UnitBias
         
-        init(unitsBounds: BoundingBox, scale: SIMD3<Float>, bias: Grid3D.UnitBias) {
+        public init(unitsBounds: BoundingBox, scale: SIMD3<Float>, bias: Grid3D.UnitBias) {
             self.unitsBounds = unitsBounds
             self.scale = scale
             self.bias = bias
@@ -55,7 +63,7 @@ extension Grid3D {
         
         /// Take a position in grid units and returns a proper Translation position relative to the center
         /// after adjusting for the bounds origin, z flipping, and bias to end up centered on or between grid units/
-        func positionForUnits(_ unitsPosition: Units, bias: UnitBias? = nil) -> SIMD3<Float> {
+        public func positionForUnits(_ unitsPosition: Units, bias: UnitBias? = nil) -> SIMD3<Float> {
             let biasOffset = (bias ?? self.bias).offset
             let centerRelative = (unitsPosition + biasOffset) - unitsBounds.center
             return centerRelative * .zFlip
@@ -63,28 +71,24 @@ extension Grid3D {
         
         // MARK: - fitFrom
         
-        init(
+        public init(
             from c: Grid3D.UnitsConstraints,
             sceneBounds: BoundingBox
         ) throws {
+            guard !c.requiredUnits.isEmpty else { throw FitError.invalidConstrants("unitsMinBounds") }
             guard !sceneBounds.isEmpty else { throw FitError.invalidSceneBounds }
-            let sceneExtents = sceneBounds.extents
 
-            guard !c.unitsMinBounds.isEmpty else { throw FitError.invalidConstrants("unitsMinBounds") }
-            let paddedBounds = BoundingBox(
-                min: c.unitsMinBounds.min - c.paddingUnits,
-                max: c.unitsMinBounds.max + c.paddingUnits
-            )
-            let fitScales = sceneExtents / paddedBounds.extents
+            let unitsBounds = c.paddedBounds
+            let fitScales = sceneBounds.extents / unitsBounds.extents
             let scale = fitScales.min()
             
             self = UnitsFit(
-                unitsBounds: paddedBounds,
+                unitsBounds: unitsBounds,
                 scale: .one * scale,
                 bias: c.unitBias
             )
         }
-        
+
         enum FitError: Error {
             case invalidConstrants(String?),
                  invalidSceneBounds
