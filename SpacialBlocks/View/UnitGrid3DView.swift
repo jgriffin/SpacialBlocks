@@ -36,11 +36,17 @@ struct UnitGrid3DView: View {
 
     @State private var scaledRoot = Entity()
     @State private var unitsCenter = Entity()
-    @State private var unitsFit: Grid3D.UnitsFit?
+    @State private var unitsFit: Grid3D.UnitsFit? {
+        didSet {
+            unitsCenter.unitsFit = unitsFit
+        }
+    }
 
     var body: some View {
         GeometryReader3D { proxy in
             RealityView { content in
+                UnitsSystem.ensureRegistered()
+
                 guard let r = try? await GridResources.loadResources() else {
                     debugPrint("resource loading failed")
                     return
@@ -51,19 +57,6 @@ struct UnitGrid3DView: View {
                 content.add(scaledRoot)
                 scaledRoot.addChild(unitsCenter)
 
-                let defaultFit = Grid3D.UnitsFit(
-                    unitsBounds: gridConstraints.paddedBounds,
-                    scale: .one / 10,
-                    unitsBias: gridConstraints.unitsBias
-                )
-
-                // let sphere = ModelEntity(
-                //     mesh: .generateSphere(radius: 0.1),
-                //     materials: [SimpleMaterial(color: .red, isMetallic: true)]
-                // )
-                // unitsCenter.addChild(sphere)
-                // sphere.position.y -= defaultFit.unitsBounds.extents.y / 2
-
                 for cubePosition in cubePositions {
                     let cubeMesh = MeshResource.generateBox(size: 1)
                     let cube = ModelEntity(
@@ -71,7 +64,7 @@ struct UnitGrid3DView: View {
                         materials: .init(repeating: r.plasticMaterial, count: cubeMesh.expectedMaterialCount)
                     )
                     unitsCenter.addChild(cube)
-                    cube.position = defaultFit.positionForUnits(cubePosition)
+                    cube.unitsPosition = cubePosition
                 }
 
                 ensureGridFit(proxy, content)

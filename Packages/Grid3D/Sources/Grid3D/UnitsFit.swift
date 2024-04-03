@@ -73,13 +73,18 @@ public struct UnitsFit: Equatable {
     /// Take a position in grid units and returns a proper Translation position relative to the center
     /// after adjusting for the bounds origin and bias to end up centered on or between grid units/
     public func positionForUnits(_ unitsPosition: Units, bias: UnitBias? = nil) -> SIMD3<Float> {
-        print("bounds min: \(unitsBounds.min.desc) max: \(unitsBounds.max.desc) center: \(unitsBounds.center.desc)")
         let centerRelative = unitsPosition - unitsBounds.center
         let biasAdjusted = centerRelative + (bias ?? unitsBias).offset
         let position = biasAdjusted * .zFlip
-
-        print("unitsPos: \(unitsPosition.desc) position: \(position.desc)")
         return position
+    }
+
+    public func updatePositionsFor(_ entities: [Entity]) {
+        entities.forEach { entity in
+            guard let units = entity.unitsComponent else { return }
+            let postion = positionForUnits(units.position, bias: nil)
+            entity.position = postion
+        }
     }
 }
 
