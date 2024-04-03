@@ -7,12 +7,15 @@ let package = Package(
     products: [
         .library(
             name: "Grid3D",
-            targets: ["Grid3D"]),
+            targets: ["Grid3D"]
+        ),
     ],
     targets: [
         .target(
             name: "Grid3D"),
         .testTarget(
             name: "Grid3DTests",
-            dependencies: ["Grid3D"]),
-    ])
+            dependencies: ["Grid3D"]
+        ),
+    ]
+)

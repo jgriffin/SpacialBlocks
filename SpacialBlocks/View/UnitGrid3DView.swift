@@ -2,10 +2,10 @@
 // Created by John Griffin on 3/28/24
 //
 
+import Grid3D
 import RealityKit
 import RealityKitContent
 import SwiftUI
-import Grid3D
 
 /// Establishes a (scaled) 3D grid inside a 3D Volume to make it easy to layout grid-based objects
 ///
@@ -17,12 +17,18 @@ import Grid3D
 /// we can just think in terms of a natural 3D unit based coordinate system with a simple origin.
 struct UnitGrid3DView: View {
     var gridConstraints: Grid3D.UnitsConstraints = .init(
-        requiredUnits: .init(min: [0, 0, 0], max: [9, 5, 6]),
-        paddingMin: [1,0,0]
+        requiredUnits: .init(min: [0, 0, 0], max: [5, 3, 3]),
+        paddingMin: [1, 0, 1],
+        paddingMax: [1, 1, 1],
+        unitBias: .centerBetween
     )
 
     var cubePositions: [SIMD3<Float>] = [
-        [0, 0, 0], [2, 0, 0],
+        [0, 0, 0],
+        [1, 1, 1],
+        [2, 2, 2],
+        [3, 1, 1],
+        [4, 0, 0],
     ]
 
     @State private var e = GridEntities()
@@ -35,7 +41,7 @@ struct UnitGrid3DView: View {
     var body: some View {
         GeometryReader3D { proxy in
             RealityView { content in
-                guard let r = await GridResources.loadResources() else {
+                guard let r = try? await GridResources.loadResources() else {
                     debugPrint("resource loading failed")
                     return
                 }
@@ -46,10 +52,17 @@ struct UnitGrid3DView: View {
                 scaledRoot.addChild(unitsCenter)
 
                 let defaultFit = Grid3D.UnitsFit(
-                    unitsBounds: gridConstraints.requiredUnits,
+                    unitsBounds: gridConstraints.paddedBounds,
                     scale: .one / 10,
-                    bias: gridConstraints.unitBias
+                    unitsBias: gridConstraints.unitsBias
                 )
+
+                // let sphere = ModelEntity(
+                //     mesh: .generateSphere(radius: 0.1),
+                //     materials: [SimpleMaterial(color: .red, isMetallic: true)]
+                // )
+                // unitsCenter.addChild(sphere)
+                // sphere.position.y -= defaultFit.unitsBounds.extents.y / 2
 
                 for cubePosition in cubePositions {
                     let cubeMesh = MeshResource.generateBox(size: 1)
@@ -74,7 +87,6 @@ struct UnitGrid3DView: View {
 
     private func ensureGridFit(_ proxy: GeometryProxy3D, _ content: RealityViewContent) {
         guard r != nil else { return }
-        debugPrint(scaledRoot.position)
 
         let sceneBounds = content.convert(proxy.frame(in: .local), from: .local, to: .scene)
         let fit = try! Grid3D.UnitsFit(from: gridConstraints, sceneBounds: sceneBounds)
@@ -96,20 +108,15 @@ extension UnitGrid3DView {
     }
 
     func applyUnitsFit(_ fit: Grid3D.UnitsFit) {
-        debugPrint("scaledRoot.scale: \(fit.scale)")
         scaledRoot.scale = fit.scale
-
-        if let r {
-            ensureGridPlanes(fit, gridMaterial: r.unitsGridMaterial)
-        } else {
-            assertionFailure("applyGridFit called without materials")
-        }
+        try? ensureGridPlanes(fit)
     }
 
     private func ensureGridPlanes(
-        _ fit: Grid3D.UnitsFit,
-        gridMaterial: ShaderGraphMaterial
-    ) {
+        _ fit: Grid3D.UnitsFit
+    ) throws {
+        let r = try r.unwrapped
+
         let unitsBounds = fit.unitsBounds
         let unitsExtents = unitsBounds.extents
 
@@ -117,9 +124,8 @@ extension UnitGrid3DView {
         let backMesh = MeshResource.generateBox(width: unitsExtents.x, height: unitsExtents.y, depth: 0.01)
         let rightMesh = MeshResource.generateBox(width: 0.01, height: unitsExtents.y, depth: unitsExtents.z)
 
-        let bias = remainder(unitsExtents, [2,2,2]) / 2
-        var gridMaterial = gridMaterial
-        try? gridMaterial.setParameter(name: "positionBias", value: .simd3Float(bias))
+        let gridMaterial = try r.unitsGridMaterial
+            .updateUnitsGridLinesParameters(centerBias: fit.centerBias)
 
         e.ground.model = ModelComponent(mesh: groundMesh, material: gridMaterial)
         e.back.model = ModelComponent(mesh: backMesh, material: gridMaterial)

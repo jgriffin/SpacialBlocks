@@ -10,7 +10,7 @@
 
 def Xform "Root"
 {
-    reorder nameChildren = ["Materials", "ABSPlasticHolder", "Holders"]
+    reorder nameChildren = ["Materials", "Cube"]
     quatf xformOp:orient = (1, 0, 0, 0)
     float3 xformOp:scale = (1, 1, 1)
     float3 xformOp:translate = (0, 0, 0)
@@ -541,6 +541,15 @@ def Xform "Root"
                     }
                 }
             )
+            float3 inputs:centerBias = (0, 0, 0) (
+                customData = {
+                    dictionary realitykit = {
+                        float2 positionInSubgraph = (-498.51562, 7.5546875)
+                        float2 sizeInSubgraph = (139, 53)
+                        int stackingOrderInSubgraph = 3337
+                    }
+                }
+            )
             color4f inputs:gridLineColor = (0.048647866, 0.70414114, 0.8340569, 1) (
                 colorSpace = "srgb_displayp3"
                 customData = {
@@ -566,15 +575,6 @@ def Xform "Root"
                         float2 positionInSubgraph = (-500.51172, -203.46484)
                         float2 sizeInSubgraph = (139, 53)
                         int stackingOrderInSubgraph = 3332
-                    }
-                }
-            )
-            float3 inputs:positionBias = (0, 0, 0) (
-                customData = {
-                    dictionary realitykit = {
-                        float2 positionInSubgraph = (-498.51562, 7.5546875)
-                        float2 sizeInSubgraph = (144, 53)
-                        int stackingOrderInSubgraph = 3328
                     }
                 }
             )
@@ -635,7 +635,7 @@ def Xform "Root"
             {
                 float3 inputs:gridUnits.connect = </Root/Materials/UnitGridLinesMaterial.inputs:gridUnits>
                 float inputs:lineWidth.connect = </Root/Materials/UnitGridLinesMaterial.inputs:gridLineWidth>
-                float3 inputs:position.connect = </Root/Materials/UnitGridLinesMaterial/Add.outputs:out>
+                float3 inputs:position.connect = </Root/Materials/UnitGridLinesMaterial/Subtract.outputs:out>
                 float2 ui:nodegraph:node:pos = (-247.43652, -117.3548)
                 float2 ui:nodegraph:node:size = (130, 217)
                 int ui:nodegraph:node:stackingOrder = 3138
@@ -709,15 +709,15 @@ def Xform "Root"
                 int ui:nodegraph:node:stackingOrder = 3324
             }
 
-            def Shader "Add"
+            def Shader "Subtract"
             {
-                uniform token info:id = "ND_add_vector3"
+                uniform token info:id = "ND_subtract_vector3"
                 float3 inputs:in1.connect = </Root/Materials/UnitGridLinesMaterial/Position.outputs:out>
-                float3 inputs:in2.connect = </Root/Materials/UnitGridLinesMaterial.inputs:positionBias>
+                float3 inputs:in2.connect = </Root/Materials/UnitGridLinesMaterial.inputs:centerBias>
                 float3 outputs:out
-                float2 ui:nodegraph:node:pos = (-375.08984, -43.40625)
-                float2 ui:nodegraph:node:size = (61.5, 36.5)
-                int ui:nodegraph:node:stackingOrder = 3331
+                float2 ui:nodegraph:node:pos = (-385.42383, -36.998047)
+                float2 ui:nodegraph:node:size = (61.5, 36)
+                int ui:nodegraph:node:stackingOrder = 3336
             }
         }
 
@@ -1095,6 +1095,7 @@ def Xform "Root"
             active = true
         )
         {
+            reorder nameChildren = ["UnitGridLinesHolder", "LineCountHolder", "ABSPlasticHolder"]
             quatf xformOp:orient = (1, 0, 0, 0)
             float3 xformOp:scale = (1, 1, 1)
             float3 xformOp:translate = (0, 0, 0)
@@ -1113,19 +1114,36 @@ def Xform "Root"
                 float3 xformOp:scale = (1, 1, 1)
                 float3 xformOp:translate = (0, 0, 0)
                 uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
 
-                def Material "DefaultMaterial"
-                {
-                    prepend token outputs:surface.connect = </Root/Materials/Holders/ABSPlasticHolder/DefaultMaterial/DefaultSurfaceShader.outputs:surface>
+            def Cube "UnitGridLinesHolder" (
+                active = true
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Root/Materials/LightGridMaterial> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                double size = 0.2
+                quatf xformOp:orient = (1, 0, 0, 0)
+                float3 xformOp:scale = (1, 1, 1)
+                float3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
+            }
 
-                    def Shader "DefaultSurfaceShader"
-                    {
-                        uniform token info:id = "UsdPreviewSurface"
-                        color3f inputs:diffuseColor = (1, 1, 1)
-                        float inputs:roughness = 0.75
-                        token outputs:surface
-                    }
-                }
+            def Cube "LineCountHolder" (
+                active = true
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Root/Materials/LineCountMaterial> (
+                    bindMaterialAs = "weakerThanDescendants"
+                )
+                double size = 0.2
+                quatf xformOp:orient = (1, 0, 0, 0)
+                float3 xformOp:scale = (1, 1, 1)
+                float3 xformOp:translate = (0, 0, 0)
+                uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:orient", "xformOp:scale"]
             }
         }
     }

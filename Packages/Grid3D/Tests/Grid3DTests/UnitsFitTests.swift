@@ -7,7 +7,7 @@ import RealityKit
 import XCTest
 
 final class Grid3DMathTests: XCTestCase {
-    typealias PositionFitCheck = (position: SIMD3<Float>, fit: Grid3D.UnitsFit, check: SIMD3<Float>)
+    typealias PositionFitCheck = (position: SIMD3<Float>, fit: Grid3D.UnitsFit, checkPos: SIMD3<Float>)
 
     func pfcs(_ tests: PositionFitCheck...) -> [PositionFitCheck] { tests }
 
@@ -15,7 +15,7 @@ final class Grid3DMathTests: XCTestCase {
         for (i, pfc) in pfcs.enumerated() {
             XCTAssertEqual(
                 pfc.fit.positionForUnits(pfc.position).flipZ,
-                pfc.check,
+                pfc.checkPos,
                 "\(pfc.position.desc) \(i + 1)"
             )
         }
@@ -51,17 +51,18 @@ final class Grid3DMathTests: XCTestCase {
             (-2 * .one, .init(min: -[1, 2, 3], max: [1, 2, 3]), -2 * .one),
             (-2 * .one, .init(min: -.one, max: [1, 2, 3]), [-2, -2.5, -3])
         )
-        
-        assertPFCsPreZ(
-            ([0,0,0], .init(max: [9,5,6]), [-4.5, -2.5, -3]),
-            ([0,0,0], .init(min: [-1,0,0], max: [9,5,6]), [-4, -2.5, -3])
-        )
 
+        assertPFCsPreZ(
+            ([0, 0, 0], .init(max: [9, 5, 6]), [-4.5, -2.5, -3]),
+            ([0, 0, 0], .init(min: [-1, 0, -1], max: [6, 3, 3]), [-2.5, -1.5, -1]),
+            ([0, 0, 0], .init(min: [-1, 0, 0], max: [9, 5, 6]), [-4, -2.5, -3])
+        )
     }
 
     func testSingle() {
         assertPFCsPreZ(
-            (-.one, .init(max: 2), -2 * .one)
+            ([0, 0, 0], .init(min: [-1, 0, -1], max: [6, 3, 3]), [-2.5, -1.5, -1]),
+            ([0, 0, 0], .init(min: [-1, 0, -1], max: [6, 3, 3], .centerBetween), [-2, -1, -0.5])
         )
     }
 }
@@ -72,7 +73,7 @@ private extension Grid3D.UnitsFit {
         max: SIMD3<Float>,
         _ bias: Grid3D.UnitBias = .centerOn
     ) {
-        self.init(unitsBounds: .init(min: min, max: max), scale: .one, bias: bias)
+        self.init(unitsBounds: .init(min: min, max: max), scale: .one, unitsBias: bias)
     }
 
     init(
@@ -80,14 +81,14 @@ private extension Grid3D.UnitsFit {
         max: Float,
         _ bias: Grid3D.UnitBias = .centerOn
     ) {
-        self.init(unitsBounds: .init(min: min * .one, max: max * .one), scale: .one, bias: bias)
+        self.init(unitsBounds: .init(min: min * .one, max: max * .one), scale: .one, unitsBias: bias)
     }
 
     init(
         _ bounds: BoundingBox,
-        bias: Grid3D.UnitBias = .centerBetween
+        bias: Grid3D.UnitBias = .centerOn
     ) {
-        self.init(unitsBounds: bounds, scale: .one, bias: bias)
+        self.init(unitsBounds: bounds, scale: .one, unitsBias: bias)
     }
 }
 

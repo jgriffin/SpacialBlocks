@@ -7,26 +7,27 @@ import RealityKitContent
 
 struct GridResources {
     let unitsGridMaterial: ShaderGraphMaterial
-    let plasticMaterial: RealityKit.Material
+    let lineCountMaterial: ShaderGraphMaterial
+    let plasticMaterial: ShaderGraphMaterial
 
     @MainActor
-    static func loadResources() async -> GridResources? {
-        guard let gridMaterial = try? await unitsGridShaderMaterial(),
-              let plasticMaterial = try? await absPlasticMaterial(baseColorTint: .green)
-        else {
-            return nil
-        }
+    static func loadResources() async throws -> GridResources {
+        let unitsGrid = try GridMaterials.unitGridLinesShader
+            .unwrapped("unitGridLinesShader")
+            .updateUnitsGridLinesParameters(gridUnits: .one, lineWidth: 0.02)
+
+        let lineCount = try GridMaterials.lineCountShader
+            .unwrapped("lineCountShader")
+            .updateLineCountParameters(lineCounts: [10, 10], lineWidths: [0.02, 0.02])
+
+        let plastic = try GridMaterials.absPlasticShader
+            .unwrapped("absPlasticShader")
+            .updateABSPlasticParameters(baseColorTint: .blue)
 
         return GridResources(
-            unitsGridMaterial: gridMaterial,
-            plasticMaterial: plasticMaterial
+            unitsGridMaterial: unitsGrid,
+            lineCountMaterial: lineCount,
+            plasticMaterial: plastic
         )
-    }
-
-    static func loadMaterial(holderName: String, in parent: Entity) -> RealityKit.Material? {
-        parent.findEntity(named: holderName)?
-            .components[ModelComponent.self]?
-            .materials
-            .first
     }
 }
