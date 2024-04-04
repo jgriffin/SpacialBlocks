@@ -17,5 +17,7 @@ let package = Package(
             name: "Grid3DTests",
             dependencies: ["Grid3D"]
         ),
+        .target(
+            name: "SpatialCharts"),
     ]
 )
