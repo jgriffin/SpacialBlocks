@@ -9,6 +9,11 @@ let package = Package(
             name: "Grid3D",
             targets: ["Grid3D"]
         ),
+        .library(
+            name: "Charts3D",
+            targets: ["Charts3D"]
+        ),
+
     ],
     targets: [
         .target(
@@ -17,7 +22,12 @@ let package = Package(
             name: "Grid3DTests",
             dependencies: ["Grid3D"]
         ),
+
         .target(
-            name: "SpatialCharts"),
+            name: "Charts3D"),
+        .testTarget(
+            name: "Charts3DTests",
+            dependencies: ["Charts3D"]
+        ),
     ]
 )

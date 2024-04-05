@@ -14,7 +14,8 @@ struct ContentView: View {
     @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
 
     var body: some View {
-        UnitGrid3DView()
+//        UnitGrid3DView()
+        Chart3DView()
             .onChange(of: showImmersiveSpace) { _, newValue in
                 Task { @MainActor in
                     await updateImmersiveSpaceShown(newValue)
@@ -33,6 +34,7 @@ struct ContentView: View {
             }
     }
 
+    @MainActor
     private func updateImmersiveSpaceShown(_ show: Bool) async {
         if show {
             switch await openImmersiveSpace(id: "ImmersiveSpace") {
