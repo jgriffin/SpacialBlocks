@@ -7,26 +7,22 @@ import RealityKit
 import Spatial
 
 public protocol EntityRepresentableContent: Chart3DContent {
-    var id: ContentID { get }
-
     func makeEntity() throws -> Entity
 
     // called by Entity.chart3DContent
-    func updateEntity(_: Entity) throws
+    func updateEntity(_: Entity, _ environment: RenderEnvironment) throws
 }
 
 public extension EntityRepresentableContent {
     func makeEntity() throws -> Entity {
-        let entity = Entity()
-        entity.chart3DContent = self
-        return entity
+        Entity()
     }
 
-    func updateEntity(_ entity: Entity) throws {
-        try updateEntityCommon(entity)
+    func updateEntity(_ entity: Entity, _ environment: RenderEnvironment) throws {
+        try updateEntityCommon(entity, environment)
     }
 
-    func updateEntityCommon(_ entity: Entity) throws {
+    func updateEntityCommon(_ entity: Entity, _: RenderEnvironment) throws {
         if let model = self as? ModelRepresentableContent {
             try model.updateModelComponent(entity)
         }

@@ -17,24 +17,3 @@ public extension SizeableContent {
         copyWith(self) { $0.size = size }
     }
 }
-
-// MARK: - SizeAnchorablePositionableContent
-
-public protocol SizeAnchorablePositionableContent: PositionedContent {
-    var size: Size3D { get }
-
-    // 0...1 ratio mapped to size.center
-    var unitAnchorInSize: Vector3D { get set }
-}
-
-public extension SizeAnchorablePositionableContent {
-    var anchorOffset: Vector3D {
-        (unitAnchorInSize - .half).scaled(by: size)
-    }
-}
-
-public extension SizeAnchorablePositionableContent {
-    func withUnitAnchorInSize(_ unitAnchorInSize: Vector3D) -> Self {
-        copyWith(self) { $0.unitAnchorInSize = unitAnchorInSize }
-    }
-}

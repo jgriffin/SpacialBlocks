@@ -15,9 +15,7 @@ public protocol ModelRepresentableContent: EntityRepresentableContent {
 
 public extension ModelRepresentableContent {
     func makeEntity() throws -> Entity {
-        let entity = ModelEntity()
-        entity.chart3DContent = self
-        return entity
+        ModelEntity()
     }
 
     func updateModelComponent(_ entity: Entity) throws {
@@ -34,12 +32,6 @@ public protocol MeshMaterialRepresentableContent: ModelRepresentableContent {
 }
 
 public extension MeshMaterialRepresentableContent {
-    func withMaterial(_ material: Chart3DMaterial) -> Self {
-        copyWith(self) { $0.material = material }
-    }
-}
-
-public extension MeshMaterialRepresentableContent {
     func makeMaterials(for mesh: MeshResource) -> [Material] {
         let chartMaterial = material ?? .simple(color: .blue, roughness: 1, isMetalic: true)
         let material = chartMaterial.makeMaterial()
@@ -52,5 +44,11 @@ public extension MeshMaterialRepresentableContent {
             mesh: mesh,
             materials: makeMaterials(for: mesh)
         )
+    }
+
+    // MARK: modifiers
+
+    func withMaterial(_ material: Chart3DMaterial) -> Self {
+        copyWith(self) { $0.material = material }
     }
 }

@@ -23,9 +23,6 @@ public extension Entity {
         }
         set {
             components[Chart3DComponent.self] = newValue.map(Chart3DComponent.init)
-            if let newValue {
-                try? newValue.updateEntity(self)
-            }
         }
     }
 }

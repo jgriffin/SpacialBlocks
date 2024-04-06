@@ -6,9 +6,12 @@ import Foundation
 import RealityKit
 import Spatial
 
-public struct Chart3DBox: MeshMaterialRepresentableContent, SizeableContent, SizeAnchorablePositionableContent {
-    public var id: ContentID
-
+public struct Chart3DBox:
+    MeshMaterialRepresentableContent,
+    PositionableContent,
+    SizeableContent,
+    SizeAnchorableContent
+{
     public var size: Size3D
     public var position: Point3D
     public var unitAnchorInSize: Vector3D
@@ -16,13 +19,12 @@ public struct Chart3DBox: MeshMaterialRepresentableContent, SizeableContent, Siz
     public var material: Chart3DMaterial?
 
     public init(
-        id: ContentID = UUID(),
-        size: Size3D = .one * 0.1,
+        id _: ContentID = UUID(),
+        size: Size3D = Defaults.boxSize,
         position: Point3D = .zero,
-        unitAnchorInSize: Vector3D = .half,
+        unitAnchorInSize: Vector3D = Defaults.boxUnitAnchor,
         material: Chart3DMaterial? = nil
     ) {
-        self.id = id
         self.size = size
         self.position = position
         self.unitAnchorInSize = unitAnchorInSize

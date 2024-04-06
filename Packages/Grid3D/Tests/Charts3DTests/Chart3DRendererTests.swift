@@ -2,34 +2,33 @@
 // Created by John Griffin on 4/4/24
 //
 
+import Charts3D
 import RealityKit
-import SpatialCharts
 import XCTest
 
 final class Chart3DRendererTests: XCTestCase {
     func testBoxOrigin() throws {
-        let root = Entity()
-        let render = Chart3DRenderer(root: root)
-        try render.renderChart(Chart3D(contents: [
-            Chart3DBox(material: .simple(color: .red, roughness: 1, isMetalic: true)),
-        ]))
+        let chart = Chart3D {
+            Chart3DBox()
+        }
+        let render = Chart3DRenderer()
 
-        let entity = root.children.first
+        try render.renderChart(chart)
+
+        let entity = render.root.children.first
         XCTAssertNotNil(entity)
         XCTAssertEqual(entity?.position, .zero)
     }
 
     func testBoxPosition() throws {
-        let root = Entity()
-        let render = Chart3DRenderer(root: root)
-        try render.renderChart(
-            Chart3D(contents: [
-                Chart3DBox(material: .simple(color: .red, roughness: 1, isMetalic: true))
-                    .withPosition(.one),
-            ])
-        )
+        let chart = Chart3D {
+            Chart3DBox()
+                .withPosition(.init(.one))
+        }
+        let render = Chart3DRenderer()
+        try render.renderChart(chart)
 
-        let entity = root.children.first
+        let entity = render.root.children.first
         XCTAssertNotNil(entity)
         XCTAssertEqual(entity?.position, .one)
     }
