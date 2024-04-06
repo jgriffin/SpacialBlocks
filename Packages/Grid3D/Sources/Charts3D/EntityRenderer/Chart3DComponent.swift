@@ -6,9 +6,9 @@ import Foundation
 import RealityKit
 
 public struct Chart3DComponent: Component {
-    public let content: any EntityRepresentableContent
+    public let content: any EntityRepresentable
 
-    public init(content: any EntityRepresentableContent) {
+    public init(content: any EntityRepresentable) {
         self.content = content
     }
 
@@ -17,7 +17,7 @@ public struct Chart3DComponent: Component {
 }
 
 public extension Entity {
-    var chart3DContent: (any EntityRepresentableContent)? {
+    var chart3DContent: (any EntityRepresentable)? {
         get {
             components[Chart3DComponent.self]?.content
         }

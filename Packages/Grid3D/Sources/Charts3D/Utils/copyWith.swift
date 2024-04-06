@@ -4,7 +4,7 @@
 
 import Foundation
 
-public func copyWith<T>(_ t: T, with: (inout T) -> Void) -> T {
+public func copy<T>(_ t: T, with: (inout T) -> Void) -> T {
     var copy = t
     with(&copy)
     return copy

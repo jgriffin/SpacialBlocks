@@ -8,12 +8,12 @@ import Spatial
 
 // MARK: - Sizeable
 
-public protocol SizeableContent {
+public protocol Sizeable {
     var size: Size3D { get set }
 }
 
-public extension SizeableContent {
+public extension Sizeable {
     func withSize(_ size: Size3D) -> Self {
-        copyWith(self) { $0.size = size }
+        copy(self) { $0.size = size }
     }
 }

@@ -8,12 +8,12 @@ import Spatial
 
 // MARK: - positioned
 
-public protocol PositionedContent: TransformableContent {
+public protocol Positioned: Transformable {
     var position: Point3D { get }
     var anchorOffset: Vector3D { get }
 }
 
-public extension PositionedContent {
+public extension Positioned {
     var position: Point3D { .zero }
 
     // relative to entity center
@@ -29,38 +29,38 @@ public extension PositionedContent {
 
 // MARK: - positionable
 
-public protocol PositionableContent: PositionedContent {
+public protocol Positionable: Positioned {
     var position: Point3D { get set }
 }
 
-public extension PositionableContent {
+public extension Positionable {
     func withPosition(_ position: Point3D) -> Self {
-        copyWith(self) { $0.position = position }
+        copy(self) { $0.position = position }
     }
 }
 
 // MARK: - anchor offsettable
 
-public protocol AnchorOffsettableContent: PositionedContent {
+public protocol AnchorOffsettable: Positioned {
     var anchorOffset: Vector3D { get set }
 }
 
-public extension AnchorOffsettableContent {
+public extension AnchorOffsettable {
     func withAnchorOffset(_ anchorOffset: Vector3D) -> Self {
-        copyWith(self) { $0.anchorOffset = anchorOffset }
+        copy(self) { $0.anchorOffset = anchorOffset }
     }
 }
 
 // MARK: - SizeAnchorablePositionableContent
 
-public protocol SizeAnchorableContent: PositionedContent {
+public protocol SizeAnchorable: Positioned {
     var size: Size3D { get }
 
     // 0...1 ratio mapped to size.center
     var unitAnchorInSize: Vector3D { get set }
 }
 
-public extension SizeAnchorableContent {
+public extension SizeAnchorable {
     var anchorOffset: Vector3D {
         (unitAnchorInSize - .half).scaled(by: size)
     }
@@ -68,6 +68,6 @@ public extension SizeAnchorableContent {
     // MARK: modifiers
 
     func withUnitAnchorInSize(_ unitAnchorInSize: Vector3D) -> Self {
-        copyWith(self) { $0.unitAnchorInSize = unitAnchorInSize }
+        copy(self) { $0.unitAnchorInSize = unitAnchorInSize }
     }
 }

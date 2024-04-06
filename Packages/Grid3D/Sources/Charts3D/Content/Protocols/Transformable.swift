@@ -6,11 +6,11 @@ import Foundation
 import RealityKit
 import Spatial
 
-public protocol TransformableContent {
+public protocol Transformable {
     var transform: Pose3D { get }
 }
 
-public extension TransformableContent {
+public extension Transformable {
     func updateTransformComponent(_ entity: Entity) throws {
         entity.position = SIMD3(transform.position) * [1, 1, -1]
         // TODO: rotation

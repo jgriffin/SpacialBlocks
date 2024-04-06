@@ -5,16 +5,16 @@
 import RealityKit
 import UIKit
 
-public protocol Chart3DMaterializable {
+public protocol Materializable {
     func makeMaterial() -> RealityKit.Material
 }
 
-public enum Chart3DMaterial: Chart3DMaterializable {
+public enum ChartMaterial: Materializable {
     case simple(color: SimpleMaterial.Color, roughness: Float, isMetalic: Bool)
-}
 
-public extension Chart3DMaterial {
-    func makeMaterial() -> any Material {
+    // MARK: - materializable
+
+    public func makeMaterial() -> any Material {
         switch self {
         case let .simple(color: color, roughness: roughness, isMetalic: isMetalic):
             SimpleMaterial(color: color, roughness: .float(roughness), isMetallic: isMetalic)

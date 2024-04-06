@@ -4,7 +4,7 @@
 
 import Foundation
 
-public enum Chart3DError: Error {
+public enum ChartError: Error {
     case notYetImplemented
     case makeEntityFailure
 }

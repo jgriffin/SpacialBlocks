@@ -8,6 +8,6 @@ import Spatial
 
 // MARK: - Chart3DEntity
 
-public protocol Chart3DContent {
+public protocol ChartContent {
     typealias ContentID = UUID
 }

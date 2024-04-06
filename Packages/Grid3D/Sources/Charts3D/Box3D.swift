@@ -6,24 +6,24 @@ import Foundation
 import RealityKit
 import Spatial
 
-public struct Chart3DBox:
+public struct Box3D:
     MeshMaterialRepresentableContent,
-    PositionableContent,
-    SizeableContent,
-    SizeAnchorableContent
+    Positionable,
+    Sizeable,
+    SizeAnchorable
 {
     public var size: Size3D
     public var position: Point3D
     public var unitAnchorInSize: Vector3D
 
-    public var material: Chart3DMaterial?
+    public var material: ChartMaterial?
 
     public init(
         id _: ContentID = UUID(),
-        size: Size3D = Defaults.boxSize,
+        size: Size3D = Charts.defaultBoxSize,
         position: Point3D = .zero,
-        unitAnchorInSize: Vector3D = Defaults.boxUnitAnchor,
-        material: Chart3DMaterial? = nil
+        unitAnchorInSize: Vector3D = Charts.defaultBoxUnitAnchor,
+        material: ChartMaterial? = nil
     ) {
         self.size = size
         self.position = position
@@ -32,7 +32,7 @@ public struct Chart3DBox:
     }
 }
 
-public extension Chart3DBox {
+public extension Box3D {
     func makeMesh() -> MeshResource {
         .generateBox(width: Float(size.width), height: Float(size.height), depth: Float(size.depth))
     }

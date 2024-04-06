@@ -19,12 +19,15 @@ import SwiftUI
 /// UnitGrid3D aims to hide a lot of the tricky scaling/fitting/rotation/orientation math from us and create a coordinate systems where
 /// we can just think in terms of a natural 3D unit based coordinate system with a simple origin.
 struct Chart3DView: View {
-    var chart: Chart3D = .init {
-        Chart3DBox()
-        Chart3DBox(position: Point3D(x: 0.1, y: 0.1, z: 0.1))
+    var chart = Chart3D {
+        Box3D()
+        Box3D(position: .init(.one))
+        Box3D(size: .init(.one * 2.0), position: .init(.one * 2.0))
+
+        Axes3D()
     }
 
-    @State private var renderer = Chart3DRenderer()
+    @State private var renderer = EntityRenderer()
 
     var body: some View {
         GeometryReader3D { proxy in
@@ -35,6 +38,7 @@ struct Chart3DView: View {
                 try? renderer.renderChart(chart)
             } update: { content in
                 ensureScaledToFit(proxy, content)
+                try? renderer.renderChart(chart)
             }
         }
     }

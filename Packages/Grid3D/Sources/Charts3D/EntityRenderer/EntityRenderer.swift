@@ -6,11 +6,11 @@ import Foundation
 import RealityKit
 import Spatial
 
-public class Chart3DRenderer {
+public class EntityRenderer {
     public let root = Entity()
     var renderState = RenderState()
 
-    public init(scale: Size3D = Defaults.renderScale) {
+    public init(scale: Size3D = Charts.defaultRenderScale) {
         renderState.scale = scale
     }
 
@@ -30,12 +30,12 @@ public class Chart3DRenderer {
     }
 }
 
-public extension Chart3DRenderer {
+public extension EntityRenderer {
     internal struct RenderState {
         var scale: Size3D = .one
         var chartRange: Rect3D?
 
-        var entityForId: [Chart3DContent.ContentID: Entity] = [:]
+        var entityForId: [ChartContent.ContentID: Entity] = [:]
     }
 
     func renderChart(_ chart: Chart3D) throws {
@@ -46,7 +46,7 @@ public extension Chart3DRenderer {
     }
 
     func renderContents(
-        _ contents: [EntityRepresentableContent],
+        _ contents: [EntityRepresentable],
         _ environment: RenderEnvironment,
         in parent: Entity
     ) throws {
@@ -61,7 +61,7 @@ public extension Chart3DRenderer {
             try content.updateEntity(entity, environment)
             entity.chart3DContent = content
 
-            if let container = content as? Chart3DContentContainer,
+            if let container = content as? ContentContaining,
                let (environment, children) = container.childrenForRender(environment)
             {
                 try renderContents(children, environment, in: entity)
@@ -75,8 +75,8 @@ public extension Chart3DRenderer {
 }
 
 extension Entity {
-    var chart3DChildren: [(Entity, EntityRepresentableContent)] {
-        children.compactMap { entity -> (Entity, EntityRepresentableContent)? in
+    var chart3DChildren: [(Entity, EntityRepresentable)] {
+        children.compactMap { entity -> (Entity, EntityRepresentable)? in
             guard let content = entity.chart3DContent else { return nil }
             return (entity, content)
         }

@@ -8,12 +8,12 @@ import Spatial
 
 // MARK: - ModelRepresentable
 
-public protocol ModelRepresentableContent: EntityRepresentableContent {
+public protocol ModelEntityRepresentable: EntityRepresentable {
     func makeModelComponent() throws -> ModelComponent
     func updateModelComponent(_ entity: Entity) throws
 }
 
-public extension ModelRepresentableContent {
+public extension ModelEntityRepresentable {
     func makeEntity() throws -> Entity {
         ModelEntity()
     }
@@ -26,9 +26,9 @@ public extension ModelRepresentableContent {
 
 // MARK: - MeshMaterialRepresentable
 
-public protocol MeshMaterialRepresentableContent: ModelRepresentableContent {
+public protocol MeshMaterialRepresentableContent: ModelEntityRepresentable {
     func makeMesh() -> MeshResource
-    var material: Chart3DMaterial? { get set }
+    var material: ChartMaterial? { get set }
 }
 
 public extension MeshMaterialRepresentableContent {
@@ -48,7 +48,7 @@ public extension MeshMaterialRepresentableContent {
 
     // MARK: modifiers
 
-    func withMaterial(_ material: Chart3DMaterial) -> Self {
-        copyWith(self) { $0.material = material }
+    func withMaterial(_ material: ChartMaterial) -> Self {
+        copy(self) { $0.material = material }
     }
 }

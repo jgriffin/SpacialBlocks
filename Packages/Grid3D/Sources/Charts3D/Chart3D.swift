@@ -5,14 +5,14 @@
 import Foundation
 import Spatial
 
-public struct Chart3D: EntityRepresentableContent, PositionedContent, Chart3DContentContainer {
+public struct Chart3D: EntityRepresentable, Positioned, ContentContaining {
     public var range: Rect3D
-    public var contents: [Chart3DContent]
+    public var contents: [ChartContent]
 
     public init(
         id _: ContentID = .init(),
-        range: Rect3D = Defaults.chartRange,
-        @Chart3DContentBuilder contents: () -> [any Chart3DContent]
+        range: Rect3D = Charts.defaultChartRange,
+        @ChartBuilder contents: () -> [any ChartContent]
     ) {
         self.range = range
         self.contents = contents()
@@ -25,11 +25,11 @@ public extension Chart3D {
     }
 
     func range(_ range: Rect3D) -> Chart3D {
-        copyWith(self) { $0.range = range }
+        copy(self) { $0.range = range }
     }
 
-    func childrenForRender(_ environment: RenderEnvironment) -> (RenderEnvironment, [EntityRepresentableContent])? {
-        let entityContents = contents.compactMap { $0 as? EntityRepresentableContent }
+    func childrenForRender(_ environment: RenderEnvironment) -> (RenderEnvironment, [EntityRepresentable])? {
+        let entityContents = contents.compactMap { $0 as? EntityRepresentable }
         guard !entityContents.isEmpty else {
             return nil
         }

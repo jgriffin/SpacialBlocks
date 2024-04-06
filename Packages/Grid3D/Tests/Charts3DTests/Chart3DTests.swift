@@ -10,7 +10,7 @@ final class Chart3DTests: XCTestCase {
     func testEmptyChart() {
         let result = Chart3D {}
 
-        XCTAssertEqual(result.range, .init(origin: .zero, size: .init(0.2, 0.2, 0.2)))
+        XCTAssertEqual(result.range, Charts.defaultChartRange)
         XCTAssertTrue(result.contents.isEmpty)
     }
 
