@@ -22,10 +22,16 @@ struct Chart3DView: View {
     var chart = Chart3D {
         Box3D()
         Box3D(position: .init(.one))
-        Box3D(size: .init(.one * 2.0), position: .init(.one * 2.0))
+        Box3D(size: .init(.one * 2.0), position: Point3D([1.0, 2.0, 4.0]))
+
+        Sphere3D(radius: 1, position: .init([1.0, 5.0, -1.0]))
+        Cone3D(height: 2, radius: 1, position: .init([2.0, 2.0, -1.0]))
+        Cylinder3D(height: 2, radius: 1, position: .init([7.0, 2.0, -1.0]))
+        Plane3D(width: 5, height: 4, cornerRadius: 0.01, position: .init([5.0, 5.0, 8.0]))
 
         Axes3D()
     }
+    .setRange(Rect3D(origin: .zero, size: Size3D(width: 10, height: 10, depth: 10)))
 
     @State private var renderer = EntityRenderer()
 

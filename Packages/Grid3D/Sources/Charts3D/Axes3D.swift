@@ -22,7 +22,9 @@ public struct Axes3D: EntityRepresentable, ContentContaining {
         copy(self) { $0.gridSize = gridSize }
     }
 
-    public func childrenForRender(_ environment: RenderEnvironment) -> (RenderEnvironment, [any EntityRepresentable])? {
+    public func contentsFor(
+        _ environment: RenderEnvironment
+    ) -> (RenderEnvironment, [ChartContent])? {
         guard let range = environment[ChartRange.self] else {
             return nil
         }
@@ -30,7 +32,7 @@ public struct Axes3D: EntityRepresentable, ContentContaining {
         let gridPlanes = makeGridPlanes(range: range).compactMap { $0 as? EntityRepresentable }
         return (environment, gridPlanes)
     }
-    
+
     @ChartBuilder
     private func makeGridPlanes(range: Rect3D) -> [ChartContent] {
         // X
@@ -51,14 +53,26 @@ public struct Axes3D: EntityRepresentable, ContentContaining {
     }
 }
 
-public struct GridPlane: MeshMaterialRepresentableContent, Sizeable, Positioned {
+public struct GridPlane: EntityRepresentable, Sizeable, Positioned, ContentContaining {
     public var size: Size3D
-    public var gridSize: Size3D = Charts.defaultGridSize
     public var position: Point3D
+    public var gridSize: Size3D = Charts.defaultGridSize
 
-    public func makeMesh() -> MeshResource {
-        .generateBox(size: .init(size))
+    public func contentsFor(
+        _ environment: RenderEnvironment
+    ) -> (RenderEnvironment, [ChartContent])? {
+        (environment, makeContents())
     }
 
-    public var material: ChartMaterial? = .gridPlane
+    @ChartBuilder
+    func makeContents() -> [ChartContent] {
+        Box3D(size: size, position: .zero, unitAnchorInSize: .half, material: .gridPlane)
+    }
 }
+
+// public struct GridLine: MeshMaterialRepresentableContent, Sizeable, Positioned {
+//    public var size: Size3D
+//    public var gridSize: Size3D = Charts.defaultGridSize
+//    public var position: Point3D
+//
+// }

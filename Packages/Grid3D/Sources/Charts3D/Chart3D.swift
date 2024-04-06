@@ -24,18 +24,14 @@ public extension Chart3D {
         .init(range.center.vector)
     }
 
-    func range(_ range: Rect3D) -> Chart3D {
+    func setRange(_ range: Rect3D) -> Self {
         copy(self) { $0.range = range }
     }
 
-    func childrenForRender(_ environment: RenderEnvironment) -> (RenderEnvironment, [EntityRepresentable])? {
-        let entityContents = contents.compactMap { $0 as? EntityRepresentable }
-        guard !entityContents.isEmpty else {
-            return nil
-        }
+    func contentsFor(_ environment: RenderEnvironment) -> (RenderEnvironment, [ChartContent])? {
         var environment = environment
         environment[ChartRange.self] = range
 
-        return (environment, entityContents)
+        return (environment, contents)
     }
 }

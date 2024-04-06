@@ -5,5 +5,5 @@
 import Foundation
 
 public protocol ContentContaining: ChartContent {
-    func childrenForRender(_ environment: RenderEnvironment) -> (RenderEnvironment, [EntityRepresentable])?
+    func contentsFor(_ environment: RenderEnvironment) -> (RenderEnvironment, [ChartContent])?
 }

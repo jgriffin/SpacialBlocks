@@ -8,9 +8,10 @@ import Spatial
 
 // MARK: - positioned
 
-public protocol Positioned: Transformable {
+public protocol Positioned: Posed {
     var position: Point3D { get }
     var anchorOffset: Vector3D { get }
+    var rotation: Rotation3D { get }
 }
 
 public extension Positioned {
@@ -19,10 +20,12 @@ public extension Positioned {
     // relative to entity center
     var anchorOffset: Vector3D { .zero }
 
-    var transform: Pose3D {
+    var rotation: Rotation3D { .identity }
+
+    var pose: Pose3D {
         .init(
             position: position - anchorOffset,
-            rotation: .identity
+            rotation: rotation
         )
     }
 }
@@ -69,5 +72,17 @@ public extension SizeAnchorable {
 
     func withUnitAnchorInSize(_ unitAnchorInSize: Vector3D) -> Self {
         copy(self) { $0.unitAnchorInSize = unitAnchorInSize }
+    }
+}
+
+// MARK: - Rotatable
+
+public protocol Rotateable: Positioned {
+    var rotation: Rotation3D { get set }
+}
+
+public extension Rotateable {
+    func withRotation(_ rotation: Rotation3D) -> Self {
+        copy(self) { $0.rotation = rotation }
     }
 }

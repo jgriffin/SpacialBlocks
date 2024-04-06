@@ -62,9 +62,10 @@ public extension EntityRenderer {
             entity.chart3DContent = content
 
             if let container = content as? ContentContaining,
-               let (environment, children) = container.childrenForRender(environment)
+               let (environment, contents) = container.contentsFor(environment),
+               case let renderable = contents.compactMap({ $0 as? EntityRepresentable })
             {
-                try renderContents(children, environment, in: entity)
+                try renderContents(renderable, environment, in: entity)
             }
         }
 

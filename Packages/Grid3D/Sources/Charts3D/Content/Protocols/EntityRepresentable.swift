@@ -26,8 +26,8 @@ public extension EntityRepresentable {
         if let model = self as? ModelEntityRepresentable {
             try model.updateModelComponent(entity)
         }
-        if let transformable = self as? Transformable {
-            try transformable.updateTransformComponent(entity)
+        if let posed = self as? Posed {
+            try posed.updateTransformComponent(entity)
         }
     }
 }
