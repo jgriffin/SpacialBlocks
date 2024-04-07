@@ -11,6 +11,12 @@ public extension Vector3D {
     var flipZ: Vector3D { Vector3D(vector * .zFlip) }
 }
 
+public extension Rect3D {
+    init(min: Point3D = .zero, max: Point3D) {
+        self.init(points: [min, max])
+    }
+}
+
 public extension SIMD3<Float> {
     static let half: Self = [0.5, 0.5, 0.5]
     static let zFlip: Self = [1.0, 1.0, -1.0]

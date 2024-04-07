@@ -8,9 +8,9 @@ import Spatial
 public enum Charts {}
 
 public extension Charts {
-    static let defaultChartRange: Rect3D = .init(origin: .zero, size: .one * 10.0)
+    static let defaultChartMinRange: Rect3D = .init(origin: .zero, size: .one * 10.0)
     static let defaultBoxSize: Size3D = .one * 1
-    static let defaultBoxUnitAnchor: Vector3D = .zero
+    static let defaultBoxUnitAnchor: Vector3D = .half
     static let defaultRenderScale: Size3D = .one / 10
     static let defaultGridSize: Size3D = defaultBoxSize
     static let defaultGridThickness: Size3D = .one * 0.001

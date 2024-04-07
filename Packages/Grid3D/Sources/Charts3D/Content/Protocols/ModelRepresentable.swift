@@ -8,12 +8,12 @@ import Spatial
 
 // MARK: - ModelRepresentable
 
-public protocol ModelEntityRepresentable: EntityRepresentable {
+public protocol ModelRepresentable: EntityRepresentable {
     func makeModelComponent() throws -> ModelComponent
     func updateModelComponent(_ entity: Entity) throws
 }
 
-public extension ModelEntityRepresentable {
+public extension ModelRepresentable {
     func makeEntity() throws -> Entity {
         ModelEntity()
     }
@@ -24,14 +24,14 @@ public extension ModelEntityRepresentable {
     }
 }
 
-// MARK: - MeshMaterialRepresentable
+// MARK: - MeshMaterialModeling
 
-public protocol MeshMaterialRepresentableContent: ModelEntityRepresentable {
+public protocol MeshMaterialModeling: ModelRepresentable {
     func makeMesh() -> MeshResource
     var material: ChartMaterial? { get set }
 }
 
-public extension MeshMaterialRepresentableContent {
+public extension MeshMaterialModeling {
     func makeMaterials(for mesh: MeshResource) -> [Material] {
         let chartMaterial = material ?? .simple(color: .blue, roughness: 1, isMetalic: true)
         let material = chartMaterial.makeMaterial()

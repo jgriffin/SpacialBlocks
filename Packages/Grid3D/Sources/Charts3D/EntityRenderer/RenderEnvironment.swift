@@ -4,15 +4,15 @@
 
 import Foundation
 
-public struct RenderEnvironment {
+public struct RenderEnvironment: Modifiable {
     private var values: [ObjectIdentifier: Any]
-
-    public init() {
-        values = [:]
-    }
 
     init(values: [ObjectIdentifier: Any]) {
         self.values = values
+    }
+
+    public init() {
+        values = [:]
     }
 }
 

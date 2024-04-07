@@ -2,46 +2,69 @@
 // Created by John Griffin on 4/4/24
 //
 
+import Combine
 import Foundation
 import RealityKit
 import Spatial
 
 public class EntityRenderer {
     public let root = Entity()
-    var renderState = RenderState()
-
-    public init(scale: Size3D = Charts.defaultRenderScale) {
-        renderState.scale = scale
+    var state = RenderState() {
+        didSet {
+            guard state != oldValue else { return }
+            onStateChanged()
+        }
     }
 
-    public func ensureScale(_ scale: Size3D) {
-        guard renderState.scale != scale else { return }
+    var cancellables = Set<AnyCancellable>()
 
-        renderState.scale = scale
+    public init(scale: Size3D = Charts.defaultRenderScale) {
+        state.scale = scale
+    }
+
+    public func setSceneBounds(_ sceneBounds: Rect3D) {
+        state.sceneBounds = sceneBounds
+    }
+
+    public func setScale(_ scale: Size3D) {
+        guard state.scale != scale else { return }
+
+        state.scale = scale
         root.scale = SIMD3(scale.vector)
     }
 
-    public func ensureScaledToFit(_ sceneBounds: Rect3D) {
-        guard let bounds = renderState.chartRange, !bounds.isEmpty else { return }
-
-        let fitScales = sceneBounds.size.vector / bounds.size.vector
-        let scale = fitScales.min()
-        ensureScale(.one.uniformlyScaled(by: scale))
+    private func onStateChanged() {
+        if let scale = state.scaleThatFits(), state.scale != scale {
+            setScale(scale)
+        }
     }
 }
 
 public extension EntityRenderer {
-    internal struct RenderState {
+    internal struct RenderState: Equatable {
         var scale: Size3D = .one
-        var chartRange: Rect3D?
+        var chartBounds: Rect3D?
+        var sceneBounds: Rect3D?
 
-        var entityForId: [ChartContent.ContentID: Entity] = [:]
+        func scaleThatFits() -> Size3D? {
+            guard let chartBounds, let sceneBounds, !chartBounds.isEmpty else {
+                return nil
+            }
+
+            let fitScales = sceneBounds.size.vector / chartBounds.size.vector
+            let scale = fitScales.min()
+            return .one.uniformlyScaled(by: scale)
+        }
     }
 
     func renderChart(_ chart: Chart3D) throws {
-        renderState.chartRange = chart.range
+        let chartBounds = chart.containedBounds
+        state.chartBounds = chartBounds
 
-        let environment = RenderEnvironment()
+        let environment = RenderEnvironment().with {
+            $0.chartBounds = chartBounds
+        }
+
         try renderContents([chart], environment, in: root)
     }
 
@@ -61,11 +84,9 @@ public extension EntityRenderer {
             try content.updateEntity(entity, environment)
             entity.chart3DContent = content
 
-            if let container = content as? ContentContaining,
-               let (environment, contents) = container.contentsFor(environment),
-               case let renderable = contents.compactMap({ $0 as? EntityRepresentable })
-            {
-                try renderContents(renderable, environment, in: entity)
+            if let contents = (content as? HasContents)?.contentsFor(environment) {
+                let representable = contents.compactMap { $0 as? EntityRepresentable }
+                try renderContents(representable, environment, in: entity)
             }
         }
 

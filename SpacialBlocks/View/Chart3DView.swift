@@ -19,7 +19,9 @@ import SwiftUI
 /// UnitGrid3D aims to hide a lot of the tricky scaling/fitting/rotation/orientation math from us and create a coordinate systems where
 /// we can just think in terms of a natural 3D unit based coordinate system with a simple origin.
 struct Chart3DView: View {
-    var chart = Chart3D {
+    var chart = Self.defaultChart
+
+    static let defaultChart = Chart3D {
         Box3D()
         Box3D(position: .init(.one))
         Box3D(size: .init(.one * 2.0), position: Point3D([1.0, 2.0, 4.0]))
@@ -31,7 +33,7 @@ struct Chart3DView: View {
 
         Axes3D()
     }
-    .setRange(Rect3D(origin: .zero, size: Size3D(width: 10, height: 10, depth: 10)))
+    .withMinBounds(Rect3D(max: Point3D(.one * 10.0)))
 
     @State private var renderer = EntityRenderer()
 
@@ -43,16 +45,32 @@ struct Chart3DView: View {
 
                 try? renderer.renderChart(chart)
             } update: { content in
-                ensureScaledToFit(proxy, content)
+                ensureSceneBounds(proxy, content)
                 try? renderer.renderChart(chart)
             }
         }
     }
 
-    private func ensureScaledToFit(_ proxy: GeometryProxy3D, _ content: RealityViewContent) {
+    private func ensureSceneBounds(_ proxy: GeometryProxy3D, _ content: RealityViewContent) {
         let sceneBounds = content.convert(proxy.frame(in: .local), from: .local, to: .scene)
-        renderer.ensureScaledToFit(.init(sceneBounds))
+        renderer.setSceneBounds(.init(sceneBounds))
     }
+}
+
+extension Chart3D {
+    static let test: Chart3D = Chart3D {
+        Box3D()
+        Box3D(position: .init(.one))
+        Box3D(size: .init(.one * 2.0), position: Point3D([1.0, 2.0, 4.0]))
+
+        Sphere3D(radius: 1, position: .init([1.0, 5.0, -1.0]))
+        Cone3D(height: 2, radius: 1, position: .init([2.0, 2.0, -1.0]))
+        Cylinder3D(height: 2, radius: 1, position: .init([7.0, 2.0, -1.0]))
+        Plane3D(width: 5, height: 4, cornerRadius: 0.01, position: .init([5.0, 5.0, 8.0]))
+
+        Axes3D()
+    }
+    .withMinBounds(Rect3D(origin: .zero, size: Size3D(width: 10, height: 10, depth: 10)))
 }
 
 #Preview(windowStyle: .volumetric) {
