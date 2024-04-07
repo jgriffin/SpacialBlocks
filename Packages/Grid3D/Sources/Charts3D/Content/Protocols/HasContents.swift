@@ -18,6 +18,6 @@ public extension HasContents {
     }
 
     func boundsOfContents() -> Rect3D? {
-        Rect3D.union(contentsFor(nil).compactMap(\.containedBounds))
+        Rect3D.union(contentsFor(nil).compactMap(\.containedFrame))
     }
 }

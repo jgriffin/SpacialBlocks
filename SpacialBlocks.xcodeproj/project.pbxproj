@@ -78,6 +78,7 @@
 		D6014DB12BB6725100E4B18C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				D6EA641B2BB80041007AFBE1 /* GridResources.swift */,
 				D6EA641D2BBB08D2007AFBE1 /* RealityKit++.swift */,
 				D68546B32BBCCEF300342CBC /* Optional+unwrapped.swift */,
 			);
@@ -152,7 +153,6 @@
 			children = (
 				D66C85E72BC07DA8006330B9 /* Chart3DView.swift */,
 				D6D3B4D22BB5E3B700B24CE8 /* ContentView.swift */,
-				D6EA641B2BB80041007AFBE1 /* GridResources.swift */,
 				D6D3B4D42BB5E3B700B24CE8 /* ImmersiveView.swift */,
 				D6D3B4F52BB5E60000B24CE8 /* UnitGrid3DView.swift */,
 			);

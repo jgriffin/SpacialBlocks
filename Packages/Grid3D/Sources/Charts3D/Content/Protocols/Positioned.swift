@@ -10,25 +10,23 @@ import Spatial
 
 public protocol Positioned: Posed {
     var position: Point3D { get }
-    var positionAnchor: BoundsAnchor { get }
-    var rotation: Rotation3D { get }
+    var anchor: BoundsAnchor? { get }
+    var rotation: Rotation3D? { get }
 }
 
 public extension Positioned {
     // MARK: - default implementations
 
-    var position: Point3D { .zero }
-    var positionAnchor: BoundsAnchor { .init() }
-    var rotation: Rotation3D { .identity }
+    var anchor: BoundsAnchor? { nil }
+    var rotation: Rotation3D? { nil }
 
     // MARK: - anchor position
 
     var pose: Pose3D {
-        let bounds = (self as? Bounded)?.bounds
-        let anchorPoint = positionAnchor.anchorPoint(in: bounds)
+        let anchorPoint = anchor?.anchorPoint(in: bounds) ?? .zero
         return Pose3D(
             position: position - anchorPoint,
-            rotation: rotation
+            rotation: rotation ?? .identity
         )
     }
 }
@@ -45,42 +43,26 @@ public extension Positionable {
     }
 }
 
-//// MARK: - SizeAnchored
-//
-// public protocol SizeAnchored: Positioned, Sized {
-//    // 0...1 ratio mapped to size.center
-//    var unitAnchorInSize: Vector3D { get }
-// }
-//
-// public extension SizeAnchorable {
-//    var positionAnchorOffset: Vector3D {
-//        (unitAnchorInSize - .half).scaled(by: size)
-//    }
-// }
-//
-//// MARK: - SizeAnchorable
-//
-// public protocol SizeAnchorable: SizeAnchored {
-//    // 0...1 ratio mapped to size.center
-//    var unitAnchorInSize: Vector3D { get set }
-// }
-//
-// public extension SizeAnchorable {
-//    // MARK: modifiers
-//
-//    func withUnitAnchorInSize(_ unitAnchorInSize: Vector3D) -> Self {
-//        copy(self) { $0.unitAnchorInSize = unitAnchorInSize }
-//    }
-// }
+// MARK: - Anchorable
+
+public protocol Anchorable: Positioned {
+    var anchor: BoundsAnchor? { get set }
+}
+
+public extension Anchorable {
+    func withAnchor(_ anchor: BoundsAnchor) -> Self {
+        copy(self) { $0.anchor = anchor }
+    }
+}
 
 // MARK: - Rotatable
 
 public protocol Rotateable: Positioned {
-    var rotation: Rotation3D { get set }
+    var rotation: Rotation3D? { get set }
 }
 
 public extension Rotateable {
-    func withRotation(_ rotation: Rotation3D) -> Self {
+    func withRotation(_ rotation: Rotation3D?) -> Self {
         copy(self) { $0.rotation = rotation }
     }
 }

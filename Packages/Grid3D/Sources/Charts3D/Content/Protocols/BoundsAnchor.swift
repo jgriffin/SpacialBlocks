@@ -11,18 +11,18 @@ import Spatial
 ///
 /// Other times, you just want to always move it (0.5, 0.5, 0.5) units. Or one after the other
 public struct BoundsAnchor {
-    public var boundsRatio: Vector3D?
-    public var additionalOffset: Vector3D?
+    public var unitPoint: Unit3D?
+    public var offset: Vector3D?
 
     public init(
-        boundsRatio: Vector3D? = nil,
-        additionalOffset: Vector3D? = nil
+        _ unitPoint: Unit3D? = nil,
+        offset: Vector3D? = nil
     ) {
-        self.boundsRatio = boundsRatio
-        self.additionalOffset = additionalOffset
+        self.unitPoint = unitPoint
+        self.offset = offset
     }
 
-    public static let center = BoundsAnchor(boundsRatio: Vector3D([0.5, 0.5, 0.5]))
+    public static let center = BoundsAnchor(.center)
 
     // anchorPoint first tries to find anchorPointInBounds in bounds
     // if both are set otherwise it's .zero. Then, the anchorOffset will be
@@ -30,14 +30,14 @@ public struct BoundsAnchor {
     public func anchorPoint(in bounds: Rect3D?) -> Vector3D {
         var p = Vector3D.zero
 
-        if let boundsRatio,
+        if let unitPoint,
            let bounds
         {
-            p = Vector3D(bounds.min.vector + bounds.size.vector * boundsRatio.vector)
+            p = Vector3D(bounds.min.vector + bounds.size.vector * unitPoint.vector)
         }
 
-        if let additionalOffset {
-            p += additionalOffset
+        if let offset {
+            p += offset
         }
 
         return p

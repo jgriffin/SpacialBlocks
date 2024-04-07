@@ -6,20 +6,30 @@ import Foundation
 import RealityKit
 import Spatial
 
-public protocol Posed {
+public protocol Posed: Bounded {
     var pose: Pose3D { get }
 }
 
 public extension Posed {
-    func updateTransformComponent(_ entity: Entity) throws {
+    // MARK: - Bounded
+
+    var frame: Rect3D? {
+        bounds?.applying(pose)
+    }
+
+    var containedFrame: Rect3D? {
+        containedBounds?.applying(pose)
+    }
+
+    // MARK: - render helper
+
+    func updateEnityPose(_ entity: Entity) throws {
         let pose = pose
 
         let transform3D = AffineTransform3D(
             rotation: pose.rotation,
-            translation: Vector3D(pose.position.vector.flipZ)
+            translation: pose.position.asVector
         )
-
         entity.transform = Transform(transform3D)
-        // TODO: rotation
     }
 }

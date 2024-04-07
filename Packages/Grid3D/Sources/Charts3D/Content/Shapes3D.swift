@@ -8,21 +8,21 @@ import Spatial
 
 // MARK: - box
 
-public struct Box3D: ChartContent, MeshMaterialModeling, Positionable, Sizeable, Anchorable {
+public struct Box3D: ChartContent, MeshModeled, Sizeable, Positionable, Anchorable {
     public var size: Size3D
     public var position: Point3D
-    public var positionAnchor: BoundsAnchor?
+    public var anchor: BoundsAnchor?
     public var material: ChartMaterial?
 
     public init(
-        size: Size3D = Charts.defaultBoxSize,
+        size: Size3D = Charts.defaultSize,
         position: Point3D = .zero,
         anchor: BoundsAnchor? = nil,
         material: ChartMaterial? = nil
     ) {
         self.size = size
         self.position = position
-        positionAnchor = anchor
+        self.anchor = anchor
         self.material = material
     }
 
@@ -33,10 +33,10 @@ public struct Box3D: ChartContent, MeshMaterialModeling, Positionable, Sizeable,
 
 // MARK: - sphere
 
-public struct Sphere3D: ChartContent, MeshMaterialModeling, Positionable, Anchorable {
+public struct Sphere3D: ChartContent, MeshModeled, Positionable, Anchorable {
     public var radius: Float
     public var position: Point3D
-    public var positionAnchor: BoundsAnchor?
+    public var anchor: BoundsAnchor?
     public var material: ChartMaterial?
 
     public init(
@@ -47,13 +47,13 @@ public struct Sphere3D: ChartContent, MeshMaterialModeling, Positionable, Anchor
     ) {
         self.radius = radius
         self.position = position
-        positionAnchor = anchor
+        self.anchor = anchor
         self.material = material
     }
 
     public var bounds: Rect3D? {
         Rect3D(
-            center: position,
+            center: .zero,
             size: Size3D(vector: .one).uniformlyScaled(by: Double(radius))
         )
     }
@@ -63,52 +63,56 @@ public struct Sphere3D: ChartContent, MeshMaterialModeling, Positionable, Anchor
     }
 }
 
-public struct Plane3D: ChartContent, MeshMaterialModeling, Positionable, Rotateable {
-    public var width: Float
-    public var height: Float
-    public var cornerRadius: Float
+public struct Plane3D: ChartContent, MeshModeled, Positioned {
+    public var u: Vector3D
+    public var v: Vector3D
+    public var cornerRadius: Double
 
     public var position: Point3D
-    public var positionAnchor: BoundsAnchor?
-    public var rotation: Rotation3D
+    public var anchor: BoundsAnchor?
     public var material: ChartMaterial?
 
     public init(
-        width: Float,
-        height: Float,
-        cornerRadius: Float = 0,
+        u: Vector3D,
+        v: Vector3D,
+        cornerRadius: Double = 0.01,
         position: Point3D = .zero,
-        anchor: BoundsAnchor? = nil,
-        rotation: Rotation3D = .identity,
+        anchor: BoundsAnchor? = .center,
         material: ChartMaterial? = nil
     ) {
-        self.width = width
-        self.height = height
+        self.u = u
+        self.v = v
         self.cornerRadius = cornerRadius
 
         self.position = position
-        positionAnchor = anchor
-        self.rotation = rotation
+        self.anchor = anchor
         self.material = material
     }
 
     public var bounds: Rect3D? {
-        let rect = Rect3D(center: .zero, size: .init(width: width, height: height, depth: cornerRadius))
-        return rect.applying(pose)
+        Rect3D(
+            origin: .zero,
+            size: .init(width: u.length, height: v.length, depth: cornerRadius)
+        )
+    }
+
+    public var rotation: Rotation3D? {
+        let look = Point3D(u.cross(v))
+        return Rotation3D(position: look, target: .zero)
     }
 
     public func makeMesh() -> MeshResource {
-        .generatePlane(width: width, height: height, cornerRadius: cornerRadius)
+        .generatePlane(width: Float(u.length), height: Float(v.length), cornerRadius: Float(cornerRadius))
     }
 }
 
 // MARK: - cone
 
-public struct Cone3D: ChartContent, MeshMaterialModeling, Positionable, Rotateable {
+public struct Cone3D: ChartContent, MeshModeled, Positionable, Rotateable {
     public var height: Float
     public var radius: Float
     public var position: Point3D
-    public var rotation: Rotation3D
+    public var rotation: Rotation3D?
     public var material: ChartMaterial?
 
     public init(
@@ -127,8 +131,8 @@ public struct Cone3D: ChartContent, MeshMaterialModeling, Positionable, Rotateab
 
     public var bounds: Rect3D? {
         Rect3D(
-            origin: position,
-            size: Size3D(vector: .one).uniformlyScaled(by: Double(max(height, radius)))
+            center: .zero,
+            size: Size3D(width: 2.0 * radius, height: height, depth: 2 * radius)
         )
     }
 
@@ -139,12 +143,12 @@ public struct Cone3D: ChartContent, MeshMaterialModeling, Positionable, Rotateab
 
 // MARK: - cylindar
 
-public struct Cylinder3D: ChartContent, MeshMaterialModeling, Positionable, Rotateable {
+public struct Cylinder3D: ChartContent, MeshModeled, Positionable, Rotateable {
     public var height: Float
     public var radius: Float
     public var position: Point3D
-    public var positionAnchor: BoundsAnchor?
-    public var rotation: Rotation3D
+    public var anchor: BoundsAnchor?
+    public var rotation: Rotation3D?
     public var material: ChartMaterial?
 
     public init(
@@ -158,15 +162,15 @@ public struct Cylinder3D: ChartContent, MeshMaterialModeling, Positionable, Rota
         self.height = height
         self.radius = radius
         self.position = position
-        positionAnchor = anchor
+        self.anchor = anchor
         self.rotation = rotation
         self.material = material
     }
 
     public var bounds: Rect3D? {
         Rect3D(
-            origin: position,
-            size: Size3D(vector: .one).uniformlyScaled(by: Double(min(height, radius)))
+            center: .zero,
+            size: Size3D(width: 2.0 * radius, height: height, depth: 2.0 * radius)
         )
     }
 

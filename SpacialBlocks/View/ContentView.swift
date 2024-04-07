@@ -2,6 +2,7 @@
 // Created by John Griffin on 3/28/24
 //
 
+import Charts3D
 import RealityKit
 import SwiftUI
 
@@ -15,7 +16,7 @@ struct ContentView: View {
 
     var body: some View {
 //        UnitGrid3DView()
-        Chart3DView()
+        ChartsView(chart: .current)
             .onChange(of: showImmersiveSpace) { _, newValue in
                 Task { @MainActor in
                     await updateImmersiveSpaceShown(newValue)

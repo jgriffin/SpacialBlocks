@@ -11,11 +11,10 @@ public protocol Sized: Positioned, Bounded {
 }
 
 public extension Sized {
-    // MARK: - bounded
+    // MARK: - Bounded
 
     var bounds: Rect3D? {
         Rect3D(center: .zero, size: size)
-            .applying(pose)
     }
 }
 

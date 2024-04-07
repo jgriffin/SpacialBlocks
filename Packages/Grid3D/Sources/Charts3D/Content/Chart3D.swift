@@ -5,13 +5,16 @@
 import Foundation
 import Spatial
 
-public struct Chart3D: ChartContent, EntityRepresentable, Positioned, HasContents {
+public struct Chart3D: ChartContent, EntityRepresentable, Anchorable, Positioned, HasContents {
     public var minBounds: Rect3D
     public var maxBounds: Rect3D?
     public var contentsPadding: Size3D
 
     public var contents: [ChartContent]
     public var contentsBounds: Rect3D?
+
+    public var position: Point3D = .zero
+    public var anchor: BoundsAnchor? = .center
 
     public init(
         minBounds: Rect3D = Charts.defaultChartMinRange,
@@ -45,15 +48,11 @@ public extension Chart3D {
 
     // hides all bounds offset from above
     var bounds: Rect3D? {
-        chartBounds.translated(by: -Vector3D(chartBounds.center))
+        chartBounds
     }
 
     var containedBounds: Rect3D? {
         bounds
-    }
-
-    var positionAnchorOffset: Vector3D {
-        Vector3D(chartBounds.center)
     }
 
     // MARK: - ContentContaining
@@ -70,5 +69,9 @@ public extension Chart3D {
 
     func withMaxBounds(_ maxBounds: Rect3D) -> Self {
         copy(self) { $0.maxBounds = maxBounds }
+    }
+
+    func withContentsPadding(_ padding: Size3D) -> Self {
+        copy(self) { $0.contentsPadding = padding }
     }
 }

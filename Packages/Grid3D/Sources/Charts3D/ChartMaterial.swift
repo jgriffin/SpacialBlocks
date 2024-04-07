@@ -10,7 +10,7 @@ public protocol Materializable {
 }
 
 public enum ChartMaterial: Materializable {
-    case simple(color: SimpleMaterial.Color, roughness: Float, isMetalic: Bool)
+    case simple(color: SimpleMaterial.Color, roughness: Float = 1, isMetalic: Bool = false)
 
     // MARK: - materializable
 

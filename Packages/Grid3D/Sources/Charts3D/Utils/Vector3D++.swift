@@ -11,9 +11,25 @@ public extension Vector3D {
     var flipZ: Vector3D { Vector3D(vector * .zFlip) }
 }
 
+public extension Point3D {
+    var asVector: Vector3D { Vector3D(self) }
+
+    static let one = Point3D(.one)
+}
+
+public extension Size3D {
+    var asCenterRect: Rect3D {
+        Rect3D(center: .zero, size: size)
+    }
+}
+
 public extension Rect3D {
     init(min: Point3D = .zero, max: Point3D) {
         self.init(points: [min, max])
+    }
+
+    func unitPoint(_ point: Unit3D) -> Point3D {
+        min + size.scaled(by: point.asSize)
     }
 }
 
