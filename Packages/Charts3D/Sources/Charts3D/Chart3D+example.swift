@@ -39,7 +39,9 @@ public extension Chart3D {
     }
 
     static let current = Chart3D {
-        Line3D(from: Point3D([0.0, 0, 0]), to: Point3D([1.0, 1, 1]))
+        Box3D(size: .one * -0.1, material: .color(.cyan, alpha: 0.2))
+        Line3D(from: Point3D([0.0, 0, 0]), to: Point3D([1.0, 1, 11]))
+        
         GridPlanes3D()
-    }.withMinBounds(Rect3D(min: .zero, max: .one))
+    }.withBoundsToInclude([.zero, .one])
 }

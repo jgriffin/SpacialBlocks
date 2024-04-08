@@ -35,7 +35,7 @@ public struct Line3D: ChartContent, ModelEntityRepresentable, Posed {
     public var position: Point3D = .zero
 
     public var anchor: BoundsAnchor? {
-        BoundsAnchor(offset: Vector3D((from.vector + to.vector) / 2.0))
+        BoundsAnchor(offset: -Vector3D((from.vector + to.vector) / 2.0))
     }
 
     public var rotation: Rotation3D? {

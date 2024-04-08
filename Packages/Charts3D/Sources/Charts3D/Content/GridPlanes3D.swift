@@ -41,9 +41,7 @@ public extension GridPlanes3D {
 
     @ChartBuilder
     private func makeGridPlanes(chartBounds: Rect3D) -> [ChartContent] {
-        let _: Void = print(chartBounds)
-
-        Sphere3D(radius: 0.01, position: .zero, material: .simple(color: .red))
+        Sphere3D(radius: 0.05, position: .zero, material: .color(.red, alpha: 0.8))
 
         axisLine(to: modify(.zero) { $0.x = chartBounds.max.x })
         axisLine(to: modify(.zero) { $0.y = chartBounds.max.y })

@@ -7,8 +7,7 @@ import RealityKit
 import Spatial
 
 public struct Chart3D: ChartContent, EntityRepresentable, Posed {
-    public var minBounds: Rect3D
-    public var maxBounds: Rect3D?
+    public var boundsToInclude: [Point3D]?
     public var contentsPadding: Size3D
 
     public var contents: [ChartContent]
@@ -18,13 +17,11 @@ public struct Chart3D: ChartContent, EntityRepresentable, Posed {
     public var rotation: Rotation3D?
 
     public init(
-        minBounds: Rect3D = Charts.defaultChartMinRange,
-        maxBounds: Rect3D? = nil,
+        boundsToInclude: [Point3D]? = nil,
         contentsPadding: Size3D = .zero,
         @ChartBuilder contents: () -> [any ChartContent]
     ) {
-        self.minBounds = minBounds
-        self.maxBounds = maxBounds
+        self.boundsToInclude = boundsToInclude
         self.contentsPadding = contentsPadding
 
         self.contents = contents()
@@ -34,15 +31,17 @@ public struct Chart3D: ChartContent, EntityRepresentable, Posed {
 
 public extension Chart3D {
     var chartBounds: Rect3D {
-        var b = minBounds
+        var b: Rect3D?
+
+        if let boundsToInclude, !boundsToInclude.isEmpty {
+            b = Rect3D(points: boundsToInclude)
+        }
+
         if let contentsBounds {
-            let padded = contentsBounds.inset(by: -contentsPadding)
-            b.formUnion(padded)
+            let paddedContentBounds = contentsBounds.inset(by: -contentsPadding)
+            b = b?.union(paddedContentBounds) ?? paddedContentBounds
         }
-        if let maxBounds {
-            b.formIntersection(minBounds.union(maxBounds))
-        }
-        return b
+        return b ?? Size3D.one.asCenterRect
     }
 
     // MARK: - Bounded
@@ -72,12 +71,8 @@ public extension Chart3D {
 
     // MARK: - modifiers
 
-    func withMinBounds(_ minBounds: Rect3D) -> Self {
-        modify(self) { $0.minBounds = minBounds }
-    }
-
-    func withMaxBounds(_ maxBounds: Rect3D) -> Self {
-        modify(self) { $0.maxBounds = maxBounds }
+    func withBoundsToInclude(_ points: [Point3D]) -> Self {
+        modify(self) { $0.boundsToInclude = points }
     }
 
     func withContentsPadding(_ padding: Size3D) -> Self {

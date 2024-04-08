@@ -10,7 +10,7 @@ public protocol Materializable {
 }
 
 public enum ChartMaterial: Materializable {
-    case simple(color: SimpleMaterial.Color, roughness: Float = 1, isMetalic: Bool = false)
+    case simple(color: SimpleMaterial.Color, roughness: Float, isMetalic: Bool)
 
     // MARK: - materializable
 
@@ -19,5 +19,17 @@ public enum ChartMaterial: Materializable {
         case let .simple(color: color, roughness: roughness, isMetalic: isMetalic):
             SimpleMaterial(color: color, roughness: .float(roughness), isMetallic: isMetalic)
         }
+    }
+}
+
+public extension ChartMaterial {
+    static func color(
+        _ color: SimpleMaterial.Color,
+        alpha: CGFloat? = nil,
+        roughness: Float = 1,
+        isMetalic: Bool = false
+    ) -> ChartMaterial {
+        let color = alpha.flatMap { color.withAlphaComponent($0) } ?? color
+        return .simple(color: color, roughness: roughness, isMetalic: isMetalic)
     }
 }
