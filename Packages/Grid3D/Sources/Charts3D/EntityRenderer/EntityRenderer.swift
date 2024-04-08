@@ -61,7 +61,7 @@ public extension EntityRenderer {
         let chartBounds = chart.containedBounds
         state.chartBounds = chartBounds
 
-        let environment = RenderEnvironment().with {
+        let environment = RenderEnvironment().modify {
             $0.chartBounds = chartBounds
         }
 
@@ -73,10 +73,10 @@ public extension EntityRenderer {
         _ environment: RenderEnvironment,
         in parent: Entity
     ) throws {
-        var existingChildren = parent.chart3DChildren
+        let existingChildren = parent.chart3DChildren
 
         for content in contents {
-            // match or make
+            // TODO: match existing content
 
             let entity = try content.makeEntity()
             parent.addChild(entity)
@@ -84,8 +84,8 @@ public extension EntityRenderer {
             try content.updateEntity(entity, environment)
             entity.chart3DContent = content
 
-            if let contents = (content as? HasContents)?.contentsFor(environment) {
-                let representable = contents.compactMap { $0 as? EntityRepresentable }
+            let representable = content.contentsFor(environment).compactMap { $0 as? EntityRepresentable }
+            if !representable.isEmpty {
                 try renderContents(representable, environment, in: entity)
             }
         }

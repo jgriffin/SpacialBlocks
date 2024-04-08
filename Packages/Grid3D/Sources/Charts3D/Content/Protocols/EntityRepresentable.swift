@@ -6,7 +6,7 @@ import Foundation
 import RealityKit
 import Spatial
 
-public protocol EntityRepresentable {
+public protocol EntityRepresentable: ChartContent {
     func makeEntity() throws -> Entity
 
     // called by Entity.chart3DContent
@@ -26,6 +26,7 @@ public extension EntityRepresentable {
         if let model = self as? ModelRepresentable {
             try model.updateEntityModel(entity)
         }
+
         if let posed = self as? Posed {
             try posed.updateEnityPose(entity)
         }

@@ -6,7 +6,7 @@ import Foundation
 import RealityKit
 import Spatial
 
-public struct Line3D: ChartContent, MeshModeled, Positioned {
+public struct Line3D: ChartContent, ModelRepresentable, Posed {
     public let from: Point3D
     public let to: Point3D
     public let width: Float
@@ -35,6 +35,8 @@ public struct Line3D: ChartContent, MeshModeled, Positioned {
     public var position: Point3D {
         Point3D((from.vector + to.vector) / 2.0)
     }
+
+    public var anchor: BoundsAnchor? { nil }
 
     public var rotation: Rotation3D? {
         Vector3D.up.rotation(to: to - from)

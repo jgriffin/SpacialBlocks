@@ -15,7 +15,7 @@ final class EntityRendererTests: XCTestCase {
 
     func testBoxOrigin() throws {
         let chart = Chart3D {
-            Box()
+            Box3D()
         }
 
         try render.renderChart(chart)
@@ -27,7 +27,7 @@ final class EntityRendererTests: XCTestCase {
 
     func testBoxPosition() throws {
         let chart = Chart3D {
-            Box()
+            Box3D()
                 .withPosition(.init(.one))
         }
 

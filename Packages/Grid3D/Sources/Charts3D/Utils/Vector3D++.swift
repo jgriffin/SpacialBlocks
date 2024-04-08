@@ -31,6 +31,12 @@ public extension Rect3D {
     func unitPoint(_ point: Unit3D) -> Point3D {
         min + size.scaled(by: point.asSize)
     }
+
+    static func union(_ rects: [Rect3D]) -> Rect3D? {
+        rects.reduce(nil as Rect3D?) { result, next in
+            result?.union(next) ?? next
+        }
+    }
 }
 
 public extension SIMD3<Float> {

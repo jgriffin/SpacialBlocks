@@ -7,12 +7,12 @@ import Foundation
 public protocol Modifiable {}
 
 public extension Modifiable {
-    func with(_ t: (inout Self) -> Void) -> Self {
-        copy(self, with: t)
+    func modify(_ with: (inout Self) -> Void) -> Self {
+        Charts3D.modify(self, with: with)
     }
 }
 
-public func copy<T>(_ t: T, with: (inout T) -> Void) -> T {
+public func modify<T>(_ t: T, with: (inout T) -> Void) -> T {
     var copy = t
     with(&copy)
     return copy

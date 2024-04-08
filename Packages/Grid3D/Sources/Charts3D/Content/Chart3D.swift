@@ -5,7 +5,7 @@
 import Foundation
 import Spatial
 
-public struct Chart3D: ChartContent, EntityRepresentable, Anchorable, Positioned, HasContents {
+public struct Chart3D: ChartContent, EntityRepresentable, Poseable {
     public var minBounds: Rect3D
     public var maxBounds: Rect3D?
     public var contentsPadding: Size3D
@@ -15,6 +15,7 @@ public struct Chart3D: ChartContent, EntityRepresentable, Anchorable, Positioned
 
     public var position: Point3D = .zero
     public var anchor: BoundsAnchor? = .center
+    public var rotation: Rotation3D?
 
     public init(
         minBounds: Rect3D = Charts.defaultChartMinRange,
@@ -64,14 +65,14 @@ public extension Chart3D {
     // MARK: - modifiers
 
     func withMinBounds(_ minBounds: Rect3D) -> Self {
-        copy(self) { $0.minBounds = minBounds }
+        modify(self) { $0.minBounds = minBounds }
     }
 
     func withMaxBounds(_ maxBounds: Rect3D) -> Self {
-        copy(self) { $0.maxBounds = maxBounds }
+        modify(self) { $0.maxBounds = maxBounds }
     }
 
     func withContentsPadding(_ padding: Size3D) -> Self {
-        copy(self) { $0.contentsPadding = padding }
+        modify(self) { $0.contentsPadding = padding }
     }
 }
