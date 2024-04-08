@@ -8,7 +8,7 @@ import Spatial
 
 // MARK: - box
 
-public struct Box3D: ChartContent, ModelRepresentable, Poseable, Sizeable {
+public struct Box3D: ChartContent, ModelEntityRepresentable, Poseable {
     public var size: Size3D
 
     public var position: Point3D
@@ -36,12 +36,18 @@ public struct Box3D: ChartContent, ModelRepresentable, Poseable, Sizeable {
     public func makeMesh() -> MeshResource {
         .generateBox(width: Float(size.width), height: Float(size.height), depth: Float(size.depth))
     }
+
+    // MARK: - modifiers
+
+    func withSize(_ size: Size3D) -> Self {
+        modify(self) { $0.size = size }
+    }
 }
 
 // MARK: - sphere
 
-public struct Sphere3D: ChartContent, ModelRepresentable, Poseable {
-    public var radius: Float
+public struct Sphere3D: ChartContent, ModelEntityRepresentable, Poseable {
+    public var radius: Double
 
     public var position: Point3D
     public var anchor: BoundsAnchor?
@@ -50,7 +56,7 @@ public struct Sphere3D: ChartContent, ModelRepresentable, Poseable {
     public var material: ChartMaterial?
 
     public init(
-        radius: Float,
+        radius: Double,
         position: Point3D = .zero,
         anchor: BoundsAnchor? = nil,
         material: ChartMaterial? = nil
@@ -62,18 +68,15 @@ public struct Sphere3D: ChartContent, ModelRepresentable, Poseable {
     }
 
     public var bounds: Rect3D? {
-        Rect3D(
-            center: .zero,
-            size: Size3D(vector: .one).uniformlyScaled(by: Double(radius))
-        )
+        Size3D(vector: .one * radius).asCenterRect
     }
 
     public func makeMesh() -> MeshResource {
-        .generateSphere(radius: radius)
+        .generateSphere(radius: Float(radius))
     }
 }
 
-public struct Plane3D: ChartContent, ModelRepresentable, Posed {
+public struct Plane3D: ChartContent, ModelEntityRepresentable, Posed {
     public var u: Vector3D
     public var v: Vector3D
     public var cornerRadius: Double
@@ -119,7 +122,7 @@ public struct Plane3D: ChartContent, ModelRepresentable, Posed {
 
 // MARK: - cone
 
-public struct Cone3D: ChartContent, ModelRepresentable, Poseable {
+public struct Cone3D: ChartContent, ModelEntityRepresentable, Poseable {
     public var height: Float
     public var radius: Float
 
@@ -154,7 +157,7 @@ public struct Cone3D: ChartContent, ModelRepresentable, Poseable {
 
 // MARK: - cylindar
 
-public struct Cylinder3D: ChartContent, ModelRepresentable, Poseable {
+public struct Cylinder3D: ChartContent, ModelEntityRepresentable, Poseable {
     public var height: Float
     public var radius: Float
 
@@ -181,10 +184,7 @@ public struct Cylinder3D: ChartContent, ModelRepresentable, Poseable {
     }
 
     public var bounds: Rect3D? {
-        Rect3D(
-            center: .zero,
-            size: Size3D(width: 2.0 * radius, height: height, depth: 2.0 * radius)
-        )
+        Size3D(width: 2.0 * radius, height: height, depth: 2.0 * radius).asCenterRect
     }
 
     public func makeMesh() -> MeshResource {

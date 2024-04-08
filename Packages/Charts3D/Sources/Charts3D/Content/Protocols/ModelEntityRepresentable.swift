@@ -6,23 +6,21 @@ import Foundation
 import RealityKit
 import Spatial
 
-// MARK: - ModelRepresentable
-
-public protocol ModelRepresentable: EntityRepresentable {
+public protocol ModelEntityRepresentable: EntityRepresentable {
     func makeMesh() -> MeshResource
     var material: ChartMaterial? { get set }
 
     func updateEntityModel(_ entity: Entity) throws
 }
 
-public extension ModelRepresentable {
+public extension ModelEntityRepresentable {
     // MARK: - EntityRepresentable
 
     func makeEntity() throws -> Entity {
         ModelEntity()
     }
 
-    // MARK: - ModelRepresentable
+    // MARK: - ModelEntityRepresentable
 
     func makeModelComponent() throws -> ModelComponent {
         let mesh = makeMesh()

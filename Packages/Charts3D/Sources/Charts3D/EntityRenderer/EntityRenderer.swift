@@ -69,22 +69,30 @@ public extension EntityRenderer {
     }
 
     func renderContents(
-        _ contents: [EntityRepresentable],
+        _ contents: [ChartContent],
         _ environment: RenderEnvironment,
         in parent: Entity
     ) throws {
         let existingChildren = parent.chart3DChildren
 
         for content in contents {
-            // TODO: match existing content
+            guard let entityContent = content as? EntityRepresentable else {
+                let representable = content.contentsFor(environment)
+                if !representable.isEmpty {
+                    try renderContents(representable, environment, in: parent)
+                }
 
-            let entity = try content.makeEntity()
+                continue
+            }
+
+            // TODO: match existing content
+            let entity = try entityContent.makeEntity()
             parent.addChild(entity)
 
-            try content.updateEntity(entity, environment)
-            entity.chart3DContent = content
+            try entityContent.updateEntity(entity, environment)
+            entity.chart3DContent = entityContent
 
-            let representable = content.contentsFor(environment).compactMap { $0 as? EntityRepresentable }
+            let representable = entityContent.contentsFor(environment)
             if !representable.isEmpty {
                 try renderContents(representable, environment, in: entity)
             }

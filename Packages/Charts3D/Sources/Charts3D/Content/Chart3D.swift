@@ -3,9 +3,10 @@
 //
 
 import Foundation
+import RealityKit
 import Spatial
 
-public struct Chart3D: ChartContent, EntityRepresentable, Poseable {
+public struct Chart3D: ChartContent, EntityRepresentable, Posed {
     public var minBounds: Rect3D
     public var maxBounds: Rect3D?
     public var contentsPadding: Size3D
@@ -14,7 +15,6 @@ public struct Chart3D: ChartContent, EntityRepresentable, Poseable {
     public var contentsBounds: Rect3D?
 
     public var position: Point3D = .zero
-    public var anchor: BoundsAnchor? = .center
     public var rotation: Rotation3D?
 
     public init(
@@ -49,17 +49,25 @@ public extension Chart3D {
 
     // hides all bounds offset from above
     var bounds: Rect3D? {
-        chartBounds
+        chartBounds.size.asCenterRect
     }
 
     var containedBounds: Rect3D? {
         bounds
     }
 
+    var anchor: BoundsAnchor? {
+        BoundsAnchor(offset: chartBounds.center.asVector)
+    }
+
     // MARK: - ContentContaining
 
     func contentsFor(_: RenderEnvironment?) -> [ChartContent] {
         contents
+    }
+
+    func makeEntity() throws -> Entity {
+        Entity()
     }
 
     // MARK: - modifiers

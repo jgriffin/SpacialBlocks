@@ -23,7 +23,7 @@ public extension EntityRepresentable {
     }
 
     func updateEntityCommon(_ entity: Entity, _: RenderEnvironment) throws {
-        if let model = self as? ModelRepresentable {
+        if let model = self as? ModelEntityRepresentable {
             try model.updateEntityModel(entity)
         }
 
