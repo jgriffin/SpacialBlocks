@@ -71,9 +71,4 @@ public extension GridPlanes3D {
     func gridPlane(u: Vector3D, v: Vector3D, center: Point3D) -> some ChartContent {
         Plane3D(u: u, v: v, position: center, anchor: .center, material: .gridPlane)
     }
-
-    var bottomPoints: [Unit3D] { [
-        .bottomLeadingBack, .bottomTrailingBack, .bottomTrailingFront,
-        .bottomLeadingFront, .bottomLeadingBack,
-    ] }
 }

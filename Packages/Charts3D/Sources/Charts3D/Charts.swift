@@ -15,12 +15,15 @@ public extension Charts {
     static let defaultRenderScale: Size3D = .one / 10
     static let defaultGridSize: Size3D = defaultSize
     static let defaultGridThickness: Size3D = .one * 0.001
+    static let boundingBoxLineWidth: Float = 0.001
 }
 
 public extension ChartMaterial {
-    static let defaultMaterial = ChartMaterial.simple(color: .blue.withAlphaComponent(1.0), roughness: 0, isMetalic: false)
+    static let defaultMaterial = ChartMaterial.color(.blue)
 
-    static let gridPlane = ChartMaterial.simple(color: .cyan.withAlphaComponent(0.2), roughness: 1, isMetalic: false)
-    static let gridLine = ChartMaterial.simple(color: .cyan.withAlphaComponent(0.8), roughness: 0, isMetalic: false)
-    static let axisLine = ChartMaterial.simple(color: .cyan.withAlphaComponent(0.8), roughness: 0, isMetalic: false)
+    static let boundingBox = ChartMaterial.color(.cyan, alpha: 0.1)
+    static let boundingBoxLine = ChartMaterial.color(.cyan, alpha: 0.5)
+    static let gridPlane = ChartMaterial.color(.cyan, alpha: 0.2)
+    static let gridLine = ChartMaterial.color(.cyan, alpha: 0.8)
+    static let axisLine = ChartMaterial.color(.cyan, alpha: 0.8)
 }

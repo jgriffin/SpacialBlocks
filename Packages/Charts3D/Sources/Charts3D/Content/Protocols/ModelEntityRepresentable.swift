@@ -31,7 +31,7 @@ public extension ModelEntityRepresentable {
     }
 
     func makeMaterials(for mesh: MeshResource) -> [Material] {
-        let chartMaterial = material ?? .simple(color: .blue, roughness: 1, isMetalic: true)
+        let chartMaterial = material ?? .color(.blue)
         let material = chartMaterial.makeMaterial()
         return Array(repeating: material, count: mesh.expectedMaterialCount)
     }

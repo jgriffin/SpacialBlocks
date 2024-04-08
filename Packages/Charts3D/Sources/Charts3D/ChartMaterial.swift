@@ -29,7 +29,10 @@ public extension ChartMaterial {
         roughness: Float = 1,
         isMetalic: Bool = false
     ) -> ChartMaterial {
-        let color = alpha.flatMap { color.withAlphaComponent($0) } ?? color
-        return .simple(color: color, roughness: roughness, isMetalic: isMetalic)
+        .simple(
+            color: alpha.flatMap { color.withAlphaComponent($0) } ?? color,
+            roughness: roughness,
+            isMetalic: isMetalic
+        )
     }
 }

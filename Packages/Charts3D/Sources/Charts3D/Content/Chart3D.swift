@@ -52,7 +52,7 @@ public extension Chart3D {
     }
 
     var containedBounds: Rect3D? {
-        bounds
+        chartBounds.size.asCenterRect
     }
 
     var anchor: BoundsAnchor? {
@@ -62,7 +62,13 @@ public extension Chart3D {
     // MARK: - ContentContaining
 
     func contentsFor(_: RenderEnvironment?) -> [ChartContent] {
-        contents
+        contents + extraContent()
+    }
+
+    @ChartBuilder
+    func extraContent() -> [ChartContent] {
+        BoundingBox(chartBounds)
+//        Box3D(size: .one * 0.1, position: .one * 0.5, material: .color(.red, alpha: 0.2))
     }
 
     func makeEntity() throws -> Entity {

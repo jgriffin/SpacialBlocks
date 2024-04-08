@@ -39,9 +39,9 @@ public extension Chart3D {
     }
 
     static let current = Chart3D {
-        Box3D(size: .one * -0.1, material: .color(.cyan, alpha: 0.2))
-        Line3D(from: Point3D([0.0, 0, 0]), to: Point3D([1.0, 1, 11]))
-        
+        // Box3D(size: .one * -0.1, material: .boundingBox)
+        Line3D(from: Point3D([0.0, 0, 0]), to: Point3D([1.0, 1, 1]))
+
         GridPlanes3D()
     }.withBoundsToInclude([.zero, .one])
 }

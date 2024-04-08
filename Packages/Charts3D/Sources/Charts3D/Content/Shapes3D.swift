@@ -104,10 +104,7 @@ public struct Plane3D: ChartContent, ModelEntityRepresentable, Posed {
     }
 
     public var bounds: Rect3D? {
-        Rect3D(
-            origin: .zero,
-            size: .init(width: u.length, height: v.length, depth: cornerRadius)
-        )
+        Size3D(width: u.length, height: v.length, depth: cornerRadius).asCenterRect
     }
 
     public var rotation: Rotation3D? {

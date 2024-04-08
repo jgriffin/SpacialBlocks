@@ -21,16 +21,6 @@ public protocol ChartContent {
     var frame: Rect3D? { get }
     var containedFrame: Rect3D? { get }
 
-//    // MARK: - position
-//
-//    var position: Point3D { get }
-//    var anchor: BoundsAnchor? { get }
-//    var rotation: Rotation3D? { get }
-//
-//    // MARK: - pose
-//
-//    var pose: Pose3D { get }
-
     // MARK: - contentsFor
 
     func contentsFor(_ environment: RenderEnvironment?) -> [ChartContent]

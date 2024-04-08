@@ -58,7 +58,7 @@ public extension EntityRenderer {
     }
 
     func renderChart(_ chart: Chart3D) throws {
-        let chartBounds = chart.containedBounds
+        let chartBounds = chart.chartBounds
         state.chartBounds = chartBounds
 
         let environment = RenderEnvironment().modify {
@@ -71,7 +71,8 @@ public extension EntityRenderer {
     func renderContents(
         _ contents: [ChartContent],
         _ environment: RenderEnvironment,
-        in parent: Entity
+        in parent: Entity,
+        pruneChildren: Bool = true
     ) throws {
         let existingChildren = parent.chart3DChildren
 
@@ -79,7 +80,7 @@ public extension EntityRenderer {
             guard let entityContent = content as? EntityRepresentable else {
                 let representable = content.contentsFor(environment)
                 if !representable.isEmpty {
-                    try renderContents(representable, environment, in: parent)
+                    try renderContents(representable, environment, in: parent, pruneChildren: false)
                 }
 
                 continue

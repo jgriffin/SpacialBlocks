@@ -18,8 +18,8 @@ final class BoundsTests: XCTestCase {
         )
         XCTAssertEqual(box.bounds?.min, Point3D(tenTenTen))
         XCTAssertEqual(box.bounds?.max, Point3D([11.0, 12, 13]))
-        XCTAssertEqual(box.containedBounds?.min, Point3D(tenTenTen))
-        XCTAssertEqual(box.containedBounds?.max, Point3D([11.0, 12, 13]))
+        XCTAssertEqual(box.containedBounds()?.min, Point3D(tenTenTen))
+        XCTAssertEqual(box.containedBounds()?.max, Point3D([11.0, 12, 13]))
     }
 
     func testChartBounds() {
@@ -32,7 +32,7 @@ final class BoundsTests: XCTestCase {
 
         XCTAssertEqual(chart.bounds?.min, Point3D.zero)
         XCTAssertEqual(chart.bounds?.max, Point3D(tenTenTen))
-        XCTAssertEqual(chart.containedBounds?.min, Point3D.zero)
-        XCTAssertEqual(chart.containedBounds?.max, Point3D(elevenTwelveThirteen))
+        XCTAssertEqual(chart.containedBounds()?.min, Point3D.zero)
+        XCTAssertEqual(chart.containedBounds()?.max, Point3D(elevenTwelveThirteen))
     }
 }

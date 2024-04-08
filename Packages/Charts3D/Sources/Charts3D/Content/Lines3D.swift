@@ -9,18 +9,18 @@ import Spatial
 public struct Line3D: ChartContent, ModelEntityRepresentable, Posed {
     public let from: Point3D
     public let to: Point3D
-    public let width: Float
+    public let lineWidth: Float
     public var material: ChartMaterial?
 
     public init(
         from: Point3D,
         to: Point3D,
-        width: Float = Charts.defaultLineWidth,
+        lineWidth: Float = Charts.defaultLineWidth,
         material: ChartMaterial? = nil
     ) {
         self.from = from
         self.to = to
-        self.width = width
+        self.lineWidth = lineWidth
         self.material = material
     }
 
@@ -45,22 +45,22 @@ public struct Line3D: ChartContent, ModelEntityRepresentable, Posed {
     // MARK: - MeshModeling
 
     public func makeMesh() -> MeshResource {
-        .generateCylinder(height: Float(from.distance(to: to)), radius: width)
+        .generateCylinder(height: Float(from.distance(to: to)), radius: lineWidth)
     }
 }
 
 public struct Lines3D: ChartContent, EntityRepresentable, NotPosed {
     public let points: [Point3D]
-    public let width: Float
+    public let lineWidth: Float
     public var material: ChartMaterial?
 
     public init(
         points: [Point3D],
-        width: Float = Charts.defaultLineWidth,
+        lineWidth: Float = Charts.defaultLineWidth,
         material: ChartMaterial? = nil
     ) {
         self.points = points
-        self.width = width
+        self.lineWidth = lineWidth
         self.material = material
     }
 
@@ -72,7 +72,7 @@ public struct Lines3D: ChartContent, EntityRepresentable, NotPosed {
 
     public func contentsFor(_: RenderEnvironment?) -> [any ChartContent] {
         zip(points, points.dropFirst()).map { p1, p2 in
-            Line3D(from: p1, to: p2, width: width, material: material)
+            Line3D(from: p1, to: p2, lineWidth: lineWidth, material: material)
         }
     }
 

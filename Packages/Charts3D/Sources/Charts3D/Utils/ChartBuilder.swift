@@ -6,31 +6,35 @@ import Foundation
 
 @resultBuilder
 public enum ChartBuilder {
-    public static func buildBlock(_ components: [ChartContent]...) -> [ChartContent] {
+    public typealias Expression = ChartContent
+    public typealias Component = [ChartContent]
+    public typealias FinalResult = [ChartContent]
+
+    public static func buildBlock(_ components: Component...) -> Component {
         components.flatMap { $0 }
     }
 
-    public static func buildExpression(_ component: ChartContent) -> [ChartContent] {
-        [component]
+    public static func buildExpression(_ expression: Expression) -> Component {
+        [expression]
     }
 
-    public static func buildExpression(_ components: [ChartContent]) -> [ChartContent] {
-        components
+    public static func buildExpression(_ expressions: [ChartContent]) -> Component {
+        expressions
     }
 
-    public static func buildOptional(_ components: [any ChartContent]?) -> [any ChartContent] {
-        components ?? []
+    public static func buildOptional(_ component: Component?) -> Component {
+        component ?? []
     }
 
-    public static func buildEither(first components: [any ChartContent]) -> [any ChartContent] {
-        components
+    public static func buildEither(first component: Component) -> Component {
+        component
     }
 
-    public static func buildEither(second components: [any ChartContent]) -> [any ChartContent] {
-        components
+    public static func buildEither(second component: Component) -> Component {
+        component
     }
 
-    public static func buildArray(_ components: [[ChartContent]]) -> [ChartContent] {
+    public static func buildArray(_ components: [Component]) -> Component {
         components.flatMap { $0 }
     }
 }
