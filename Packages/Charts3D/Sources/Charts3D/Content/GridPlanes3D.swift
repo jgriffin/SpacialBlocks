@@ -41,27 +41,27 @@ public extension GridPlanes3D {
 
     @ChartBuilder
     private func makeGridPlanes(chartBounds: Rect3D) -> [ChartContent] {
-        Sphere3D(radius: 0.05, position: .zero, material: .color(.red, alpha: 0.8))
+        Sphere3D(radius: 0.04, position: .zero, material: .color(.red, alpha: 0.8))
 
         axisLine(to: modify(.zero) { $0.x = chartBounds.max.x })
         axisLine(to: modify(.zero) { $0.y = chartBounds.max.y })
         axisLine(to: modify(.zero) { $0.z = chartBounds.max.z })
 
         // ground
-//        gridPlane(u: .right * chartBounds.size.width,
-//                  v: -.forward * chartBounds.size.depth,
-//                  center: chartBounds.unitPoint(.bottom))
+        gridPlane(u: .right * chartBounds.size.width,
+                  v: .forward * chartBounds.size.depth,
+                  center: chartBounds.unitPoint(.bottom))
         // back
         gridPlane(u: .right * chartBounds.size.width,
                   v: .up * chartBounds.size.height,
                   center: chartBounds.unitPoint(.back))
         // right
-//        gridPlane(u: .up * chartBounds.size.height,
-//                  v: -.forward * chartBounds.size.depth,
-//                  center: chartBounds.unitPoint(.trailing))
-
-//        Lines3D(points: unitPoints.map(chartBounds.unitPoint),
-//                material: .gridLine)
+        gridPlane(u: .forward * chartBounds.size.depth,
+                  v: .up * chartBounds.size.height,
+                  center: chartBounds.unitPoint(.trailing))
+        
+        let _: Void = print("GridPlane chartBounds: \(chartBounds)")
+//        BoundingBox(chartBounds)
     }
 
     func axisLine(from _: Point3D = .zero, to: Point3D) -> some ChartContent {

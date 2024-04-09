@@ -15,7 +15,7 @@ public extension Charts {
     static let defaultRenderScale: Size3D = .one / 10
     static let defaultGridSize: Size3D = defaultSize
     static let defaultGridThickness: Size3D = .one * 0.001
-    static let boundingBoxLineWidth: Float = 0.001
+    static let boundingBoxLineWidth: Float = 0.005
 }
 
 public extension ChartMaterial {

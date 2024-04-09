@@ -104,16 +104,23 @@ public struct Plane3D: ChartContent, ModelEntityRepresentable, Posed {
     }
 
     public var bounds: Rect3D? {
-        Size3D(width: u.length, height: v.length, depth: cornerRadius).asCenterRect
+        Size3D(
+            width: u.length,
+            height: v.length,
+            depth: cornerRadius
+        ).asCenterRect
     }
 
     public var rotation: Rotation3D? {
-        let look = Point3D(u.cross(v))
-        return Rotation3D(position: look, target: .zero)
+        Vector3D.forward.rotation(to: u.cross(v))
     }
 
     public func makeMesh() -> MeshResource {
-        .generatePlane(width: Float(u.length), height: Float(v.length), cornerRadius: Float(cornerRadius))
+        .generateTwoSidedPlane(
+            width: Float(u.length),
+            height: Float(v.length),
+            cornerRadius: Float(cornerRadius)
+        )
     }
 }
 

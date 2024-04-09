@@ -39,5 +39,12 @@ final class Rect3DTests: XCTestCase {
         }
     }
 
-    func testRectUnion() {}
+    func testUnionEmpty() {
+        let one = Rect3D(center: .zero, size: .one)
+        let point = Rect3D(center: .one * 2.0, size: .zero)
+
+        let result = one.union(point)
+
+        XCTAssertEqual(result, Rect3D(min: .one * -0.5, max: .one * 2.0))
+    }
 }

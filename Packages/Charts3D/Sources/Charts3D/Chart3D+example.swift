@@ -43,5 +43,5 @@ public extension Chart3D {
         Line3D(from: Point3D([0.0, 0, 0]), to: Point3D([1.0, 1, 1]))
 
         GridPlanes3D()
-    }.withBoundsToInclude([.zero, .one])
+    } // .withBoundsToInclude([-.one, .one])
 }

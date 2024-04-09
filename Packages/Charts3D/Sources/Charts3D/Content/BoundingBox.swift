@@ -23,13 +23,15 @@ public struct BoundingBox: ChartContent, NotPosed {
     @ChartBuilder
     public func contentsFor(_: RenderEnvironment?) -> [ChartContent] {
         Lines3D(points: bottomPoints.map(boundingBox.unitPoint),
+                lineWidth: lineWidth,
                 material: .boundingBoxLine)
         Lines3D(points: topPoints.map(boundingBox.unitPoint),
+                lineWidth: lineWidth,
                 material: .boundingBoxLine)
         posts.map { post in
             Line3D(from: boundingBox.unitPoint(post.0),
                    to: boundingBox.unitPoint(post.1),
-                   lineWidth: 0.01,
+                   lineWidth: lineWidth,
                    material: .boundingBoxLine)
         }
     }

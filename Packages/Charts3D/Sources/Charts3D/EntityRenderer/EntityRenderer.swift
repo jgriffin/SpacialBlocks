@@ -43,15 +43,15 @@ public class EntityRenderer {
 public extension EntityRenderer {
     internal struct RenderState: Equatable {
         var scale: Size3D = .one
-        var chartBounds: Rect3D?
+        var rootFrame: Rect3D?
         var sceneBounds: Rect3D?
 
         func scaleThatFits() -> Size3D? {
-            guard let chartBounds, let sceneBounds, !chartBounds.isEmpty else {
+            guard let rootFrame, let sceneBounds, !rootFrame.isEmpty else {
                 return nil
             }
 
-            let fitScales = sceneBounds.size.vector / chartBounds.size.vector
+            let fitScales = sceneBounds.size.vector / rootFrame.size.vector
             let scale = fitScales.min()
             return .one.uniformlyScaled(by: scale)
         }
@@ -59,7 +59,7 @@ public extension EntityRenderer {
 
     func renderChart(_ chart: Chart3D) throws {
         let chartBounds = chart.chartBounds
-        state.chartBounds = chartBounds
+        state.rootFrame = chart.frame
 
         let environment = RenderEnvironment().modify {
             $0.chartBounds = chartBounds
@@ -72,35 +72,42 @@ public extension EntityRenderer {
         _ contents: [ChartContent],
         _ environment: RenderEnvironment,
         in parent: Entity,
-        pruneChildren: Bool = true
+        prunePreviousChildren: Bool = true
     ) throws {
-        let existingChildren = parent.chart3DChildren
+        let previousChildren = parent.chart3DChildren
+
+        defer {
+            if prunePreviousChildren {
+                for pair in previousChildren {
+                    parent.removeChild(pair.0)
+                }
+            }
+        }
 
         for content in contents {
             guard let entityContent = content as? EntityRepresentable else {
                 let representable = content.contentsFor(environment)
                 if !representable.isEmpty {
-                    try renderContents(representable, environment, in: parent, pruneChildren: false)
+                    try renderContents(
+                        representable,
+                        environment,
+                        in: parent,
+                        prunePreviousChildren: false
+                    )
                 }
 
                 continue
             }
 
             // TODO: match existing content
-            let entity = try entityContent.makeEntity()
-            parent.addChild(entity)
+            let contentEntity = try entityContent.makeEntity()
+            parent.addChild(contentEntity)
 
-            try entityContent.updateEntity(entity, environment)
-            entity.chart3DContent = entityContent
+            try entityContent.updateEntity(contentEntity, environment)
+            contentEntity.chart3DContent = entityContent
 
             let representable = entityContent.contentsFor(environment)
-            if !representable.isEmpty {
-                try renderContents(representable, environment, in: entity)
-            }
-        }
-
-        for pair in existingChildren {
-            parent.removeChild(pair.0)
+            try renderContents(representable, environment, in: contentEntity)
         }
     }
 }

@@ -19,7 +19,7 @@ public struct Chart3D: ChartContent, EntityRepresentable, Posed {
     public init(
         boundsToInclude: [Point3D]? = nil,
         contentsPadding: Size3D = .zero,
-        @ChartBuilder contents: () -> [any ChartContent]
+        @ChartBuilder contents: () -> [ChartContent]
     ) {
         self.boundsToInclude = boundsToInclude
         self.contentsPadding = contentsPadding
@@ -46,29 +46,16 @@ public extension Chart3D {
 
     // MARK: - Bounded
 
-    // hides all bounds offset from above
-    var bounds: Rect3D? {
-        chartBounds.size.asCenterRect
-    }
-
-    var containedBounds: Rect3D? {
-        chartBounds.size.asCenterRect
-    }
-
-    var anchor: BoundsAnchor? {
-        BoundsAnchor(offset: chartBounds.center.asVector)
-    }
+    var bounds: Rect3D? { chartBounds }
+    var containedBounds: Rect3D? { chartBounds }
+    var anchor: BoundsAnchor? { .center }
 
     // MARK: - ContentContaining
 
-    func contentsFor(_: RenderEnvironment?) -> [ChartContent] {
-        contents + extraContent()
-    }
-
     @ChartBuilder
-    func extraContent() -> [ChartContent] {
+    func contentsFor(_: RenderEnvironment?) -> [ChartContent] {
+        contents
         BoundingBox(chartBounds)
-//        Box3D(size: .one * 0.1, position: .one * 0.5, material: .color(.red, alpha: 0.2))
     }
 
     func makeEntity() throws -> Entity {
