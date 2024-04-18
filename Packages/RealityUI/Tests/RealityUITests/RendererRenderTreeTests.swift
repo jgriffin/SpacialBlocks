@@ -2,6 +2,8 @@ import RealityUI
 import XCTest
 
 final class RendererRenderTreeTests: XCTestCase {
+    typealias Renderer = RealityContentRenderer
+    
     func testEmptyView() throws {
         let empty = EmptyContent()
 

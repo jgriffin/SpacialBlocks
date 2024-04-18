@@ -8,7 +8,7 @@ import Spatial
 // MARK: - RenderNode
 
 public struct RenderNode {
-    public init(renderer: any EntityRenderer, children: [RenderNode]) {
+    public init(_ renderer: any EntityRenderer, children: [RenderNode] = []) {
         self.renderer = renderer
         self.children = children
     }
@@ -35,6 +35,8 @@ public struct EmptyEntityRenderer: EntityRenderer {
 }
 
 public struct MeshEntityRenderer: EntityRenderer {
+    public typealias EntityType = ModelEntity
+
     public let mesh: MeshResource
     public let material: RealityMaterial
 

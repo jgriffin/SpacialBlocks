@@ -12,8 +12,8 @@ final class RendererSyncEntityTreeTests: XCTestCase {
     func testEmptyView() throws {
         let empty = EmptyContent()
 
-        let renderTree = Renderer.renderTreeFor(empty, size: .one)
-        Renderer.syncEntityTree(root, withRenderTree: renderTree)
+        let renderTree = EnityRenderer.renderTreeFor(empty, size: .one)
+        EnityRenderer.syncEntityTree(root, withRenderTree: renderTree)
 
         XCTAssertEqual(root.children.count, 1)
         XCTAssertEqual(root.children.first?.children.count, 0)
@@ -22,8 +22,8 @@ final class RendererSyncEntityTreeTests: XCTestCase {
     func testBox() throws {
         let box = BoxShape()
 
-        let renderTree = Renderer.renderTreeFor(box, size: .one)
-        Renderer.syncEntityTree(root, withRenderTree: renderTree)
+        let renderTree = EnityRenderer.renderTreeFor(box, size: .one)
+        EnityRenderer.syncEntityTree(root, withRenderTree: renderTree)
 
         XCTAssertEqual(root.children.count, 1)
         XCTAssertEqual(root.children.first?.children.count, 0)
@@ -32,8 +32,8 @@ final class RendererSyncEntityTreeTests: XCTestCase {
     func testFramedBox() throws {
         let framed = BoxShape().frame(width: 2.0, height: 3.0, depth: 4.0)
 
-        let renderTree = Renderer.renderTreeFor(framed, size: .one)
-        Renderer.syncEntityTree(root, withRenderTree: renderTree)
+        let renderTree = EnityRenderer.renderTreeFor(framed, size: .one)
+        EnityRenderer.syncEntityTree(root, withRenderTree: renderTree)
 
         XCTAssertEqual(root.children.count, 1)
         XCTAssertEqual(root.children.first?.children.count, 1)
@@ -43,8 +43,8 @@ final class RendererSyncEntityTreeTests: XCTestCase {
     func testFramedSphere() throws {
         let framed = SphereShape().frame(width: 2.0, height: 3.0, depth: 4.0)
 
-        let renderTree = Renderer.renderTreeFor(framed, size: .one)
-        Renderer.syncEntityTree(root, withRenderTree: renderTree)
+        let renderTree = EnityRenderer.renderTreeFor(framed, size: .one)
+        EnityRenderer.syncEntityTree(root, withRenderTree: renderTree)
 
         XCTAssertEqual(root.children.count, 1)
         XCTAssertEqual(root.children.first?.children.count, 1)
@@ -54,8 +54,8 @@ final class RendererSyncEntityTreeTests: XCTestCase {
     func testFramedSphereAligned() throws {
         let framed = SphereShape().frame(width: 2.0, height: 3.0, depth: 4.0, alignment: .bottomLeadingFront)
 
-        let renderTree = Renderer.renderTreeFor(framed, size: .one)
-        Renderer.syncEntityTree(root, withRenderTree: renderTree)
+        let renderTree = EnityRenderer.renderTreeFor(framed, size: .one)
+        EnityRenderer.syncEntityTree(root, withRenderTree: renderTree)
 
         XCTAssertEqual(root.children.count, 1)
         XCTAssertEqual(root.children.first?.children.count, 1)

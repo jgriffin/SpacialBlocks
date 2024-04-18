@@ -60,6 +60,6 @@ public struct EmptyContent: RealityContent, BuiltIn {
     public func sizeFor(_: ProposedSize3D) -> Size3D { .zero }
 
     public func render(_: RenderContext, size _: Size3D) -> RenderNode {
-        .init(renderer: EmptyEntityRenderer(), children: [])
+        .init(EmptyEntityRenderer())
     }
 }

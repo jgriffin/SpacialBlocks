@@ -8,9 +8,9 @@ import Spatial
 // MARK: - Shape
 
 public protocol RealityShape: RealityContent {
-    func mesh(in size: Size3D) -> MeshResource
-
     func shapeSizeFor(_ proposed: ProposedSize3D) -> Size3D
+
+    func mesh(in size: Size3D) -> MeshResource
 }
 
 public extension RealityShape {
@@ -29,11 +29,10 @@ public struct RealityShapeView<S: RealityShape>: RealityContent, BuiltIn {
 
     public func render(_: RenderContext, size: Size3D) -> RenderNode {
         RenderNode(
-            renderer: MeshEntityRenderer(
+            MeshEntityRenderer(
                 mesh: shape.mesh(in: sizeFor(size)),
                 material: material
-            ),
-            children: []
+            )
         )
     }
 }
@@ -60,6 +59,6 @@ public struct SphereShape: RealityShape {
     }
 
     public func mesh(in size: Size3D) -> MeshResource {
-        .generateSphere(radius: Float(size.vector.min()))
+        .generateSphere(radius: Float(size.vector.min() / 2))
     }
 }

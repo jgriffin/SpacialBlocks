@@ -41,7 +41,7 @@ public struct RealityFrame<Content: RealityContent>: RealityContent, BuiltIn {
 
         let childNode = content.render(context, size: size)
         return RenderNode(
-            renderer: PoseEntityRenderer(pose: pose),
+            PoseEntityRenderer(pose: pose),
             children: [childNode]
         )
     }
