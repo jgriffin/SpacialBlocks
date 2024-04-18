@@ -7,12 +7,15 @@ let package = Package(
     products: [
         .library(
             name: "RealityUI",
-            targets: ["RealityUI"]),
+            targets: ["RealityUI"]
+        ),
     ],
     targets: [
         .target(
             name: "RealityUI"),
         .testTarget(
             name: "RealityUITests",
-            dependencies: ["RealityUI"]),
-    ])
+            dependencies: ["RealityUI"]
+        ),
+    ]
+)

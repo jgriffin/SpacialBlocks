@@ -1,4 +1,4 @@
-// 
+//
 // Created by John Griffin on 4/18/24
 //
 
@@ -9,6 +9,8 @@ import Spatial
 
 public protocol RealityShape: RealityView {
     func mesh(in size: Size3D) -> MeshResource
+
+    func shapeSizeFor(_ proposed: ProposedSize) -> Size3D
 }
 
 public extension RealityShape {
@@ -22,23 +24,41 @@ public struct RealityShapeView<S: RealityShape>: RealityView, BuiltIn {
     public var material: RealityMaterial
 
     public func sizeFor(_ proposed: ProposedSize) -> Size3D {
-        proposed
+        shape.shapeSizeFor(proposed)
     }
 
-    public func render(_ context: RenderContext, size: Size3D) {
-        // TODO:
+    public func render(_: RenderContext, size: Size3D) -> RenderNode {
+        RenderNode(
+            renderer: MeshEntityRenderer(
+                mesh: shape.mesh(in: sizeFor(size)),
+                material: material
+            ),
+            children: []
+        )
     }
 }
 
 // MARK: - shapes
 
-public struct Box: RealityShape {
+public struct BoxShape: RealityShape {
+    public init() {}
+
+    public func shapeSizeFor(_ proposed: ProposedSize) -> Size3D {
+        proposed
+    }
+
     public func mesh(in size: Size3D) -> MeshResource {
         .generateBox(width: Float(size.width), height: Float(size.height), depth: Float(size.depth))
     }
 }
 
-public struct Sphere: RealityShape {
+public struct SphereShape: RealityShape {
+    public init() {}
+
+    public func shapeSizeFor(_ proposed: ProposedSize) -> Size3D {
+        Size3D.one * proposed.vector.min()
+    }
+
     public func mesh(in size: Size3D) -> MeshResource {
         .generateSphere(radius: Float(size.vector.min()))
     }
