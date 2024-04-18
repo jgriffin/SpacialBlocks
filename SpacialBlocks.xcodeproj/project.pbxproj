@@ -10,6 +10,7 @@
 		D66C85EA2BC08060006330B9 /* Charts3D in Frameworks */ = {isa = PBXBuildFile; productRef = D66C85E92BC08060006330B9 /* Charts3D */; };
 		D68546B22BBCB03F00342CBC /* Grid3D in Frameworks */ = {isa = PBXBuildFile; productRef = D68546B12BBCB03F00342CBC /* Grid3D */; };
 		D68546B42BBCCEF300342CBC /* Optional+unwrapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68546B32BBCCEF300342CBC /* Optional+unwrapped.swift */; };
+		D696FCA02BD1D0DB001A32D1 /* RealityUI in Frameworks */ = {isa = PBXBuildFile; productRef = D696FC9F2BD1D0DB001A32D1 /* RealityUI */; };
 		D6972DBD2BBB4A8500B8A4DF /* LoadResourcesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6972DBC2BBB4A8500B8A4DF /* LoadResourcesTests.swift */; };
 		D6D3B4CF2BB5E3B700B24CE8 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = D6D3B4CE2BB5E3B700B24CE8 /* RealityKitContent */; };
 		D6D3B4D12BB5E3B700B24CE8 /* SpacialBlocksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6D3B4D02BB5E3B700B24CE8 /* SpacialBlocksApp.swift */; };
@@ -60,6 +61,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6D3B4CF2BB5E3B700B24CE8 /* RealityKitContent in Frameworks */,
+				D696FCA02BD1D0DB001A32D1 /* RealityUI in Frameworks */,
 				D66C85EA2BC08060006330B9 /* Charts3D in Frameworks */,
 				D68546B22BBCB03F00342CBC /* Grid3D in Frameworks */,
 			);
@@ -199,6 +201,7 @@
 				D6D3B4CE2BB5E3B700B24CE8 /* RealityKitContent */,
 				D68546B12BBCB03F00342CBC /* Grid3D */,
 				D66C85E92BC08060006330B9 /* Charts3D */,
+				D696FC9F2BD1D0DB001A32D1 /* RealityUI */,
 			);
 			productName = SpacialBlocks;
 			productReference = D6D3B4C92BB5E3B700B24CE8 /* SpacialBlocks.app */;
@@ -577,6 +580,10 @@
 		D68546B12BBCB03F00342CBC /* Grid3D */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Grid3D;
+		};
+		D696FC9F2BD1D0DB001A32D1 /* RealityUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RealityUI;
 		};
 		D6D3B4CE2BB5E3B700B24CE8 /* RealityKitContent */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -2,9 +2,10 @@
 // Created by John Griffin on 3/28/24
 //
 
-import Charts3D
+//import Charts3D
 import RealityKit
 import SwiftUI
+import RealityUI
 
 struct ContentView: View {
     @State private var enlarge = false
@@ -16,7 +17,8 @@ struct ContentView: View {
 
     var body: some View {
 //        UnitGrid3DView()
-        ChartsView(chart: .current)
+//        ChartsView(chart: .current)
+        RealityUIView(SphereShape())
             .onChange(of: showImmersiveSpace) { _, newValue in
                 Task { @MainActor in
                     await updateImmersiveSpaceShown(newValue)
