@@ -36,6 +36,7 @@
 /* Begin PBXFileReference section */
 		D66DC4A02BBC977900AD6D00 /* Grid3D */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Grid3D; sourceTree = "<group>"; };
 		D68546B32BBCCEF300342CBC /* Optional+unwrapped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+unwrapped.swift"; sourceTree = "<group>"; };
+		D696FC9E2BD1153E001A32D1 /* RealityUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityUI; sourceTree = "<group>"; };
 		D6972DBC2BBB4A8500B8A4DF /* LoadResourcesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadResourcesTests.swift; sourceTree = "<group>"; };
 		D6ABFCD62BC3D4590041D8BF /* Charts3D */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Charts3D; sourceTree = "<group>"; };
 		D6D3B4C92BB5E3B700B24CE8 /* SpacialBlocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpacialBlocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +126,7 @@
 		D6D3B4CC2BB5E3B700B24CE8 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				D696FC9E2BD1153E001A32D1 /* RealityUI */,
 				D6ABFCD62BC3D4590041D8BF /* Charts3D */,
 				D66DC4A02BBC977900AD6D00 /* Grid3D */,
 				D6D3B4CD2BB5E3B700B24CE8 /* RealityKitContent */,
