@@ -10,7 +10,7 @@ final class RendererSyncEntityTreeTests: XCTestCase {
     }
 
     func testEmptyView() throws {
-        let empty = EmptyView()
+        let empty = EmptyContent()
 
         let renderTree = Renderer.renderTreeFor(empty, size: .one)
         Renderer.syncEntityTree(root, withRenderTree: renderTree)

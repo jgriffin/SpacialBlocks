@@ -20,14 +20,17 @@ public struct RenderNode {
 // MARK: - EntityRenderer
 
 public protocol EntityRenderer {
-    func makeEntity() -> Entity
-    func updateEntity(_ entity: Entity)
+    associatedtype EntityType: Entity
+
+    func makeEntity() -> EntityType
+    func updateEntity(_ entity: EntityType)
 }
 
 // MARK: - Entity renderers
 
 public struct EmptyEntityRenderer: EntityRenderer {
     public func makeEntity() -> Entity { Entity() }
+
     public func updateEntity(_: Entity) {}
 }
 
@@ -40,14 +43,16 @@ public struct MeshEntityRenderer: EntityRenderer {
         self.material = material
     }
 
-    public func makeEntity() -> Entity {
-        ModelEntity()
+    public func makeEntity() -> ModelEntity {
+        let entity = ModelEntity()
+        updateEntity(entity)
+        return entity
     }
 
-    public func updateEntity(_ entity: Entity) {
-        guard let entity = entity as? ModelEntity else { fatalError() }
+    public func updateEntity(_ entity: ModelEntity) {
+        let materials = Array(repeating: material.makeMaterial(),
+                              count: mesh.expectedMaterialCount)
 
-        let materials = Array(repeating: material.makeMaterial(), count: mesh.expectedMaterialCount)
         entity.components[ModelComponent.self] = ModelComponent(
             mesh: mesh,
             materials: materials
@@ -62,7 +67,11 @@ public struct PoseEntityRenderer: EntityRenderer {
         self.pose = pose
     }
 
-    public func makeEntity() -> Entity { Entity() }
+    public func makeEntity() -> Entity {
+        let entity = Entity()
+        updateEntity(entity)
+        return entity
+    }
 
     public func updateEntity(_ entity: Entity) {
         let transform = AffineTransform3D(pose: pose)

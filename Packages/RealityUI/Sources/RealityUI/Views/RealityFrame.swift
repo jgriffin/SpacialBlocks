@@ -4,14 +4,14 @@
 
 import Spatial
 
-public struct RealityFrame<Content: RealityView>: RealityView, BuiltIn {
+public struct RealityFrame<Content: RealityContent>: RealityContent, BuiltIn {
     var width: Double?
     var height: Double?
     var depth: Double?
     var alignment: Alignment3D
     var content: Content
 
-    private func newProposedSize(_ proposed: ProposedSize) -> ProposedSize {
+    private func newProposedSize(_ proposed: ProposedSize3D) -> ProposedSize3D {
         .init(
             width: width ?? proposed.width,
             height: height ?? proposed.height,
@@ -19,7 +19,7 @@ public struct RealityFrame<Content: RealityView>: RealityView, BuiltIn {
         )
     }
 
-    public func sizeFor(_ proposed: ProposedSize) -> Size3D {
+    public func sizeFor(_ proposed: ProposedSize3D) -> Size3D {
         let newProposed = newProposedSize(proposed)
         let childSize = content.sizeFor(newProposed)
 

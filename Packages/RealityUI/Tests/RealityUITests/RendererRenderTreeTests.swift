@@ -3,7 +3,7 @@ import XCTest
 
 final class RendererRenderTreeTests: XCTestCase {
     func testEmptyView() throws {
-        let empty = EmptyView()
+        let empty = EmptyContent()
 
         let result = Renderer.renderTreeFor(empty, size: .one)
 

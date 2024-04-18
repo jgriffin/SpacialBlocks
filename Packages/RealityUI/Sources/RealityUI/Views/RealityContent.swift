@@ -5,19 +5,20 @@
 import RealityKit
 import Spatial
 
-// MARK: - RealityView
+// MARK: - RealityContent
 
-public protocol RealityView {
-    associatedtype Body: RealityView
+public protocol RealityContent {
+    associatedtype Body: RealityContent
+
     var body: Body { get }
 }
 
 // MARK: - layout and render
 
-public typealias ProposedSize = Size3D
+public typealias ProposedSize3D = Size3D
 
-public extension RealityView {
-    func sizeFor(_ proposed: ProposedSize) -> Size3D {
+public extension RealityContent {
+    func sizeFor(_ proposed: ProposedSize3D) -> Size3D {
         if let builtIn = self as? BuiltIn {
             builtIn.sizeFor(proposed)
         } else {
@@ -39,24 +40,24 @@ public extension RealityView {
 public protocol BuiltIn {
     typealias Body = Never
 
-    func sizeFor(_ proposed: ProposedSize) -> Size3D
+    func sizeFor(_ proposed: ProposedSize3D) -> Size3D
     func render(_ context: RenderContext, size: Size3D) -> RenderNode
 }
 
-public extension RealityView where Body == Never {
+public extension RealityContent where Body == Never {
     var body: Never { fatalError("This should never be called.") }
 }
 
-extension Never: RealityView {
+extension Never: RealityContent {
     public typealias Body = Never
 }
 
-// MARK: - EmptyView
+// MARK: - EmptyContent
 
-public struct EmptyView: RealityView, BuiltIn {
+public struct EmptyContent: RealityContent, BuiltIn {
     public init() {}
 
-    public func sizeFor(_: ProposedSize) -> Size3D { .zero }
+    public func sizeFor(_: ProposedSize3D) -> Size3D { .zero }
 
     public func render(_: RenderContext, size _: Size3D) -> RenderNode {
         .init(renderer: EmptyEntityRenderer(), children: [])

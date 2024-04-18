@@ -3,7 +3,7 @@ import XCTest
 
 final class SizeForTests: XCTestCase {
     func testEmpty() {
-        let empty = EmptyView()
+        let empty = EmptyContent()
         let result = empty.sizeFor(.one)
         XCTAssertEqual(result, .zero)
     }

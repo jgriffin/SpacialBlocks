@@ -2,13 +2,13 @@
 // Created by John Griffin on 4/18/24
 //
 
-public extension RealityView {
+public extension RealityContent {
     func frame(
         width: Double? = nil,
         height: Double? = nil,
         depth: Double? = nil,
         alignment: Alignment3D = .center
-    ) -> some RealityView {
+    ) -> some RealityContent {
         RealityFrame(
             width: width,
             height: height,
