@@ -6,27 +6,41 @@ import RealityUI
 import XCTest
 
 final class RealityBuilderTests: XCTestCase {
-    func build<Content: RealityContent>(@RealityBuilder block: () -> Content) -> Content {
-        block()
-    }
+    typealias Builder = RealityContentsBuilder
 
     func testEmpty() {
-        let result = build {}
-        XCTAssertTrue(type(of: result) == EmptyContent.self)
+        let result = Builder.build {}
+        XCTAssertEqual(result.count, 0)
     }
 
     func testBox() {
-        let result = build { BoxShape() }
-        XCTAssertTrue(type(of: result) == BoxShape.self)
+        let result = Builder.build { BoxShape() }
+        XCTAssertEqual(result.count, 1)
+        XCTAssertTrue(type(of: result.first!) == BoxShape.self)
     }
 
-    func testTuple() {
-        let result = build {
+    func testMultiple() {
+        let result = Builder.build {
             BoxShape()
             BoxShape()
+                .frame(size: .one)
             SphereShape()
         }
-        print(result)
-//        XCTAssertTrue(result is BoxShape)
+        XCTAssertEqual(result.count, 3)
+    }
+
+    func testIf() {
+        let no = false
+        let result = Builder.build {
+            BoxShape()
+            if no {
+                BoxShape()
+            }
+            if no {
+                BoxShape()
+                SphereShape()
+            }
+        }
+        XCTAssertEqual(result.count, 1)
     }
 }

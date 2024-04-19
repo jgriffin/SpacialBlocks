@@ -27,15 +27,4 @@ final class SizeThatFitsTests: XCTestCase {
         let result = framed.sizeThatFits(proposeOne)
         XCTAssertEqual(result, .init(width: 2.0, height: 3.0, depth: 4.0))
     }
-
-    func testTuple() {
-        let tuple = RealityBuilder.build {
-            BoxShape()
-            SphereShape()
-        }
-
-        let result = tuple.sizeThatFits(proposeOne)
-
-        XCTAssertEqual(result, .init(width: 2.0, height: 3.0, depth: 4.0))
-    }
 }

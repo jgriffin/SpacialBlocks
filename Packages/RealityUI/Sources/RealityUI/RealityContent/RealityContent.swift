@@ -10,7 +10,7 @@ import Spatial
 public protocol RealityContent {
     associatedtype Body: RealityContent
 
-    @RealityBuilder var body: Body { get }
+    var body: Body { get }
 }
 
 // MARK: - layout and render

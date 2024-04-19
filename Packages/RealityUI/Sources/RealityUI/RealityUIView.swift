@@ -9,7 +9,7 @@
     public struct RealityUIView: View {
         var realityContent: any RealityContent
 
-        public init(@RealityBuilder _ realityContent: () -> some RealityContent) {
+        public init(_ realityContent: () -> some RealityContent) {
             self.realityContent = realityContent()
         }
 
