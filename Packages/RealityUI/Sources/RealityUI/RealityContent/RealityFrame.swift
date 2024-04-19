@@ -5,11 +5,11 @@
 import Spatial
 
 public struct RealityFrame<Content: RealityContent>: RealityContent, BuiltIn {
+    var content: Content
     var width: Double?
     var height: Double?
     var depth: Double?
     var alignment: Alignment3D
-    var content: Content
 
     private func newProposedSize(_ proposed: ProposedSize3D) -> ProposedSize3D {
         .init(
@@ -19,7 +19,7 @@ public struct RealityFrame<Content: RealityContent>: RealityContent, BuiltIn {
         )
     }
 
-    public func sizeFor(_ proposed: ProposedSize3D) -> Size3D {
+    public func customSizeFor(_ proposed: ProposedSize3D) -> Size3D {
         let newProposed = newProposedSize(proposed)
         let childSize = content.sizeThatFits(newProposed)
 
@@ -30,18 +30,11 @@ public struct RealityFrame<Content: RealityContent>: RealityContent, BuiltIn {
         )
     }
 
-    public func render(_ context: RenderContext, size: Size3D) -> RenderNode {
-        let proposed = newProposedSize(.init(size: size))
+    public func customRender(_ context: RenderContext, size: Size3D) -> RenderNode {
+        let proposed = newProposedSize(.init(size))
         let childSize = content.sizeThatFits(proposed)
 
-        let selfPoint = alignment.point(for: proposed.orDefault)
-        let childPoint = alignment.point(for: childSize)
-        let pose = Pose3D(position: Point3D(selfPoint - childPoint), rotation: .identity)
-
-        let childNode = content.render(context, size: size)
-        return RenderNode(
-            PoseEntityRenderer(pose: pose),
-            children: [childNode]
-        )
+        return content.render(context, size: size)
+            .wrappedInAlignment(alignment, parent: proposed.sizeOrDefault, child: childSize)
     }
 }

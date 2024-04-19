@@ -17,65 +17,20 @@ public struct RenderNode {
     public var children: [RenderNode]
 }
 
-// MARK: - EntityRenderer
-
-public protocol EntityRenderer<EntityType> {
-    associatedtype EntityType: Entity
-
-    func makeEntity() -> EntityType
-    func updateEntity(_ entity: EntityType)
-}
-
-// MARK: - Entity renderers
-
-public struct EmptyEntityRenderer: EntityRenderer {
-    public func makeEntity() -> Entity { Entity() }
-    public func updateEntity(_: Entity) {}
-}
-
-public struct MeshEntityRenderer: EntityRenderer {
-    public typealias EntityType = ModelEntity
-
-    public let mesh: MeshResource
-    public let material: RealityMaterial
-
-    public init(mesh: MeshResource, material: RealityMaterial) {
-        self.mesh = mesh
-        self.material = material
+public extension RenderNode {
+    func wrappedIn(_ renderer: any EntityRenderer) -> RenderNode {
+        RenderNode(renderer, children: [self])
     }
 
-    public func makeEntity() -> ModelEntity {
-        let entity = ModelEntity()
-        updateEntity(entity)
-        return entity
+    func wrappedInTransform(_ transform: AffineTransform3D) -> RenderNode {
+        wrappedIn(TransformEntity(transform))
     }
 
-    public func updateEntity(_ entity: ModelEntity) {
-        let materials = Array(repeating: material.makeMaterial(),
-                              count: mesh.expectedMaterialCount)
-
-        entity.components[ModelComponent.self] = ModelComponent(
-            mesh: mesh,
-            materials: materials
-        )
-    }
-}
-
-public struct PoseEntityRenderer: EntityRenderer {
-    public let pose: Pose3D
-
-    public init(pose: Pose3D) {
-        self.pose = pose
+    func wrappedInTranslation(_ translation: Vector3D) -> RenderNode {
+        wrappedInTransform(.init(translation: translation))
     }
 
-    public func makeEntity() -> Entity {
-        let entity = Entity()
-        updateEntity(entity)
-        return entity
-    }
-
-    public func updateEntity(_ entity: Entity) {
-        let transform = AffineTransform3D(pose: pose)
-        entity.transform = Transform(transform)
+    func wrappedInAlignment(_ alignment: Alignment3D, parent: Size3D, child: Size3D) -> RenderNode {
+        wrappedInTranslation(alignment.offset(parent: parent, child: child))
     }
 }

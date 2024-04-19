@@ -6,12 +6,10 @@ import SwiftUI
 
 #Preview(windowStyle: .volumetric) {
     RealityUIView {
-        SphereShape()
-    }
-}
-
-#Preview(windowStyle: .volumetric) {
-    RealityUIView {
-        SphereShape()
+        RealityHStack {
+            SphereShape()
+            BoxShape()
+            SphereShape()
+        }
     }
 }

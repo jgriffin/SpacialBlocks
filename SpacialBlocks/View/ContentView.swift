@@ -18,23 +18,27 @@ struct ContentView: View {
     var body: some View {
 //        UnitGrid3DView()
 //        ChartsView(chart: .current)
-        RealityUIView(SphereShape())
-            .onChange(of: showImmersiveSpace) { _, newValue in
-                Task { @MainActor in
-                    await updateImmersiveSpaceShown(newValue)
+        RealityUIView {
+            RealityHStack {
+                SphereShape()
+                BoxShape()
+            }
+        }
+        .onChange(of: showImmersiveSpace) { _, newValue in
+            Task { @MainActor in
+                await updateImmersiveSpaceShown(newValue)
+            }
+        }
+        .gesture(TapGesture().targetedToAnyEntity().onEnded { _ in
+            enlarge.toggle()
+        })
+        .toolbar {
+            ToolbarItemGroup(placement: .bottomOrnament) {
+                VStack(spacing: 12) {
+                    Toggle("Show ImmersiveSpace", isOn: $showImmersiveSpace)
                 }
             }
-            .gesture(TapGesture().targetedToAnyEntity().onEnded { _ in
-                enlarge.toggle()
-            })
-            .toolbar {
-                ToolbarItemGroup(placement: .bottomOrnament) {
-                    VStack(spacing: 12) {
-//                        Toggle("Enlarge RealityView Content", isOn: $enlarge)
-                        Toggle("Show ImmersiveSpace", isOn: $showImmersiveSpace)
-                    }
-                }
-            }
+        }
     }
 
     @MainActor

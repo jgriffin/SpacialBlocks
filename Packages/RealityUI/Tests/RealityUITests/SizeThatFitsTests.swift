@@ -2,7 +2,7 @@ import RealityUI
 import XCTest
 
 final class SizeThatFitsTests: XCTestCase {
-    let proposeOne = ProposedSize3D(size: .one)
+    let proposeOne = ProposedSize3D(.one)
 
     func testEmpty() {
         let empty = EmptyContent()

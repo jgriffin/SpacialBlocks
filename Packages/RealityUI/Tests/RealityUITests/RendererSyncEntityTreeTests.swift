@@ -4,7 +4,7 @@ import XCTest
 
 final class RendererSyncEntityTreeTests: XCTestCase {
     typealias Renderer = RealityContentRenderer
-    let proposeOne = ProposedSize3D(size: .one)
+    let proposeOne = ProposedSize3D(.one)
 
     var root: Entity!
 

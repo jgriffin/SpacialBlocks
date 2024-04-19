@@ -12,9 +12,9 @@ public enum RealityContentsBuilder {
         contents.flatMap { $0 }
     }
 
-    public static func buildExpression<Content: RealityContent>(_ expression: Content) -> [Content] {
-        [expression]
-    }
+    public static func buildExpression(_ expression: Content) -> [Content] { [expression] }
+
+    public static func buildExpression(_ expression: [Content]) -> [Content] { expression }
 
     public static func buildArray(_ contents: [Content]) -> [Content] { contents }
 

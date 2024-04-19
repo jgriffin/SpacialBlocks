@@ -18,7 +18,7 @@
         public var body: some View {
             GeometryReader3D { proxy in
                 RealityView { content in
-                    content.add(renderer.root)
+                    content.add(renderer.realityRoot)
 
                     let sceneBounds = content.convert(proxy.frame(in: .local), from: .local, to: .scene)
                     renderer.update(with: realityContent, size: Size3D(sceneBounds.extents))

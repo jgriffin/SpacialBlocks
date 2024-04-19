@@ -12,11 +12,11 @@ public extension RealityContent {
         alignment: Alignment3D = .center
     ) -> some RealityContent {
         RealityFrame(
+            content: self,
             width: width,
             height: height,
             depth: depth,
-            alignment: alignment,
-            content: self
+            alignment: alignment
         )
     }
 
@@ -25,11 +25,11 @@ public extension RealityContent {
         alignment: Alignment3D = .center
     ) -> some RealityContent {
         RealityFrame(
+            content: self,
             width: size.width,
             height: size.height,
             depth: size.depth,
-            alignment: alignment,
-            content: self
+            alignment: alignment
         )
     }
 }

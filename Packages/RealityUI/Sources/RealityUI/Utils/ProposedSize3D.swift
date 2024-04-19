@@ -17,19 +17,24 @@ public struct ProposedSize3D {
 }
 
 public extension ProposedSize3D {
-    init(size: Size3D) {
+    init(_ size: Size3D) {
         self.init(width: size.width, height: size.height, depth: size.depth)
     }
 
-    var orMax: Size3D {
-        Size3D(width: width ?? .greatestFiniteMagnitude,
-               height: height ?? .greatestFiniteMagnitude,
-               depth: depth ?? .greatestFiniteMagnitude)
+    func sizeOr(_ size: Size3D) -> Size3D {
+        Size3D(width: width ?? size.width,
+               height: height ?? size.height,
+               depth: depth ?? size.depth)
     }
 
-    var orDefault: Size3D {
-        Size3D(width: width ?? 0.10,
-               height: height ?? 0.10,
-               depth: depth ?? 0.10)
-    }
+    var sizeOrInfinite: Size3D { sizeOr(Self.infiniteSize) }
+    var sizeOrDefault: Size3D { sizeOr(Self.defaultSize) }
+
+    static let infiniteSize = Size3D(width: .greatestFiniteMagnitude,
+                                     height: .greatestFiniteMagnitude,
+                                     depth: .greatestFiniteMagnitude)
+
+    static let defaultSize = Size3D(width: 0.10,
+                                    height: 0.10,
+                                    depth: 0.10)
 }

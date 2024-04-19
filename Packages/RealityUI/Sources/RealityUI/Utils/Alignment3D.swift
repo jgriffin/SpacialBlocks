@@ -30,6 +30,10 @@ public struct Alignment3D: Equatable {
             z: depth.alignmentID.defaultValue(in: size)
         )
     }
+
+    public func offset(parent: Size3D, child: Size3D) -> Vector3D {
+        point(for: parent) - point(for: child)
+    }
 }
 
 public struct HorizontalAlignment3D: Equatable {

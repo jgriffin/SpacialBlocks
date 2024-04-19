@@ -9,7 +9,7 @@ final class RendererRenderTreeTests: XCTestCase {
 
         let result = Renderer.renderTreeFor(empty, size: .one)
 
-        XCTAssertTrue(result.renderer is EmptyEntityRenderer)
+        XCTAssertTrue(result.renderer is EmptyEntity)
         XCTAssertTrue(result.children.isEmpty)
     }
 
@@ -18,7 +18,7 @@ final class RendererRenderTreeTests: XCTestCase {
 
         let result = Renderer.renderTreeFor(box, size: .one)
 
-        XCTAssertTrue(result.renderer is MeshEntityRenderer)
+        XCTAssertTrue(result.renderer is MeshEntity)
         XCTAssertTrue(result.children.isEmpty)
     }
 
@@ -27,10 +27,10 @@ final class RendererRenderTreeTests: XCTestCase {
 
         let result = Renderer.renderTreeFor(framed, size: .one)
 
-        let pose = (result.renderer as? PoseEntityRenderer)?.pose
-        XCTAssertEqual(pose?.position, .zero)
+        let transform = (result.renderer as? TransformEntity)?.transform
+        XCTAssertEqual(transform?.translation, .zero)
         XCTAssertEqual(result.children.count, 1)
-        XCTAssertTrue(result.children.first?.renderer is MeshEntityRenderer)
+        XCTAssertTrue(result.children.first?.renderer is MeshEntity)
     }
 
     func testFramedSphere() throws {
@@ -38,10 +38,10 @@ final class RendererRenderTreeTests: XCTestCase {
 
         let result = Renderer.renderTreeFor(framed, size: .one)
 
-        let pose = (result.renderer as? PoseEntityRenderer)?.pose
-        XCTAssertEqual(pose?.position, .init(x: 0.0, y: 0.5, z: 1.0))
+        let transform = (result.renderer as? TransformEntity)?.transform
+        XCTAssertEqual(transform?.translation, .init(x: 0.0, y: 0.5, z: 1.0))
         XCTAssertEqual(result.children.count, 1)
-        XCTAssertTrue(result.children.first?.renderer is MeshEntityRenderer)
+        XCTAssertTrue(result.children.first?.renderer is MeshEntity)
     }
 
     func testFramedSphereAligned() throws {
@@ -49,9 +49,9 @@ final class RendererRenderTreeTests: XCTestCase {
 
         let result = Renderer.renderTreeFor(framed, size: .one)
 
-        let pose = (result.renderer as? PoseEntityRenderer)?.pose
-        XCTAssertEqual(pose?.position, .init(x: 0.0, y: 0.0, z: 2.0))
+        let transform = (result.renderer as? TransformEntity)?.transform
+        XCTAssertEqual(transform?.translation, .init(x: 0.0, y: 0.0, z: 2.0))
         XCTAssertEqual(result.children.count, 1)
-        XCTAssertTrue(result.children.first?.renderer is MeshEntityRenderer)
+        XCTAssertTrue(result.children.first?.renderer is MeshEntity)
     }
 }
