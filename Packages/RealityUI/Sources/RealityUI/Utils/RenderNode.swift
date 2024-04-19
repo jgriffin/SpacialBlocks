@@ -19,7 +19,7 @@ public struct RenderNode {
 
 // MARK: - EntityRenderer
 
-public protocol EntityRenderer {
+public protocol EntityRenderer<EntityType> {
     associatedtype EntityType: Entity
 
     func makeEntity() -> EntityType
@@ -35,8 +35,6 @@ public struct EmptyEntityRenderer: EntityRenderer {
 }
 
 public struct MeshEntityRenderer: EntityRenderer {
-    public typealias EntityType = ModelEntity
-
     public let mesh: MeshResource
     public let material: RealityMaterial
 

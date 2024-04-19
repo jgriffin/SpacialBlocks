@@ -30,7 +30,7 @@ public struct RealityShapeView<S: RealityShape>: RealityContent, BuiltIn {
     public func render(_: RenderContext, size: Size3D) -> RenderNode {
         RenderNode(
             MeshEntityRenderer(
-                mesh: shape.mesh(in: sizeFor(size)),
+                mesh: shape.mesh(in: sizeFor(.init(size: size))),
                 material: material
             )
         )
@@ -43,7 +43,7 @@ public struct BoxShape: RealityShape {
     public init() {}
 
     public func shapeSizeFor(_ proposed: ProposedSize3D) -> Size3D {
-        proposed
+        proposed.orDefault
     }
 
     public func mesh(in size: Size3D) -> MeshResource {
@@ -55,7 +55,7 @@ public struct SphereShape: RealityShape {
     public init() {}
 
     public func shapeSizeFor(_ proposed: ProposedSize3D) -> Size3D {
-        Size3D.one * proposed.vector.min()
+        Size3D.one * proposed.orDefault.vector.min()
     }
 
     public func mesh(in size: Size3D) -> MeshResource {

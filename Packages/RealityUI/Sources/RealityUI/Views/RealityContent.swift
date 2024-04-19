@@ -15,8 +15,6 @@ public protocol RealityContent {
 
 // MARK: - layout and render
 
-public typealias ProposedSize3D = Size3D
-
 public extension RealityContent {
     func sizeFor(_ proposed: ProposedSize3D) -> Size3D {
         if let builtIn = self as? BuiltIn {

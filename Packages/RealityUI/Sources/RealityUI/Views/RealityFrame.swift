@@ -31,13 +31,12 @@ public struct RealityFrame<Content: RealityContent>: RealityContent, BuiltIn {
     }
 
     public func render(_ context: RenderContext, size: Size3D) -> RenderNode {
-        let newProposed = newProposedSize(size)
-        let childSize = content.sizeFor(newProposed)
+        let proposed = newProposedSize(.init(size: size))
+        let childSize = content.sizeFor(proposed)
 
-        let selfPoint = alignment.point(for: newProposed)
+        let selfPoint = alignment.point(for: proposed.orDefault)
         let childPoint = alignment.point(for: childSize)
-        let offset = selfPoint - childPoint
-        let pose = Pose3D(position: Point3D(offset), rotation: .identity)
+        let pose = Pose3D(position: Point3D(selfPoint - childPoint), rotation: .identity)
 
         let childNode = content.render(context, size: size)
         return RenderNode(
