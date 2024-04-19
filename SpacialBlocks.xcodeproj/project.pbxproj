@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -254,7 +254,6 @@
 			);
 			mainGroup = D6D3B4C02BB5E3B700B24CE8;
 			packageReferences = (
-				D68546B02BBCB03F00342CBC /* XCLocalSwiftPackageReference "Packages/Grid3D" */,
 			);
 			productRefGroup = D6D3B4CA2BB5E3B700B24CE8 /* Products */;
 			projectDirPath = "";
@@ -564,13 +563,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCLocalSwiftPackageReference section */
-		D68546B02BBCB03F00342CBC /* XCLocalSwiftPackageReference "Packages/Grid3D" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = Packages/Grid3D;
-		};
-/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		D66C85E92BC08060006330B9 /* Charts3D */ = {

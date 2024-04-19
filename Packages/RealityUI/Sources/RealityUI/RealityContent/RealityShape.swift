@@ -14,7 +14,7 @@ public protocol RealityShape: RealityContent {
 }
 
 public extension RealityShape {
-    var body: some RealityContent {
+    @RealityBuilder var body: some RealityContent {
         RealityShapeView(shape: self, material: .color(.blue))
     }
 }

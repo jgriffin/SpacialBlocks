@@ -30,11 +30,12 @@ public protocol EntityRenderer<EntityType> {
 
 public struct EmptyEntityRenderer: EntityRenderer {
     public func makeEntity() -> Entity { Entity() }
-
     public func updateEntity(_: Entity) {}
 }
 
 public struct MeshEntityRenderer: EntityRenderer {
+    public typealias EntityType = ModelEntity
+
     public let mesh: MeshResource
     public let material: RealityMaterial
 
