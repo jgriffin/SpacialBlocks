@@ -16,11 +16,11 @@ public protocol RealityContent {
 // MARK: - layout and render
 
 public extension RealityContent {
-    func sizeFor(_ proposed: ProposedSize3D) -> Size3D {
+    func sizeThatFits(_ proposed: ProposedSize3D) -> Size3D {
         if let builtIn = self as? BuiltIn {
             builtIn.sizeFor(proposed)
         } else {
-            body.sizeFor(proposed)
+            body.sizeThatFits(proposed)
         }
     }
 

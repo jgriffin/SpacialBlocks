@@ -21,7 +21,7 @@ public struct RealityFrame<Content: RealityContent>: RealityContent, BuiltIn {
 
     public func sizeFor(_ proposed: ProposedSize3D) -> Size3D {
         let newProposed = newProposedSize(proposed)
-        let childSize = content.sizeFor(newProposed)
+        let childSize = content.sizeThatFits(newProposed)
 
         return .init(
             width: width ?? childSize.width,
@@ -32,7 +32,7 @@ public struct RealityFrame<Content: RealityContent>: RealityContent, BuiltIn {
 
     public func render(_ context: RenderContext, size: Size3D) -> RenderNode {
         let proposed = newProposedSize(.init(size: size))
-        let childSize = content.sizeFor(proposed)
+        let childSize = content.sizeThatFits(proposed)
 
         let selfPoint = alignment.point(for: proposed.orDefault)
         let childPoint = alignment.point(for: childSize)

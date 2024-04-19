@@ -36,3 +36,9 @@ public enum RealityBuilder {
         content
     }
 }
+
+public extension RealityBuilder {
+    static func build(@RealityBuilder build: () -> some RealityContent) -> some RealityContent {
+        build()
+    }
+}

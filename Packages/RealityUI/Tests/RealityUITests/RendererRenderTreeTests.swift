@@ -54,4 +54,15 @@ final class RendererRenderTreeTests: XCTestCase {
         XCTAssertEqual(result.children.count, 1)
         XCTAssertTrue(result.children.first?.renderer is MeshEntityRenderer)
     }
+
+    func testTuple() {
+        let tuple = RealityBuilder.build {
+            BoxShape()
+            SphereShape()
+        }
+
+        let result = Renderer.renderTreeFor(tuple, size: .one)
+
+        XCTAssertEqual(result.children.count, 0)
+    }
 }

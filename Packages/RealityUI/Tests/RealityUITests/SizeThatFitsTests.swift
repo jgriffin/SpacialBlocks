@@ -1,30 +1,41 @@
 import RealityUI
 import XCTest
 
-final class SizeForTests: XCTestCase {
+final class SizeThatFitsTests: XCTestCase {
     let proposeOne = ProposedSize3D(size: .one)
 
     func testEmpty() {
         let empty = EmptyContent()
-        let result = empty.sizeFor(proposeOne)
+        let result = empty.sizeThatFits(proposeOne)
         XCTAssertEqual(result, .zero)
     }
 
     func testBox() {
         let box = BoxShape()
-        let result = box.sizeFor(proposeOne)
+        let result = box.sizeThatFits(proposeOne)
         XCTAssertEqual(result, .one)
     }
 
     func testFramedBox() {
         let framed = BoxShape().frame(width: 2.0, height: 3.0, depth: 4.0)
-        let result = framed.sizeFor(proposeOne)
+        let result = framed.sizeThatFits(proposeOne)
         XCTAssertEqual(result, .init(width: 2.0, height: 3.0, depth: 4.0))
     }
 
     func testFramedSphere() {
         let framed = SphereShape().frame(width: 2.0, height: 3.0, depth: 4.0)
-        let result = framed.sizeFor(proposeOne)
+        let result = framed.sizeThatFits(proposeOne)
+        XCTAssertEqual(result, .init(width: 2.0, height: 3.0, depth: 4.0))
+    }
+
+    func testTuple() {
+        let tuple = RealityBuilder.build {
+            BoxShape()
+            SphereShape()
+        }
+
+        let result = tuple.sizeThatFits(proposeOne)
+
         XCTAssertEqual(result, .init(width: 2.0, height: 3.0, depth: 4.0))
     }
 }

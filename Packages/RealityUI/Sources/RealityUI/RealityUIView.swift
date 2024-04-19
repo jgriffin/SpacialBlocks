@@ -9,8 +9,8 @@
     public struct RealityUIView: View {
         var realityContent: any RealityContent
 
-        public init(_ realityContent: any RealityContent) {
-            self.realityContent = realityContent
+        public init(@RealityBuilder _ realityContent: () -> some RealityContent) {
+            self.realityContent = realityContent()
         }
 
         @State private var renderer = RealityContentRenderer()
@@ -32,5 +32,5 @@
 #endif
 
 #Preview(windowStyle: .volumetric) {
-    RealityUIView(SphereShape())
+    RealityUIView { SphereShape() }
 }

@@ -25,7 +25,7 @@ public extension RealityContentRenderer {
         size: Size3D
     ) -> RenderNode {
         let context = RenderContext(environment: .init())
-        let contentSize = content.sizeFor(.init(size: size))
+        let contentSize = content.sizeThatFits(.init(size: size))
         return content.render(context, size: contentSize)
     }
 

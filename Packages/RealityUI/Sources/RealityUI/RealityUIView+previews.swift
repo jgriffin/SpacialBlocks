@@ -5,5 +5,14 @@
 import SwiftUI
 
 #Preview(windowStyle: .volumetric) {
-    RealityUIView(SphereShape())
+    RealityUIView {
+        SphereShape()
+        BoxShape()
+    }
+}
+
+#Preview(windowStyle: .volumetric) {
+    RealityUIView {
+        SphereShape()
+    }
 }
