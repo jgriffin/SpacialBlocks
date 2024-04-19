@@ -17,8 +17,8 @@ final class BoundsTests: XCTestCase {
             position: Point3D(tenTenTen)
         )
         XCTAssertEqual(box.bounds?.size, Size3D(oneTwoThree))
-        XCTAssertEqual(box.bounds?.min, Point3D((oneTwoThree - 0.5)))
-        XCTAssertEqual(box.bounds?.max, Point3D((oneTwoThree + 0.5)))
+        XCTAssertEqual(box.bounds?.min, Point3D(oneTwoThree - 0.5))
+        XCTAssertEqual(box.bounds?.max, Point3D(oneTwoThree + 0.5))
         XCTAssertEqual(box.containedBounds?.min, Point3D(tenTenTen))
         XCTAssertEqual(box.containedBounds?.max, Point3D([11.0, 12, 13]))
     }

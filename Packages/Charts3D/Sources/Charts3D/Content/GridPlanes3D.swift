@@ -59,7 +59,7 @@ public extension GridPlanes3D {
         gridPlane(u: .forward * chartBounds.size.depth,
                   v: .up * chartBounds.size.height,
                   center: chartBounds.unitPoint(.trailing))
-        
+
         let _: Void = print("GridPlane chartBounds: \(chartBounds)")
 //        BoundingBox(chartBounds)
     }
