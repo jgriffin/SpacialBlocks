@@ -7,7 +7,7 @@ import Spatial
 
 public protocol EntityRenderer<EntityType> {
     associatedtype EntityType: Entity
-
+    var name: String { get }
     func makeEntity() -> EntityType
     func updateEntity(_ entity: EntityType)
 }
@@ -41,10 +41,12 @@ public struct MeshEntity: EntityRenderer {
 
     public let mesh: MeshResource
     public let material: RealityMaterial
+    public let name: String
 
-    public init(mesh: MeshResource, material: RealityMaterial) {
+    public init(mesh: MeshResource, material: RealityMaterial, name: String) {
         self.mesh = mesh
         self.material = material
+        self.name = name
     }
 
     public func makeEntity() -> ModelEntity {
@@ -66,13 +68,19 @@ public struct MeshEntity: EntityRenderer {
 
 public struct TransformEntity: EntityRenderer {
     public let transform: AffineTransform3D
+    public let name: String
 
-    public init(_ transform: AffineTransform3D) {
+    public init(_ transform: AffineTransform3D, name: String = "Transform") {
         self.transform = transform
+        self.name = name
     }
 
-    public init(translation: Vector3D) {
-        transform = AffineTransform3D(translation: translation)
+    public init(translation: Vector3D, name: String = "Translation") {
+        self.init(AffineTransform3D(translation: translation), name: name)
+    }
+
+    public init(alignment: Vector3D, name: String = "Alignment") {
+        self.init(AffineTransform3D(translation: alignment), name: name)
     }
 
     public func makeEntity() -> Entity {
@@ -82,6 +90,12 @@ public struct TransformEntity: EntityRenderer {
     }
 
     public func updateEntity(_ entity: Entity) {
-        entity.transform = Transform(transform)
+        #if os(visionOS)
+            entity.transform = Transform(transform)
+        #else
+            let cols = transform.matrix4x4.columns
+            let floatMatrix = matrix_float4x4(columns: (.init(cols.0), .init(cols.1), .init(cols.2), .init(cols.3)))
+            entity.transform = Transform(matrix: floatMatrix)
+        #endif
     }
 }

@@ -27,10 +27,10 @@ public extension RenderNode {
     }
 
     func wrappedInTranslation(_ translation: Vector3D) -> RenderNode {
-        wrappedInTransform(.init(translation: translation))
+        wrappedIn(TransformEntity(translation: translation))
     }
 
     func wrappedInAlignment(_ alignment: Alignment3D, parent: Size3D, child: Size3D) -> RenderNode {
-        wrappedInTranslation(alignment.offset(parent: parent, child: child))
+        wrappedIn(TransformEntity(alignment: alignment.offset(parent: parent, child: child)))
     }
 }

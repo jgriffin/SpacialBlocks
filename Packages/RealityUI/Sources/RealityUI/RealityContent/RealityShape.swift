@@ -8,8 +8,8 @@ import Spatial
 // MARK: - Shape
 
 public protocol RealityShape: RealityContent {
+    var name: String { get }
     func shapeSizeFor(_ proposed: ProposedSize3D) -> Size3D
-
     func mesh(in size: Size3D) -> MeshResource
 }
 
@@ -30,7 +30,8 @@ public struct RealityShapeView<S: RealityShape>: RealityContent, BuiltIn {
     public func customRender(_: RenderContext, size: Size3D) -> RenderNode {
         MeshEntity(
             mesh: shape.mesh(in: customSizeFor(.init(size))),
-            material: material
+            material: material,
+            name: shape.name
         )
         .asNode()
     }
@@ -40,6 +41,8 @@ public struct RealityShapeView<S: RealityShape>: RealityContent, BuiltIn {
 
 public struct BoxShape: RealityShape {
     public init() {}
+
+    public var name = "Box"
 
     public func shapeSizeFor(_ proposed: ProposedSize3D) -> Size3D {
         proposed.sizeOrDefault
@@ -52,6 +55,8 @@ public struct BoxShape: RealityShape {
 
 public struct SphereShape: RealityShape {
     public init() {}
+
+    public var name = "Sphere"
 
     public func shapeSizeFor(_ proposed: ProposedSize3D) -> Size3D {
         Size3D.one * proposed.sizeOrDefault.vector.min()

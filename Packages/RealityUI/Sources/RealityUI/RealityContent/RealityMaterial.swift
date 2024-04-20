@@ -3,7 +3,6 @@
 //
 
 import RealityKit
-import UIKit
 
 public protocol Materializable {
     func makeMaterial() -> RealityKit.Material
@@ -25,7 +24,7 @@ public enum RealityMaterial: Materializable {
 public extension RealityMaterial {
     static func color(
         _ color: SimpleMaterial.Color,
-        alpha: CGFloat? = nil,
+        alpha: Double? = nil,
         roughness: Float = 1,
         isMetalic: Bool = false
     ) -> RealityMaterial {

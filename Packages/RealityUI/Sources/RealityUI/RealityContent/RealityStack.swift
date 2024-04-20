@@ -4,13 +4,16 @@
 
 import Spatial
 
-public struct RealityStack<Layout: RealityLayout>: RealityContent, BuiltIn {
-    let layout: Layout
+public struct RealityStack: RealityContent, BuiltIn {
+    let layout: any RealityLayout
     let contents: [any RealityContent]
 
-    public init(layout: Layout, contents: [any RealityContent]) {
+    public init(
+        layout: any RealityLayout,
+        @RealityContentsBuilder contents: () -> [any RealityContent]
+    ) {
         self.layout = layout
-        self.contents = contents
+        self.contents = contents()
     }
 
     public func customSizeFor(_ proposed: ProposedSize3D) -> Size3D {
@@ -26,5 +29,18 @@ public struct RealityStack<Layout: RealityLayout>: RealityContent, BuiltIn {
         }
 
         return EmptyEntity(name: "Stack").asNode(children: children)
+    }
+}
+
+public extension RealityStack {
+    init(
+        _ axis: Vector3D,
+        alignment: Alignment3D = .center,
+        @RealityContentsBuilder contents: () -> [any RealityContent]
+    ) {
+        self.init(
+            layout: StackedLayout(alignment: alignment, axis: axis),
+            contents: contents
+        )
     }
 }

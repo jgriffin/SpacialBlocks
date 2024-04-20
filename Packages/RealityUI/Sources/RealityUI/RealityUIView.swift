@@ -29,8 +29,8 @@
             }
         }
     }
-#endif
 
-#Preview(windowStyle: .volumetric) {
-    RealityUIView { SphereShape() }
-}
+    #Preview(windowStyle: .volumetric) {
+        RealityUIView { SphereShape() }
+    }
+#endif

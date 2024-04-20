@@ -98,15 +98,15 @@ public extension HorizontalAlignment3D {
     static let trailing = Self(alignmentID: HLeading.self)
 
     private enum HLeading: Alignment3DID {
-        public static func defaultValue(in _: Size3D) -> Double { 0 }
+        public static func defaultValue(in context: Size3D) -> Double { -context.width / 2 }
     }
 
     private enum HCenter: Alignment3DID {
-        public static func defaultValue(in context: Size3D) -> Double { context.width / 2 }
+        public static func defaultValue(in _: Size3D) -> Double { 0 }
     }
 
     private enum HTrailing: Alignment3DID {
-        public static func defaultValue(in context: Size3D) -> Double { context.width }
+        public static func defaultValue(in context: Size3D) -> Double { context.width / 2 }
     }
 }
 
@@ -116,15 +116,15 @@ public extension VerticalAlignment3D {
     static let bottom = Self(alignmentID: VBottom.self)
 
     private enum VTop: Alignment3DID {
-        public static func defaultValue(in context: Size3D) -> Double { context.height }
-    }
-
-    private enum VCenter: Alignment3DID {
         public static func defaultValue(in context: Size3D) -> Double { context.height / 2 }
     }
 
-    private enum VBottom: Alignment3DID {
+    private enum VCenter: Alignment3DID {
         public static func defaultValue(in _: Size3D) -> Double { 0 }
+    }
+
+    private enum VBottom: Alignment3DID {
+        public static func defaultValue(in context: Size3D) -> Double { -context.height / 2 }
     }
 }
 
@@ -134,14 +134,14 @@ public extension DepthAlignment3D {
     static let back = Self(alignmentID: DBack.self)
 
     private enum DFront: Alignment3DID {
-        public static func defaultValue(in context: Size3D) -> Double { context.depth }
-    }
-
-    private enum DCenter: Alignment3DID {
         public static func defaultValue(in context: Size3D) -> Double { context.depth / 2 }
     }
 
-    private enum DBack: Alignment3DID {
+    private enum DCenter: Alignment3DID {
         public static func defaultValue(in _: Size3D) -> Double { 0 }
+    }
+
+    private enum DBack: Alignment3DID {
+        public static func defaultValue(in context: Size3D) -> Double { -context.depth / 2 }
     }
 }

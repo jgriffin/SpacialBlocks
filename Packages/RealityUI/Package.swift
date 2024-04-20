@@ -4,6 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "RealityUI",
+    platforms: [.visionOS(.v1), .iOS(.v17), .macOS(.v14)],
     products: [
         .library(
             name: "RealityUI",

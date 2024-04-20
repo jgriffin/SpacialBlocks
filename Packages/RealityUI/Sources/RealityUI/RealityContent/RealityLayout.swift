@@ -6,6 +6,8 @@ import RealityKit
 import Spatial
 
 public protocol RealityLayout {
+    var alignment: Alignment3D { get }
+
     // Calculate and return the size of the layout container.
     func sizeThatFits(
         contents: [any RealityContent],
