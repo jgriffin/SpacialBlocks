@@ -46,20 +46,23 @@ final class StackMathTests: XCTestCase {
     // MARK: - Stack Math
 
     func testDimsSumAndMax() {
-        let dims = StackMath.dimsSumAndMax([Size3D(sd123), Size3D(sd123)])
+        let fitSizes = [Size3D(sd123), Size3D(sd123)]
+        let dims = StackMath.dimsSumAndMax(fitSizes)
 
         XCTAssertEqual(dims.max.vector, sd123)
         XCTAssertEqual(dims.sum.vector, [2, 4, 6])
     }
 
     func testSizeFromFits() {
-        let hSize = StackMath.sizeFromFits([Size3D(sd123), Size3D(sd123)], axis: .right)
+        let fitSizes = [Size3D(sd123), Size3D(sd123)]
+
+        let hSize = StackMath.sizeFromFits(fitSizes, spacing: .zero, axis: .right)
         XCTAssertEqual(hSize, Size3D([2.0, 2, 3]))
 
-        let ySize = StackMath.sizeFromFits([Size3D(sd123), Size3D(sd123)], axis: .up)
+        let ySize = StackMath.sizeFromFits(fitSizes, spacing: .zero, axis: .up)
         XCTAssertEqual(ySize, Size3D([1.0, 4, 3]))
 
-        let zSize = StackMath.sizeFromFits([Size3D(sd123), Size3D(sd123)], axis: .forward)
+        let zSize = StackMath.sizeFromFits(fitSizes, spacing: .zero, axis: .forward)
         XCTAssertEqual(zSize, Size3D([1.0, 2, 6]))
     }
 
@@ -71,7 +74,7 @@ final class StackMathTests: XCTestCase {
 
     func testCenterOffsetsFromStackCenter() {
         let fitSizes = [Size3D(sd123), Size3D(sd123)]
-        let centerOffsets = StackMath.centerOffsetsFromStackCenter(fitSizes: fitSizes, spacing: .zero)
+        let centerOffsets = StackMath.centerOffsets(fitSizes: fitSizes, spacing: .zero)
 
         XCTAssertEqual(centerOffsets.map(\.vector), [[-0.5, -1, -1.5], [0.5, 1, 1.5]])
     }

@@ -36,10 +36,11 @@ public extension RealityStack {
     init(
         _ axis: Vector3D,
         alignment: Alignment3D = .center,
+        spacing: Size3D = .zero,
         @RealityContentsBuilder contents: () -> [any RealityContent]
     ) {
         self.init(
-            layout: StackedLayout(alignment: alignment, axis: axis),
+            layout: StackedLayout(axis: axis, alignment: alignment, spacing: spacing),
             contents: contents
         )
     }

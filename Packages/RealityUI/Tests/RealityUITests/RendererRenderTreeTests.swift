@@ -39,7 +39,7 @@ final class RendererRenderTreeTests: XCTestCase {
         let result = Renderer.renderTreeFor(framed, size: .one)
 
         let transform = (result.renderer as? TransformEntity)?.transform
-        XCTAssertEqual(transform?.translation, .init(x: 0.0, y: 0.5, z: 1.0))
+        XCTAssertEqual(transform?.translation, .init(x: 0.0, y: 0.0, z: 0.0))
         XCTAssertEqual(result.children.count, 1)
         XCTAssertTrue(result.children.first?.renderer is MeshEntity)
     }
@@ -50,7 +50,7 @@ final class RendererRenderTreeTests: XCTestCase {
         let result = Renderer.renderTreeFor(framed, size: .one)
 
         let transform = (result.renderer as? TransformEntity)?.transform
-        XCTAssertEqual(transform?.translation, .init(x: 0.0, y: 0.0, z: 2.0))
+        XCTAssertEqual(transform?.translation, .init(x: 0.0, y: -0.5, z: 1.0))
         XCTAssertEqual(result.children.count, 1)
         XCTAssertTrue(result.children.first?.renderer is MeshEntity)
     }

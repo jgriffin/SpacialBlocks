@@ -20,7 +20,8 @@ enum StackMath {
     static func initialChildProposalFrom(
         _ proposal: Size3D,
         axis: Vector3D,
-        contentCount: Int
+        contentCount: Int,
+        spacing _: Size3D
     ) -> Size3D {
         guard contentCount > 0 else { return .zero }
         let divided = mixVectors(
@@ -40,6 +41,7 @@ enum StackMath {
 
     static func sizeFromFits(
         _ sizes: [Size3D],
+        spacing _: Size3D,
         axis: Vector3D
     ) -> Size3D {
         let dims = dimsSumAndMax(sizes)
@@ -53,8 +55,10 @@ enum StackMath {
 
     static func stackedOffsets(
         fitSizes: [Size3D],
-        spacing: Vector3D
+        spacing: Size3D
     ) -> (centers: [Vector3D], total: Vector3D) {
+        let spacing = Vector3D(spacing)
+
         var current: Vector3D = .zero
         let centers = fitSizes.map { size in
             if current != .zero {
@@ -67,9 +71,9 @@ enum StackMath {
         return (centers, current)
     }
 
-    static func centerOffsetsFromStackCenter(
+    static func centerOffsets(
         fitSizes: [Size3D],
-        spacing: Vector3D
+        spacing: Size3D
     ) -> [Vector3D] {
         let stacked = stackedOffsets(fitSizes: fitSizes, spacing: spacing)
 

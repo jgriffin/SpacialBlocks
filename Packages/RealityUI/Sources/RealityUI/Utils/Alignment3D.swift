@@ -94,8 +94,8 @@ public extension Alignment3D {
 
 public extension HorizontalAlignment3D {
     static let leading = Self(alignmentID: HLeading.self)
-    static let center = Self(alignmentID: HLeading.self)
-    static let trailing = Self(alignmentID: HLeading.self)
+    static let center = Self(alignmentID: HCenter.self)
+    static let trailing = Self(alignmentID: HTrailing.self)
 
     private enum HLeading: Alignment3DID {
         public static func defaultValue(in context: Size3D) -> Double { -context.width / 2 }
