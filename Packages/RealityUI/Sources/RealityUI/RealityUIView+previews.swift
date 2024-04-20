@@ -8,11 +8,19 @@ import SwiftUI
 
     #Preview(windowStyle: .volumetric) {
         RealityUIView {
-            RealityStack(.right, alignment: .center, spacing: .one * 0.1) {
+            RealityStack(.right, alignment: .topLeadingBack, spacing: .zero) {
                 SphereShape()
                 BoxShape()
                 SphereShape()
             }
+            .padding(.init(0.1))
+        }
+    }
+
+    #Preview {
+        RealityUIView {
+            BoxShape()
+                .padding(.init(0.01))
         }
     }
 

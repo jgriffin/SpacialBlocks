@@ -32,4 +32,12 @@ public extension RealityContent {
             alignment: alignment
         )
     }
+
+    func padding(_ insets: EdgeInsets3D) -> some RealityContent {
+        RealityPadding(content: self, edgeInsets: insets)
+    }
+
+    func padding(_ all: Double) -> some RealityContent {
+        RealityPadding(content: self, edgeInsets: .init(all: all))
+    }
 }
