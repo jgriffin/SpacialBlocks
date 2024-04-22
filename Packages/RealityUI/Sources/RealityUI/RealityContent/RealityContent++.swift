@@ -40,4 +40,18 @@ public extension RealityContent {
     func padding(_ all: Double) -> some RealityContent {
         RealityPadding(content: self, edgeInsets: .init(all: all))
     }
+
+    func aspectRatio(
+        _ ratio: Size3D? = nil,
+        maxScale: Double? = nil,
+        contentMode: ContentMode = .fit
+    ) -> some RealityContent {
+        RealityAspectRatio(content: self, aspectRatio: ratio, maxScale: maxScale, contentMode: contentMode)
+    }
+
+    func scaledToFit() -> some RealityContent { aspectRatio(maxScale: 1) }
+}
+
+public enum ContentMode {
+    case fit // , fill
 }

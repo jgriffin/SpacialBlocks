@@ -59,7 +59,7 @@ public struct SphereShape: RealityShape {
     public var name = "Sphere"
 
     public func shapeSizeFor(_ proposed: ProposedSize3D) -> Size3D {
-        Size3D.one * proposed.sizeOrDefault.vector.min()
+        AspectRatioMath.scaledToFit(proposed.sizeOrDefault, aspectRatio: .one, maxScale: nil)
     }
 
     public func mesh(in size: Size3D) -> MeshResource {
