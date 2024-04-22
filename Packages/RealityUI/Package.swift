@@ -10,10 +10,20 @@ let package = Package(
             name: "RealityUI",
             targets: ["RealityUI"]
         ),
+        .library(
+            name: "Charts3D",
+            targets: ["Charts3D"]
+        ),
+
     ],
     targets: [
         .target(
-            name: "RealityUI"),
+            name: "RealityUI"
+        ),
+        .target(
+            name: "Charts3D",
+            dependencies: ["RealityUI"]
+        ),
         .testTarget(
             name: "RealityUITests",
             dependencies: ["RealityUI"]

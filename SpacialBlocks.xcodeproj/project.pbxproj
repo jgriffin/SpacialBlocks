@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D66C85EA2BC08060006330B9 /* Charts3D in Frameworks */ = {isa = PBXBuildFile; productRef = D66C85E92BC08060006330B9 /* Charts3D */; };
 		D68546B22BBCB03F00342CBC /* Grid3D in Frameworks */ = {isa = PBXBuildFile; productRef = D68546B12BBCB03F00342CBC /* Grid3D */; };
 		D68546B42BBCCEF300342CBC /* Optional+unwrapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68546B32BBCCEF300342CBC /* Optional+unwrapped.swift */; };
 		D696FCA02BD1D0DB001A32D1 /* RealityUI in Frameworks */ = {isa = PBXBuildFile; productRef = D696FC9F2BD1D0DB001A32D1 /* RealityUI */; };
@@ -39,7 +38,6 @@
 		D68546B32BBCCEF300342CBC /* Optional+unwrapped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+unwrapped.swift"; sourceTree = "<group>"; };
 		D696FC9E2BD1153E001A32D1 /* RealityUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityUI; sourceTree = "<group>"; };
 		D6972DBC2BBB4A8500B8A4DF /* LoadResourcesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadResourcesTests.swift; sourceTree = "<group>"; };
-		D6ABFCD62BC3D4590041D8BF /* Charts3D */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Charts3D; sourceTree = "<group>"; };
 		D6D3B4C92BB5E3B700B24CE8 /* SpacialBlocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpacialBlocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6D3B4CD2BB5E3B700B24CE8 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		D6D3B4D02BB5E3B700B24CE8 /* SpacialBlocksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacialBlocksApp.swift; sourceTree = "<group>"; };
@@ -62,7 +60,6 @@
 			files = (
 				D6D3B4CF2BB5E3B700B24CE8 /* RealityKitContent in Frameworks */,
 				D696FCA02BD1D0DB001A32D1 /* RealityUI in Frameworks */,
-				D66C85EA2BC08060006330B9 /* Charts3D in Frameworks */,
 				D68546B22BBCB03F00342CBC /* Grid3D in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -129,7 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				D696FC9E2BD1153E001A32D1 /* RealityUI */,
-				D6ABFCD62BC3D4590041D8BF /* Charts3D */,
 				D66DC4A02BBC977900AD6D00 /* Grid3D */,
 				D6D3B4CD2BB5E3B700B24CE8 /* RealityKitContent */,
 			);
@@ -200,7 +196,6 @@
 			packageProductDependencies = (
 				D6D3B4CE2BB5E3B700B24CE8 /* RealityKitContent */,
 				D68546B12BBCB03F00342CBC /* Grid3D */,
-				D66C85E92BC08060006330B9 /* Charts3D */,
 				D696FC9F2BD1D0DB001A32D1 /* RealityUI */,
 			);
 			productName = SpacialBlocks;
@@ -565,10 +560,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D66C85E92BC08060006330B9 /* Charts3D */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Charts3D;
-		};
 		D68546B12BBCB03F00342CBC /* Grid3D */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Grid3D;
