@@ -12,6 +12,7 @@ import SwiftUI
                 Sphere()
                 Box()
                 Sphere()
+                    .offset(y: -0.1)
             }
             .padding(.init(0.1))
         }

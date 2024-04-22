@@ -5,6 +5,8 @@
 import Spatial
 
 public extension RealityContent {
+    // MARK: - frame
+
     func frame(
         width: Double? = nil,
         height: Double? = nil,
@@ -33,6 +35,8 @@ public extension RealityContent {
         )
     }
 
+    // MARK: - padding
+
     func padding(_ insets: EdgeInsets3D) -> some RealityContent {
         RealityPadding(content: self, edgeInsets: insets)
     }
@@ -40,6 +44,18 @@ public extension RealityContent {
     func padding(_ all: Double) -> some RealityContent {
         RealityPadding(content: self, edgeInsets: .init(all: all))
     }
+
+    // MARK: - offset
+
+    func offset(_ offset: Vector3D) -> some RealityContent {
+        RealityOffset(content: self, offset: offset)
+    }
+
+    func offset(x: Double = 0, y: Double = 0, z: Double = 0) -> some RealityContent {
+        RealityOffset(content: self, offset: .init(x: x, y: y, z: z))
+    }
+
+    // MARK: - aspectRatio
 
     func aspectRatio(
         _ ratio: Size3D? = nil,
