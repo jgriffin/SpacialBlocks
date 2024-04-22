@@ -20,13 +20,17 @@ let package = Package(
         .target(
             name: "RealityUI"
         ),
+        .testTarget(
+            name: "RealityUITests",
+            dependencies: ["RealityUI"]
+        ),
         .target(
             name: "Charts3D",
             dependencies: ["RealityUI"]
         ),
         .testTarget(
-            name: "RealityUITests",
-            dependencies: ["RealityUI"]
+            name: "Charts3DTests",
+            dependencies: ["Charts3D"]
         ),
     ]
 )

@@ -5,15 +5,14 @@
 import RealityUI
 import Spatial
 
-public struct Chart3D: RealityContent, BuiltIn {
-    var contents: ChartContents
+public struct Chart3D<Content: ChartContent>: ChartContent {
+    public var content: Content
 
-    public func customSizeFor(_: RealityUI.ProposedSize3D) -> Size3D {
-        .zero
+    public init(@ChartBuilder content: () -> Content) {
+        self.content = content()
     }
 
-    public func customRender(_: RealityUI.RenderContext, size _: Size3D) -> RenderNode {
-        EmptyEntity()
-            .asNode()
+    public var body: some ChartContent {
+        content
     }
 }
