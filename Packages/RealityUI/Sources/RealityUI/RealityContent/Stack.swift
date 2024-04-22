@@ -4,7 +4,7 @@
 
 import Spatial
 
-public struct RealityStack: RealityContent, BuiltIn {
+public struct Stack: RealityContent, BuiltIn {
     let layout: any RealityLayout
     let contents: [any RealityContent]
 
@@ -32,7 +32,7 @@ public struct RealityStack: RealityContent, BuiltIn {
     }
 }
 
-public extension RealityStack {
+public extension Stack {
     init(
         _ axis: Vector3D,
         alignment: Alignment3D = .center,

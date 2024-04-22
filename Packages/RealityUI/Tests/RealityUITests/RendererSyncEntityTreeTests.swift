@@ -23,7 +23,7 @@ final class RendererSyncEntityTreeTests: XCTestCase {
     }
 
     func testBox() throws {
-        let box = BoxShape()
+        let box = Box()
 
         let renderTree = Renderer.renderTreeFor(box, size: .one)
         Renderer.syncEntityTree(root, withRenderTree: renderTree)
@@ -33,7 +33,7 @@ final class RendererSyncEntityTreeTests: XCTestCase {
     }
 
     func testFramedBox() throws {
-        let framed = BoxShape().frame(width: 2.0, height: 3.0, depth: 4.0)
+        let framed = Box().frame(width: 2.0, height: 3.0, depth: 4.0)
 
         let renderTree = Renderer.renderTreeFor(framed, size: .one)
         Renderer.syncEntityTree(root, withRenderTree: renderTree)
@@ -44,7 +44,7 @@ final class RendererSyncEntityTreeTests: XCTestCase {
     }
 
     func testFramedSphere() throws {
-        let framed = SphereShape().frame(width: 2.0, height: 3.0, depth: 4.0)
+        let framed = Sphere().frame(width: 2.0, height: 3.0, depth: 4.0)
 
         let renderTree = Renderer.renderTreeFor(framed, size: .one)
         Renderer.syncEntityTree(root, withRenderTree: renderTree)
@@ -55,7 +55,7 @@ final class RendererSyncEntityTreeTests: XCTestCase {
     }
 
     func testFramedSphereAligned() throws {
-        let framed = SphereShape().frame(width: 2.0, height: 3.0, depth: 4.0, alignment: .bottomLeadingFront)
+        let framed = Sphere().frame(width: 2.0, height: 3.0, depth: 4.0, alignment: .bottomLeadingFront)
 
         let renderTree = Renderer.renderTreeFor(framed, size: .one)
         Renderer.syncEntityTree(root, withRenderTree: renderTree)

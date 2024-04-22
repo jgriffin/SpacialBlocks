@@ -31,6 +31,6 @@
     }
 
     #Preview(windowStyle: .volumetric) {
-        RealityUIView { SphereShape() }
+        RealityUIView { Sphere() }
     }
 #endif

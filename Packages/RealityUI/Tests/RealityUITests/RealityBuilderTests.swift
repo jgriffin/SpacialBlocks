@@ -14,17 +14,17 @@ final class RealityBuilderTests: XCTestCase {
     }
 
     func testBox() {
-        let result = Builder.build { BoxShape() }
+        let result = Builder.build { Box() }
         XCTAssertEqual(result.count, 1)
-        XCTAssertTrue(type(of: result.first!) == BoxShape.self)
+        XCTAssertTrue(type(of: result.first!) == Box.self)
     }
 
     func testMultiple() {
         let result = Builder.build {
-            BoxShape()
-            BoxShape()
+            Box()
+            Box()
                 .frame(size: .one)
-            SphereShape()
+            Sphere()
         }
         XCTAssertEqual(result.count, 3)
     }
@@ -32,13 +32,13 @@ final class RealityBuilderTests: XCTestCase {
     func testIf() {
         let no = false
         let result = Builder.build {
-            BoxShape()
+            Box()
             if no {
-                BoxShape()
+                Box()
             }
             if no {
-                BoxShape()
-                SphereShape()
+                Box()
+                Sphere()
             }
         }
         XCTAssertEqual(result.count, 1)

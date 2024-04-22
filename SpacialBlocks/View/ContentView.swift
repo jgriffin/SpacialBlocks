@@ -19,9 +19,9 @@ struct ContentView: View {
 //        UnitGrid3DView()
 //        ChartsView(chart: .current)
         RealityUIView {
-            RealityHStack {
-                SphereShape()
-                BoxShape()
+            Stack(.right) {
+                Sphere()
+                Box()
             }
         }
         .onChange(of: showImmersiveSpace) { _, newValue in

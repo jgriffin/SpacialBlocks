@@ -11,19 +11,19 @@ final class SizeThatFitsTests: XCTestCase {
     }
 
     func testBox() {
-        let box = BoxShape()
+        let box = Box()
         let result = box.sizeThatFits(proposeOne)
         XCTAssertEqual(result, .one)
     }
 
     func testFramedBox() {
-        let framed = BoxShape().frame(width: 2.0, height: 3.0, depth: 4.0)
+        let framed = Box().frame(width: 2.0, height: 3.0, depth: 4.0)
         let result = framed.sizeThatFits(proposeOne)
         XCTAssertEqual(result, .init(width: 2.0, height: 3.0, depth: 4.0))
     }
 
     func testFramedSphere() {
-        let framed = SphereShape().frame(width: 2.0, height: 3.0, depth: 4.0)
+        let framed = Sphere().frame(width: 2.0, height: 3.0, depth: 4.0)
         let result = framed.sizeThatFits(proposeOne)
         XCTAssertEqual(result, .init(width: 2.0, height: 3.0, depth: 4.0))
     }

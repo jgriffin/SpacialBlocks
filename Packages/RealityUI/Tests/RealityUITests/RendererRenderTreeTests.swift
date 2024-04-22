@@ -14,7 +14,7 @@ final class RendererRenderTreeTests: XCTestCase {
     }
 
     func testBox() throws {
-        let box = BoxShape()
+        let box = Box()
 
         let result = Renderer.renderTreeFor(box, size: .one)
 
@@ -23,7 +23,7 @@ final class RendererRenderTreeTests: XCTestCase {
     }
 
     func testFramedBox() throws {
-        let framed = BoxShape().frame(width: 2.0, height: 3.0, depth: 4.0)
+        let framed = Box().frame(width: 2.0, height: 3.0, depth: 4.0)
 
         let result = Renderer.renderTreeFor(framed, size: .one)
 
@@ -34,7 +34,7 @@ final class RendererRenderTreeTests: XCTestCase {
     }
 
     func testFramedSphere() throws {
-        let framed = SphereShape().frame(width: 2.0, height: 3.0, depth: 4.0)
+        let framed = Sphere().frame(width: 2.0, height: 3.0, depth: 4.0)
 
         let result = Renderer.renderTreeFor(framed, size: .one)
 
@@ -45,7 +45,7 @@ final class RendererRenderTreeTests: XCTestCase {
     }
 
     func testFramedSphereAligned() throws {
-        let framed = SphereShape().frame(width: 2.0, height: 3.0, depth: 4.0, alignment: .bottomLeadingFront)
+        let framed = Sphere().frame(width: 2.0, height: 3.0, depth: 4.0, alignment: .bottomLeadingFront)
 
         let result = Renderer.renderTreeFor(framed, size: .one)
 
