@@ -19,7 +19,7 @@ public extension PlottableDomain {
     var typeId: TypeID { "\(ObjectIdentifier(Self.self)):\(label)" }
 }
 
-public struct PlottableValueDomain<Value: Plottable>: PlottableDomain {
+public struct PlottableValueDomain<Value: Plottable>: PlottableDomain, CustomStringConvertible {
     public let label: String
     public var values: [Value]
 
@@ -37,11 +37,15 @@ public struct PlottableValueDomain<Value: Plottable>: PlottableDomain {
               label == other.label else { return nil }
         return modify(self) { $0.values.append(contentsOf: other.values) }
     }
+
+    public var description: String {
+        "'\(label)': \(Value.self) - \(values)"
+    }
 }
 
 // MARK: - PlottableDimensionDomains
 
-public struct PlottableDomains {
+public struct PlottableDomains: CustomStringConvertible {
     var domainsMap: [PlottableDomain.TypeID: any PlottableDomain]
 
     public init(_ domains: [PlottableDomain.TypeID: any PlottableDomain] = [:]) {
@@ -59,7 +63,7 @@ public struct PlottableDomains {
         self.init(valueDomains)
     }
 
-    // MARK: merge
+    // MARK: accessors
 
     public func domains<Value: Plottable>(_: Value.Type) -> [any PlottableDomain<Value>] {
         domainsMap
@@ -84,8 +88,6 @@ public struct PlottableDomains {
         }
     }
 
-    // MARK: merging
-
     public func merging(_ other: PlottableDomains) -> PlottableDomains {
         modify(self) {
             for domain in other.domainsMap.values {
@@ -93,9 +95,13 @@ public struct PlottableDomains {
             }
         }
     }
+
+    public var description: String {
+        domainsMap.values.map { "\($0)" }.joined(separator: ", ")
+    }
 }
 
-public struct DimensionDomains {
+public struct DimensionDomains: CustomStringConvertible {
     public var x, y, z: PlottableDomains
 
     public init() {
@@ -126,5 +132,13 @@ public extension DimensionDomains {
         modify(self) {
             $0.merge(other)
         }
+    }
+
+    var description: String {
+        [
+            "xs: \(x)",
+            "ys: \(y)",
+            "zs: \(z)",
+        ].joined(separator: "\n")
     }
 }

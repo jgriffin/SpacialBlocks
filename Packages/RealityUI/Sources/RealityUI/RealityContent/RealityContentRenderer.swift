@@ -26,7 +26,7 @@ public extension RealityContentRenderer {
     static func renderTreeFor(
         _ content: any RealityContent,
         size: Size3D
-    ) -> RenderNode {
+    ) -> RealityRenderNode {
         let context = RenderContext(environment: .init())
         let contentSize = content.sizeThatFits(.init(size))
         return content.render(context, size: contentSize)
@@ -34,7 +34,7 @@ public extension RealityContentRenderer {
 
     static func syncEntityTree(
         _ parent: Entity,
-        withRenderTree node: RenderNode
+        withRenderTree node: RealityRenderNode
     ) {
         let nodeEntity = node.renderer.makeEntity()
         nodeEntity.name = "\(type(of: node.renderer))"

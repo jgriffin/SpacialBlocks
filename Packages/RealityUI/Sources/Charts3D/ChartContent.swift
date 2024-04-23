@@ -2,29 +2,27 @@
 // Created by John Griffin on 4/21/24
 //
 
-import Foundation
+import RealityUI
 
 public protocol ChartContent {
-    associatedtype Body: ChartContent
-    var body: Body { get }
+    associatedtype ChartBody: ChartContent
+    var chartBody: ChartBody { get }
 }
-
-public typealias ChartRenderNode = Void
 
 public extension ChartContent {
     func dimensionDomains() -> DimensionDomains {
         if let mark = self as? ChartBuiltIn {
             mark.customDimensionDomains()
         } else {
-            body.dimensionDomains()
+            chartBody.dimensionDomains()
         }
     }
 
-    func render() -> ChartRenderNode {
+    func render(in environment: RealityEnvironment) -> RealityRenderNode {
         if let builtIn = self as? ChartBuiltIn {
-            builtIn.customRender()
+            builtIn.customRender(in: environment)
         } else {
-            body.render()
+            chartBody.render(in: environment)
         }
     }
 }
@@ -32,19 +30,19 @@ public extension ChartContent {
 // MARK: - BuiltIn
 
 public protocol ChartBuiltIn {
-    typealias Body = Never
+    typealias Content = Never
 
     func customDimensionDomains() -> DimensionDomains
 
-    func customRender() -> ChartRenderNode
+    func customRender(in environement: RealityEnvironment) -> RealityRenderNode
 }
 
-public extension ChartContent where Body == Never {
-    var body: Never { fatalError("This should never be called.") }
+public extension ChartContent where ChartBody == Never {
+    var chartBody: Never { fatalError("This should never be called.") }
 }
 
 extension Never: ChartContent {
-    public typealias Body = Never
+    public typealias ChartBody = Never
 }
 
 // MARK: - EmptyChartContent
@@ -54,7 +52,9 @@ public struct EmptyChartContent: ChartContent, ChartBuiltIn {
 
     public func customDimensionDomains() -> DimensionDomains { .init() }
 
-    public func customRender() {}
+    public func customRender(in _: RealityEnvironment) -> RealityRenderNode {
+        EmptyEntity().asNode()
+    }
 }
 
 // MARK: -
@@ -72,5 +72,7 @@ public struct ChartTuple: ChartContent, ChartBuiltIn {
             .reduce(into: DimensionDomains()) { result, next in result.merge(next) }
     }
 
-    public func customRender() {}
+    public func customRender(in _: RealityEnvironment) -> RealityRenderNode {
+        EmptyEntity().asNode()
+    }
 }

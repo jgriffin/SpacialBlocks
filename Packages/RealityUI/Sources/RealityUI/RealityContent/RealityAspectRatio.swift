@@ -41,7 +41,7 @@ public struct RealityAspectRatio<Content: RealityContent>: RealityContent, Built
         )
     }
 
-    public func customRender(_ context: RenderContext, size: Size3D) -> RenderNode {
+    public func customRender(_ context: RenderContext, size: Size3D) -> RealityRenderNode {
         let childSize = content.sizeThatFits(.init(size))
         let scale = AspectRatioMath.scaleToFit(childSize, into: size)
         let scaleSize = Size3D.one * min(scale, maxScale ?? .greatestFiniteMagnitude)

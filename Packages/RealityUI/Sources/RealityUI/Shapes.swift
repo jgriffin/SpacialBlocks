@@ -7,7 +7,7 @@ import Spatial
 
 // MARK: - shapes
 
-public struct Box: RealityShape {
+public struct Box: RealityShapeStyle {
     public init() {}
 
     public var name = "Box"
@@ -21,7 +21,7 @@ public struct Box: RealityShape {
     }
 }
 
-public struct Sphere: RealityShape {
+public struct Sphere: RealityShapeStyle {
     public init() {}
 
     public var name = "Sphere"

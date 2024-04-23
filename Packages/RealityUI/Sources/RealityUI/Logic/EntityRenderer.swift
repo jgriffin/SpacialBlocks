@@ -13,8 +13,8 @@ public protocol EntityRenderer<EntityType> {
 }
 
 public extension EntityRenderer {
-    func asNode(children: [RenderNode] = []) -> RenderNode {
-        RenderNode(self, children: children)
+    func asNode(children: [RealityRenderNode] = []) -> RealityRenderNode {
+        RealityRenderNode(self, children: children)
     }
 }
 

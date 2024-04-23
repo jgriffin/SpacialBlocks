@@ -21,7 +21,7 @@ public struct Stack: RealityContent, BuiltIn {
         return size
     }
 
-    public func customRender(_ context: RenderContext, size: Size3D) -> RenderNode {
+    public func customRender(_ context: RenderContext, size: Size3D) -> RealityRenderNode {
         let placements = layout.placeContents(contents: contents, in: size)
         let children = placements.map { placement in
             placement.content.render(context, size: placement.size)

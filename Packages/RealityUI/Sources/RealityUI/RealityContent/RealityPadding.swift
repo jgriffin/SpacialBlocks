@@ -27,7 +27,7 @@ public struct RealityPadding<Content: RealityContent>: RealityContent, BuiltIn {
         return childSize + edgeInsets.size
     }
 
-    public func customRender(_ context: RenderContext, size: Size3D) -> RenderNode {
+    public func customRender(_ context: RenderContext, size: Size3D) -> RealityRenderNode {
         let translation = Vector3D(
             x: (edgeInsets.trailing - edgeInsets.leading) / 2,
             y: (edgeInsets.top - edgeInsets.bottom) / 2,

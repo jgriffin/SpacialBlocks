@@ -17,13 +17,13 @@
 
         public var body: some View {
             GeometryReader3D { proxy in
-                RealityView { content in
-                    content.add(renderer.realityRoot)
+                RealityView { chartBody in
+                    chartBody.add(renderer.realityRoot)
 
-                    let sceneBounds = content.convert(proxy.frame(in: .local), from: .local, to: .scene)
+                    let sceneBounds = chartBody.convert(proxy.frame(in: .local), from: .local, to: .scene)
                     renderer.update(with: realityContent, size: Size3D(sceneBounds.extents))
-                } update: { content in
-                    let sceneBounds = content.convert(proxy.frame(in: .local), from: .local, to: .scene)
+                } update: { chartBody in
+                    let sceneBounds = chartBody.convert(proxy.frame(in: .local), from: .local, to: .scene)
                     renderer.update(with: realityContent, size: Size3D(sceneBounds.extents))
                 }
             }

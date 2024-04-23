@@ -30,7 +30,7 @@ public struct RealityFrame<Content: RealityContent>: RealityContent, BuiltIn {
         )
     }
 
-    public func customRender(_ context: RenderContext, size: Size3D) -> RenderNode {
+    public func customRender(_ context: RenderContext, size: Size3D) -> RealityRenderNode {
         let proposed = newProposedSize(.init(size))
         let childSize = content.sizeThatFits(proposed)
 

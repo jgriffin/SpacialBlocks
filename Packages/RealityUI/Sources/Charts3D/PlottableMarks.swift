@@ -2,7 +2,7 @@
 // Created by John Griffin on 4/21/24
 //
 
-import Foundation
+import RealityUI
 
 public protocol PlottableMark {}
 
@@ -25,7 +25,9 @@ public struct PointMark<X: Plottable, Y: Plottable, Z: Plottable>: ChartContent,
         )
     }
 
-    public func customRender() {}
+    public func customRender(in _: RealityEnvironment) -> RealityRenderNode {
+        EmptyEntity().asNode()
+    }
 }
 
 public struct LineMark<X: Plottable, Y: Plottable, Z: Plottable>: ChartContent, ChartBuiltIn {
@@ -47,7 +49,9 @@ public struct LineMark<X: Plottable, Y: Plottable, Z: Plottable>: ChartContent, 
         )
     }
 
-    public func customRender() {}
+    public func customRender(in _: RealityEnvironment) -> RealityRenderNode {
+        EmptyEntity().asNode()
+    }
 }
 
 // public struct BarMark<X: Plottable, Y: Plottable, Z: Plottable>: ChartContent, ChartBuiltIn {

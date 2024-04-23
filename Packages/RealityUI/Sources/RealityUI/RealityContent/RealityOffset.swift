@@ -12,7 +12,7 @@ public struct RealityOffset<Content: RealityContent>: RealityContent, BuiltIn {
         content.sizeThatFits(proposed)
     }
 
-    public func customRender(_ context: RenderContext, size: Size3D) -> RenderNode {
+    public func customRender(_ context: RenderContext, size: Size3D) -> RealityRenderNode {
         content.render(context, size: size)
             .wrappedInTranslation(offset)
     }
