@@ -6,7 +6,7 @@ import RealityUI
 
 public protocol PlottableMark {}
 
-public struct PointMark<X: Plottable, Y: Plottable, Z: Plottable>: ChartContent, ChartBuiltIn {
+public struct PointMark<X: Plottable, Y: Plottable, Z: Plottable>: ChartContent, ChartCustomContent {
     public let point: PlottableValuePoint<X, Y, Z>
 
     public init(_ point: PlottableValuePoint<X, Y, Z>) {
@@ -25,12 +25,14 @@ public struct PointMark<X: Plottable, Y: Plottable, Z: Plottable>: ChartContent,
         )
     }
 
-    public func customRender(in _: RealityEnvironment) -> RealityRenderNode {
-        EmptyEntity().asNode()
+    public func customRender(_ env: ChartEnvironment) -> any RealityContent {
+        env.symbolShape
+            .environment(\.foregroundMaterial, env.foregroundMaterial)
+            .frame(size: env.symbolSize)
     }
 }
 
-public struct LineMark<X: Plottable, Y: Plottable, Z: Plottable>: ChartContent, ChartBuiltIn {
+public struct LineMark<X: Plottable, Y: Plottable, Z: Plottable>: ChartContent, ChartCustomContent {
     let point: PlottableValuePoint<X, Y, Z>
 
     public init(_ point: PlottableValuePoint<X, Y, Z>) {
@@ -49,8 +51,9 @@ public struct LineMark<X: Plottable, Y: Plottable, Z: Plottable>: ChartContent, 
         )
     }
 
-    public func customRender(in _: RealityEnvironment) -> RealityRenderNode {
-        EmptyEntity().asNode()
+    public func customRender(_ env: ChartEnvironment) -> any RealityContent {
+        env.symbolShape
+            .environment(\.foregroundMaterial, env.lineMaterial)
     }
 }
 

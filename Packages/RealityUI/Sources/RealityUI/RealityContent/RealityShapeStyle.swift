@@ -15,22 +15,21 @@ public protocol RealityShapeStyle: RealityContent {
 
 public extension RealityShapeStyle {
     var body: some RealityContent {
-        RealityShapeView(shape: self, material: .color(.blue))
+        RealityShapeView(shape: self)
     }
 }
 
 public struct RealityShapeView<S: RealityShapeStyle>: RealityContent, BuiltIn {
     public var shape: S
-    public var material: RealityMaterial
 
     public func customSizeFor(_ proposed: ProposedSize3D) -> Size3D {
         shape.shapeSizeFor(proposed)
     }
 
-    public func customRender(_: RenderContext, size: Size3D) -> RealityRenderNode {
+    public func customRender(_ context: RenderContext, size: Size3D) -> RealityRenderNode {
         MeshEntity(
             mesh: shape.mesh(in: customSizeFor(.init(size))),
-            material: material,
+            material: context.environment.foregroundMaterial,
             name: shape.name
         )
         .asNode()

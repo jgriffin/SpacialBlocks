@@ -5,14 +5,14 @@
 import Spatial
 
 public extension RealityEnvironment {
-    var material: RealityMaterial {
-        get { self[RealityMaterialKey.self] }
-        set { self[RealityMaterialKey.self] = newValue }
+    var foregroundMaterial: RealityMaterial {
+        get { self[RealityForegroundMaterialKey.self] }
+        set { self[RealityForegroundMaterialKey.self] = newValue }
     }
 }
 
 // MARK: - environment keys
 
-enum RealityMaterialKey: RealityEnvironmentKey {
+enum RealityForegroundMaterialKey: RealityEnvironmentKey {
     static var defaultValue: RealityMaterial = .color(.blue)
 }

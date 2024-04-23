@@ -10,8 +10,8 @@ public enum ChartBuilder {
 
     public static func buildBlock<Content: ChartContent>(_ content: Content) -> Content { content }
 
-    public static func buildBlock(_ contents: any ChartContent...) -> ChartTuple {
-        ChartTuple(contents: contents)
+    public static func buildBlock(_ contents: any ChartContent...) -> ChartTupleContent {
+        ChartTupleContent(contents: contents)
     }
 
     public static func buildExpression<Content: ChartContent>(_ expression: Content) -> Content { expression }

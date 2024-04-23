@@ -66,6 +66,12 @@ public extension RealityContent {
     }
 
     func scaledToFit() -> some RealityContent { aspectRatio(maxScale: 1) }
+
+    // MARK: - environment
+
+    func environment<V>(_ keyPath: WritableKeyPath<RealityEnvironment, V>, _ value: V) -> some RealityContent {
+        RealityEnvironmentModifier(self, keyPath, value)
+    }
 }
 
 public enum ContentMode {
