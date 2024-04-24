@@ -5,15 +5,15 @@
 import RealityUI
 import Spatial
 
-public struct Chart3D<Content: ChartContent>: ChartContent, ChartCustomContent, RealityContent, BuiltIn {
+public struct Chart3D<Content: ChartContent>: ChartContent, CustomChartContent, RealityContent, BuiltIn {
     public var content: Content
 
     public init(@ChartBuilder content: () -> Content) {
         self.content = content()
     }
 
-    public func customDimensionDomains() -> DimensionDomains {
-        content.dimensionDomains()
+    public func customPlottableDomains() -> PlottableDomains {
+        content.plottableDomains()
     }
 
     public func customRender(_: ChartEnvironment) -> any RealityContent {

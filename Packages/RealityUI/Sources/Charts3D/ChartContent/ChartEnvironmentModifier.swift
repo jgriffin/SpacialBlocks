@@ -4,7 +4,7 @@
 
 import RealityUI
 
-public struct ChartEnvironmentModifier<Content: ChartContent, V>: ChartContent, ChartCustomContent {
+public struct ChartEnvironmentModifier<Content: ChartContent, V>: ChartContent, CustomChartContent {
     let content: Content
     let keyPath: WritableKeyPath<ChartEnvironment, V>
     let value: V
@@ -19,8 +19,8 @@ public struct ChartEnvironmentModifier<Content: ChartContent, V>: ChartContent, 
         self.value = value
     }
 
-    public func customDimensionDomains() -> DimensionDomains {
-        content.dimensionDomains()
+    public func customPlottableDomains() -> PlottableDomains {
+        content.plottableDomains()
     }
 
     public func customRender(_ env: ChartEnvironment) -> any RealityContent {

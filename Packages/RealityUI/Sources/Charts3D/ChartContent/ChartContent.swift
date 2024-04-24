@@ -10,16 +10,16 @@ public protocol ChartContent {
 }
 
 public extension ChartContent {
-    func dimensionDomains() -> DimensionDomains {
-        if let custom = self as? ChartCustomContent {
-            custom.customDimensionDomains()
+    func plottableDomains() -> PlottableDomains {
+        if let custom = self as? CustomChartContent {
+            custom.customPlottableDomains()
         } else {
-            chartBody.dimensionDomains()
+            chartBody.plottableDomains()
         }
     }
 
     func render(_ env: ChartEnvironment) -> any RealityContent {
-        if let custom = self as? ChartCustomContent {
+        if let custom = self as? CustomChartContent {
             custom.customRender(env)
         } else {
             chartBody.render(env)
@@ -27,12 +27,12 @@ public extension ChartContent {
     }
 }
 
-// MARK: - BuiltIn
+// MARK: - ChartCustomContent
 
-public protocol ChartCustomContent {
+public protocol CustomChartContent {
     typealias Content = Never
 
-    func customDimensionDomains() -> DimensionDomains
+    func customPlottableDomains() -> PlottableDomains
 
     func customRender(_ env: ChartEnvironment) -> any RealityContent
 }
@@ -47,10 +47,10 @@ extension Never: ChartContent {
 
 // MARK: - EmptyChartContent
 
-public struct EmptyChartContent: ChartContent, ChartCustomContent {
+public struct EmptyChartContent: ChartContent, CustomChartContent {
     public init() {}
 
-    public func customDimensionDomains() -> DimensionDomains { .init() }
+    public func customPlottableDomains() -> PlottableDomains { .init() }
 
     public func customRender(_: ChartEnvironment) -> any RealityContent {
         EmptyContent()
