@@ -9,8 +9,8 @@ public class RealityContentRenderer {
     public let realityRoot: Entity
 
     public init() {
-        realityRoot = Entity()
-        realityRoot.name = "realityRoot"
+        RealityUIComponent.registerOnce
+        realityRoot = EmptyContent().makeEntity(value: "realityRoot")
     }
 
     public func update(
@@ -18,30 +18,112 @@ public class RealityContentRenderer {
         size: Size3D
     ) {
         let renderTree = Self.renderTreeFor(content, size: size)
-        Self.syncEntityTree(realityRoot, withRenderTree: renderTree)
+
+        let existingRoot = realityRoot.children.first
+        let updatedRoot = Self.updatedRealityTree(existingRoot, withRenderRoot: renderTree)
+
+        if existingRoot != updatedRoot {
+            realityRoot.children.removeAll()
+            realityRoot.children.append(updatedRoot)
+        }
     }
 }
 
-public extension RealityContentRenderer {
+extension RealityContentRenderer {
+    /// returns a whole Entity tree independent of realityRoot
     static func renderTreeFor(
         _ content: any RealityContent,
         size: Size3D
-    ) -> RealityRenderNode {
+    ) -> Entity {
         let context = RenderContext(environment: .init())
         let contentSize = content.sizeThatFits(.init(size))
         return content.render(context, size: contentSize)
     }
 
-    static func syncEntityTree(
-        _ parent: Entity,
-        withRenderTree node: RealityRenderNode
-    ) {
-        let nodeEntity = node.renderer.makeEntity()
-        nodeEntity.name = "\(type(of: node.renderer))"
-        parent.addChild(nodeEntity)
+    /// Recursive method that returns an updated reality tree
+    ///
+    /// It will try to re-use and update the existingRoot at each step, but may also return an entirelly different Entity tree,
+    /// expecting the caller to remove it from its parent.
+    static func updatedRealityTree(
+        _ existingRoot: Entity?,
+        withRenderRoot renderRoot: Entity
+    ) -> Entity {
+        // MARK: gotta be the same type to update
 
-        for child in node.children {
-            syncEntityTree(nodeEntity, withRenderTree: child)
+        guard let existingRoot,
+              let existingContent = existingRoot.realityUI?.content,
+              let renderContent = renderRoot.realityUI?.content,
+              existingContent.type == renderContent.type
+        else {
+            // new entity tree
+            return renderRoot
+        }
+
+        // We're going to update the existingRoot after here
+
+        // MARK: components
+
+        if !existingContent.isEqual(renderContent) {
+            for componentType in Entity.realityUIComponentTypes {
+                if let c = renderRoot.components[componentType.self] {
+                    existingRoot.components[componentType] = c
+                }
+            }
+        }
+
+        // MARK: recursively updatedRealityTree for children
+
+        let matchedChildren = bestMatch(
+            renderChildren: renderRoot.children,
+            toExistingSiblings: existingRoot.children
+        )
+        let updatedChildren = matchedChildren.map { render, existing in
+            updatedRealityTree(existing, withRenderRoot: render)
+        }
+
+        // MARK: update exitingRoot.children
+
+        let previousChildIds = Set(existingRoot.children.map(\.id))
+        let updatedIds = Set(updatedChildren.map(\.id))
+        let removeChildIds = previousChildIds.subtracting(updatedIds)
+        let addChildIds = updatedIds.subtracting(previousChildIds)
+
+        if !removeChildIds.isEmpty {
+            existingRoot.children.filter { removeChildIds.contains($0.id) }.forEach {
+                existingRoot.removeChild($0)
+            }
+        }
+        if !addChildIds.isEmpty {
+            updatedChildren.filter { addChildIds.contains($0.id) }.forEach {
+                existingRoot.addChild($0)
+            }
+        }
+
+        return existingRoot
+    }
+
+    /// try and match render with existing siblings for better animation and performance
+    ///
+    /// In order to match, the RealityContentTypes need to be the same. All the renderChildren will be returned once,
+    /// existing siblings at most once, and the match can be nil. The rest is optimization.
+    static func bestMatch(
+        renderChildren: Entity.ChildCollection,
+        toExistingSiblings siblings: Entity.ChildCollection
+    ) -> [(render: Entity, match: Entity?)] {
+        // try simple for now
+        var existing = siblings.map { $0 }
+
+        return renderChildren.map { render -> SiblingMatch in
+            guard let rType = render.realityUI?.content.type,
+                  let matchIndex = existing.firstIndex(where: { $0.realityUI?.content.type == rType })
+            else {
+                return (render, match: nil)
+            }
+
+            let match = existing.remove(at: matchIndex)
+            return (render, match)
         }
     }
+
+    typealias SiblingMatch = (render: Entity, match: Entity?)
 }

@@ -26,12 +26,14 @@ public struct RealityShapeView<S: RealityShapeStyle>: RealityContent, BuiltIn {
         shape.shapeSizeFor(proposed)
     }
 
-    public func customRender(_ context: RenderContext, size: Size3D) -> RealityRenderNode {
-        MeshEntity(
-            mesh: shape.mesh(in: customSizeFor(.init(size))),
-            material: context.environment.foregroundMaterial,
-            name: shape.name
+    public func customRender(_ context: RenderContext, size: Size3D) -> Entity {
+        let mesh = shape.mesh(in: customSizeFor(.init(size)))
+        let material = context.environment.foregroundMaterial.makeMaterial()
+        let materials = Array(repeating: material, count: mesh.expectedMaterialCount)
+        let model = ModelComponent(mesh: mesh, materials: materials)
+
+        return makeEntity(
+            model
         )
-        .asNode()
     }
 }

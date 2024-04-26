@@ -24,7 +24,7 @@ public extension RealityContent {
         }
     }
 
-    func render(_ context: RenderContext, size: Size3D) -> RealityRenderNode {
+    func render(_ context: RenderContext, size: Size3D) -> Entity {
         if let builtIn = self as? BuiltIn {
             builtIn.customRender(context, size: size)
         } else {
@@ -39,7 +39,7 @@ public protocol BuiltIn {
     typealias Body = Never
 
     func customSizeFor(_ proposed: ProposedSize3D) -> Size3D
-    func customRender(_ context: RenderContext, size: Size3D) -> RealityRenderNode
+    func customRender(_ context: RenderContext, size: Size3D) -> Entity
 }
 
 public extension RealityContent where Body == Never {
@@ -57,7 +57,7 @@ public struct EmptyContent: RealityContent, BuiltIn {
 
     public func customSizeFor(_: ProposedSize3D) -> Size3D { .zero }
 
-    public func customRender(_: RenderContext, size _: Size3D) -> RealityRenderNode {
-        EmptyEntity().asNode()
+    public func customRender(_: RenderContext, size _: Size3D) -> Entity {
+        makeEntity()
     }
 }

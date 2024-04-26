@@ -2,6 +2,7 @@
 // Created by John Griffin on 4/20/24
 //
 
+import RealityKit
 import Spatial
 
 public struct RealityPadding<Content: RealityContent>: RealityContent, BuiltIn {
@@ -27,13 +28,16 @@ public struct RealityPadding<Content: RealityContent>: RealityContent, BuiltIn {
         return childSize + edgeInsets.size
     }
 
-    public func customRender(_ context: RenderContext, size: Size3D) -> RealityRenderNode {
+    public func customRender(_ context: RenderContext, size: Size3D) -> Entity {
         let translation = Vector3D(
             x: (edgeInsets.trailing - edgeInsets.leading) / 2,
             y: (edgeInsets.top - edgeInsets.bottom) / 2,
             z: (edgeInsets.front - edgeInsets.back) / 2
         )
-        return content.render(context, size: size - edgeInsets.size)
-            .wrappedInTranslation(translation)
+        return makeEntity(
+            value: edgeInsets,
+            .translation(translation),
+            children: content.render(context, size: size - edgeInsets.size)
+        )
     }
 }

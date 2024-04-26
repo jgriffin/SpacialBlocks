@@ -2,6 +2,7 @@
 // Created by John Griffin on 4/22/24
 //
 
+import RealityKit
 import Spatial
 
 public struct RealityEnvironmentModifier<Content: RealityContent, V>: RealityContent, BuiltIn {
@@ -23,7 +24,7 @@ public struct RealityEnvironmentModifier<Content: RealityContent, V>: RealityCon
         content.sizeThatFits(proposed)
     }
 
-    public func customRender(_ context: RenderContext, size: Size3D) -> RealityRenderNode {
+    public func customRender(_ context: RenderContext, size: Size3D) -> Entity {
         let updated = modify(context) {
             $0.environment[keyPath: keyPath] = value
         }

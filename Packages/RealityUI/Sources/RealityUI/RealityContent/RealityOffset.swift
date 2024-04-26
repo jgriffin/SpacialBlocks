@@ -2,6 +2,7 @@
 // Created by John Griffin on 4/21/24
 //
 
+import RealityKit
 import Spatial
 
 public struct RealityOffset<Content: RealityContent>: RealityContent, BuiltIn {
@@ -12,8 +13,11 @@ public struct RealityOffset<Content: RealityContent>: RealityContent, BuiltIn {
         content.sizeThatFits(proposed)
     }
 
-    public func customRender(_ context: RenderContext, size: Size3D) -> RealityRenderNode {
-        content.render(context, size: size)
-            .wrappedInTranslation(offset)
+    public func customRender(_ context: RenderContext, size: Size3D) -> Entity {
+        makeEntity(
+            value: offset,
+            .translation(offset),
+            children: content.render(context, size: size)
+        )
     }
 }

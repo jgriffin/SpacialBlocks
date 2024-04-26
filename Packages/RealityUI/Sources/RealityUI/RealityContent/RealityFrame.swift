@@ -2,6 +2,7 @@
 // Created by John Griffin on 4/18/24
 //
 
+import RealityKit
 import Spatial
 
 public struct RealityFrame<Content: RealityContent>: RealityContent, BuiltIn {
@@ -30,11 +31,15 @@ public struct RealityFrame<Content: RealityContent>: RealityContent, BuiltIn {
         )
     }
 
-    public func customRender(_ context: RenderContext, size: Size3D) -> RealityRenderNode {
+    public func customRender(_ context: RenderContext, size: Size3D) -> Entity {
         let proposed = newProposedSize(.init(size))
         let childSize = content.sizeThatFits(proposed)
 
-        return content.render(context, size: size)
-            .wrappedInAlignment(alignment, parent: proposed.sizeOrDefault, child: childSize)
+        return makeEntity(
+            .translation(
+                alignment.offset(parent: proposed.sizeOrDefault, child: childSize)
+            ),
+            children: content.render(context, size: size)
+        )
     }
 }

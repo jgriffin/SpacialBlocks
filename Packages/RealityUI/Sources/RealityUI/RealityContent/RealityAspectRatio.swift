@@ -2,6 +2,7 @@
 // Created by John Griffin on 4/20/24
 //
 
+import RealityKit
 import Spatial
 
 public struct RealityAspectRatio<Content: RealityContent>: RealityContent, BuiltIn {
@@ -41,12 +42,14 @@ public struct RealityAspectRatio<Content: RealityContent>: RealityContent, Built
         )
     }
 
-    public func customRender(_ context: RenderContext, size: Size3D) -> RealityRenderNode {
+    public func customRender(_ context: RenderContext, size: Size3D) -> Entity {
         let childSize = content.sizeThatFits(.init(size))
         let scale = AspectRatioMath.scaleToFit(childSize, into: size)
         let scaleSize = Size3D.one * min(scale, maxScale ?? .greatestFiniteMagnitude)
 
-        return content.render(context, size: childSize)
-            .wrappedInTransform(AffineTransform3D(scale: scaleSize))
+        return makeEntity(
+            .transform(AffineTransform3D(scale: scaleSize)),
+            children: content.render(context, size: childSize)
+        )
     }
 }

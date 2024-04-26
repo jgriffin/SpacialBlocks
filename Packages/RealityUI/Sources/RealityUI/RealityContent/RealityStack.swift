@@ -2,6 +2,7 @@
 // Created by John Griffin on 4/19/24
 //
 
+import RealityKit
 import Spatial
 
 public struct RealityStack: RealityContent, BuiltIn {
@@ -17,18 +18,24 @@ public struct RealityStack: RealityContent, BuiltIn {
     }
 
     public func customSizeFor(_ proposed: ProposedSize3D) -> Size3D {
-        let size = layout.sizeThatFits(contents: contents, proposal: proposed)
-        return size
+        layout.sizeThatFits(contents: contents, proposal: proposed)
     }
 
-    public func customRender(_ context: RenderContext, size: Size3D) -> RealityRenderNode {
+    public func customRender(_ context: RenderContext, size: Size3D) -> Entity {
         let placements = layout.placeContents(contents: contents, in: size)
-        let children = placements.map { placement in
-            placement.content.render(context, size: placement.size)
-                .wrappedInTranslation(.init(placement.position))
+
+        let children = placements.map { placement -> Entity in
+            makeEntity(
+                value: "stackPosition",
+                .translation(.init(placement.position)),
+                children: placement.content.render(context, size: placement.size)
+            )
         }
 
-        return EmptyEntity(name: "Stack").asNode(children: children)
+        return makeEntity(
+            components: [],
+            children: children
+        )
     }
 }
 
