@@ -10,7 +10,7 @@ struct ChartContentView: View {
     var body: some View {
         RealityUIView {
             Chart3D {
-                PointMark(.init(xyz: 0, 0, 0))
+                PointMark((0, 0, 0))
             }
         }
     }

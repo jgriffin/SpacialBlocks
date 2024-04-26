@@ -10,8 +10,8 @@ import SwiftUI
     #Preview(windowStyle: .volumetric) {
         RealityUIView {
             Chart3D {
-                PointMark(.init(xyz: 0, 0, 0))
-                PointMark(.init(xyz: 2, 2, 2))
+                PointMark(("x", "y", "z"), (0, 0, 0))
+                PointMark(("x", "y", "z"), (2, 2, 2))
             }
         }
     }

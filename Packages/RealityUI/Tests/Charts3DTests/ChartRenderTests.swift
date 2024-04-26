@@ -9,15 +9,17 @@ import XCTest
 final class ChartRenderTests: XCTestCase {
     func testEmpty() {
         let chart = Chart3D {}
-        let result = chart.body
+        let result = chart.render(ChartEnvironment())
+
         XCTAssert(type(of: result) == EmptyContent.self)
     }
 
     func testPoint() {
         let chart = Chart3D {
-            PointMark(.init(xyz: 0, 0, 0))
+            PointMark(("x", "y", "z"), (0, 0, 0))
         }
-        let result = chart.body
+        let result = chart.render(ChartEnvironment())
+
         print(result)
     }
 }

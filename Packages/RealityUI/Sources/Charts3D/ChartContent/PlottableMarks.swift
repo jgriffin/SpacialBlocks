@@ -9,16 +9,22 @@ public protocol PlottableMark {}
 // MARK: - PointMark
 
 public struct PointMark<X: Plottable, Y: Plottable, Z: Plottable>: ChartContent, CustomChartContent {
-    public let point: PlottableValuePoint<X, Y, Z>
+    public let point: (x: PlottableValue<X>, y: PlottableValue<Y>, z: PlottableValue<Z>)
 
-    public init(_ point: PlottableValuePoint<X, Y, Z>) {
+    public init(_ point: (x: PlottableValue<X>, y: PlottableValue<Y>, z: PlottableValue<Z>)) {
         self.point = point
     }
 
-    // MARK: - convenience intializers
-
     public init(x: PlottableValue<X>, y: PlottableValue<Y>, z: PlottableValue<Z>) {
-        self.init(.init(x: x, y: y, z: z))
+        point = (x, y, z)
+    }
+
+    public init(_ labels: (x: String, y: String, z: String), _ point: (x: X, y: Y, z: Z)) {
+        self.init(
+            x: .value(labels.x, point.x),
+            y: .value(labels.y, point.y),
+            z: .value(labels.z, point.z)
+        )
     }
 
     // MARK: - CustomChartContent
@@ -37,16 +43,22 @@ public struct PointMark<X: Plottable, Y: Plottable, Z: Plottable>: ChartContent,
 // MARK: - LineMark
 
 public struct LineMark<X: Plottable, Y: Plottable, Z: Plottable>: ChartContent, CustomChartContent {
-    let point: PlottableValuePoint<X, Y, Z>
+    public let point: (x: PlottableValue<X>, y: PlottableValue<Y>, z: PlottableValue<Z>)
 
-    public init(_ point: PlottableValuePoint<X, Y, Z>) {
+    public init(_ point: (x: PlottableValue<X>, y: PlottableValue<Y>, z: PlottableValue<Z>)) {
         self.point = point
     }
 
-    // MARK: - convenience intializers
-
     public init(x: PlottableValue<X>, y: PlottableValue<Y>, z: PlottableValue<Z>) {
-        self.init(.init(x: x, y: y, z: z))
+        point = (x, y, z)
+    }
+
+    public init(_ labels: (x: String, y: String, z: String), _ point: (x: X, y: Y, z: Z)) {
+        self.init(
+            x: .value(labels.x, point.x),
+            y: .value(labels.y, point.y),
+            z: .value(labels.z, point.z)
+        )
     }
 
     // MARK: - CustomChartContent

@@ -8,18 +8,24 @@ import Foundation
 
 /// (Dictionary) collection of domains
 public struct PlottableDomains: CustomStringConvertible {
-    var domainsByName: [DomainName: any PlottableDomain]
+    var x: [ObjectIdentifier: any PlottableDomain]
+    var y: [ObjectIdentifier: any PlottableDomain]
+    var z: [ObjectIdentifier: any PlottableDomain]
 
-    public init(_ domains: [DomainName: any PlottableDomain] = [:]) {
-        domainsByName = domains
+    public init() {
+        x = [:]
+        y = [:]
+        z = [:]
     }
 
-    // MARK: convenience initializers
-
-    public init(_ domains: [any PlottableDomain]) {
-        self = domains.reduce(into: PlottableDomains()) { result, next in
-            result.merge(next)
-        }
+    public init(
+        x: any PlottableDomain,
+        y: any PlottableDomain,
+        z: any PlottableDomain
+    ) {
+        self.x = [x.id: x]
+        self.y = [y.id: y]
+        self.z = [z.id: z]
     }
 
     public init<X: Plottable, Y: Plottable, Z: Plottable>(
@@ -27,127 +33,122 @@ public struct PlottableDomains: CustomStringConvertible {
         y: PlottableValue<Y>...,
         z: PlottableValue<Z>...
     ) {
-        var domains = PlottableDomains()
-        x.forEach { domains.merge(PlottableValueDomain(axis: .x, $0)) }
-        y.forEach { domains.merge(PlottableValueDomain(axis: .y, $0)) }
-        z.forEach { domains.merge(PlottableValueDomain(axis: .z, $0)) }
-        self = domains
-    }
-
-    // MARK: accessors
-
-    public func domains<Value: Plottable>(_: Value.Type) -> [any PlottableDomain<Value>] {
-        domainsByName
-            .sorted(by: { lhs, rhs in lhs.key < rhs.key })
-            .compactMap { $0.value as? any PlottableDomain<Value> }
+        self.init(
+            x: PlottableDomainValues(x.map(\.value)),
+            y: PlottableDomainValues(y.map(\.value)),
+            z: PlottableDomainValues(z.map(\.value))
+        )
     }
 
     // MARK: merge
 
-    public mutating func merge(_ other: any PlottableDomain) {
-        if let existing = domainsByName[other.name] {
-            guard let merged = existing.merging(other) else { fatalError() }
-            domainsByName[other.name] = merged
-        } else {
-            domainsByName[other.name] = other
+    static func merge(
+        _ d: inout [ObjectIdentifier: any PlottableDomain],
+        with other: any PlottableDomain
+    ) {
+        guard let domain = d[other.id] else {
+            d[other.id] = other
+            return
         }
+
+        guard let merged = domain.merging(other) else {
+            assertionFailure("same type didn't merge ...")
+            d[other.id] = other
+            return
+        }
+
+        d[other.id] = merged
+    }
+
+    static func merge(
+        _ d: inout [ObjectIdentifier: any PlottableDomain],
+        with others: some Sequence<any PlottableDomain>
+    ) {
+        others.forEach { merge(&d, with: $0) }
     }
 
     public mutating func merge(_ other: PlottableDomains) {
-        for domain in other.domainsByName.values {
-            merge(domain)
-        }
+        Self.merge(&x, with: other.x.values)
+        Self.merge(&y, with: other.y.values)
+        Self.merge(&z, with: other.z.values)
     }
 
     public func merging(_ other: PlottableDomains) -> PlottableDomains {
         modify(self) {
-            for domain in other.domainsByName.values {
-                $0.merge(domain)
-            }
+            $0.merge(other)
         }
     }
 
     public var description: String {
-        domainsByName.values.map { "\($0)" }.joined(separator: ", ")
-    }
-}
-
-// MARK: - DomainName
-
-public enum DomainAxis: Hashable, Comparable { case x, y, z }
-
-/// Axis and label for identifying domains
-public struct DomainName: Hashable, CustomStringConvertible, Comparable {
-    public let axis: DomainAxis
-    public let label: String
-
-    public init(axis: DomainAxis, label: some StringProtocol) {
-        self.axis = axis
-        self.label = .init(label)
+        "TODO"
     }
 
-    // MARK: convenience initializers
+    // MARK: - dimension domains
 
-    public static func x(_ label: some StringProtocol) -> DomainName {
-        DomainName(axis: .x, label: label)
+    public func xDomains() -> [any PlottableDomain] {
+        x.values.sorted { lhs, rhs in lhs.id < rhs.id }
     }
 
-    public static func y(_ label: some StringProtocol) -> DomainName {
-        DomainName(axis: .y, label: label)
+    public func yDomains() -> [any PlottableDomain] {
+        y.values.sorted { lhs, rhs in lhs.id < rhs.id }
     }
 
-    public static func z(_ label: some StringProtocol) -> DomainName {
-        DomainName(axis: .z, label: label)
+    public func zDomains() -> [any PlottableDomain] {
+        z.values.sorted { lhs, rhs in lhs.id < rhs.id }
     }
 
-    // MARK: members
-
-    public static func < (lhs: DomainName, rhs: DomainName) -> Bool {
-        guard lhs.axis == rhs.axis else { return lhs.axis < rhs.axis }
-        return lhs.label < rhs.label
+    public func xDomain<P: Plottable>(_: P.Type) -> [P] {
+        x.values
+            .compactMap { $0 as? any PlottableDomain<P> }
+            .flatMap(\.values)
     }
 
-    public var description: String {
-        "\(axis): \(label)"
+    public func yDomain<P: Plottable>(_: P.Type) -> [P] {
+        y.values
+            .compactMap { $0 as? any PlottableDomain<P> }
+            .flatMap(\.values)
+    }
+
+    public func zDomain<P: Plottable>(_: P.Type) -> [P] {
+        z.values
+            .compactMap { $0 as? any PlottableDomain<P> }
+            .flatMap(\.values)
     }
 }
 
 // MARK: - PlottableDomain
 
 /// protocol for generic collections of domains
-public protocol PlottableDomain<Value> {
+public protocol PlottableDomain<Value>: Identifiable where ID == ObjectIdentifier {
     associatedtype Value: Plottable
-    var name: DomainName { get }
-    var values: [Value] { get set }
 
+    var values: [Value] { get }
     func merging(_ value: any PlottableDomain) -> Self?
 }
 
-// MARK: - PlottableValueDomain
+public extension PlottableDomain {
+    var id: ObjectIdentifier { ObjectIdentifier(Self.self) }
+}
 
-/// concrete domain of values
-public struct PlottableValueDomain<Value: Plottable>: PlottableDomain, CustomStringConvertible {
-    public let name: DomainName
-    public var values: [Value]
+public struct PlottableDomainValues<V: Plottable>: PlottableDomain {
+    public typealias Value = V
 
-    public init(_ name: DomainName, values: [Value]) {
-        self.name = name
+    public var values: [V]
+
+    public init(_ values: [V]) {
         self.values = values
     }
 
-    // MARK: convenience initializers
-
-    public init(axis: DomainAxis, _ value: PlottableValue<Value>) {
-        self.init(.init(axis: axis, label: value.label), values: [value.value])
+    public init(_ values: V...) {
+        self.init(values)
     }
 
-    public func merging(_ other: any PlottableDomain) -> Self? {
-        guard let other = other as? Self,
-              name == other.name else { return nil }
-        return modify(self) { $0.values.append(contentsOf: other.values) }
+    public init(_ values: PlottableValue<V>...) {
+        self.init(values.map(\.value))
     }
 
-    public var description: String {
-        "'\(name)': \(Value.self) - \(values)"
+    public func merging(_ other: any PlottableDomain) -> PlottableDomainValues<V>? {
+        guard let o = other as? Self else { return nil }
+        return Self(values + o.values)
     }
 }
